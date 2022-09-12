@@ -14,7 +14,7 @@ bootstrap = Bootstrap(app)
 
 @app.route('/')
 def home():
-  return render_template('classify-images.html')
+  return render_template('detect-objects.html')
 
 
 if __name__ == '__main__':
