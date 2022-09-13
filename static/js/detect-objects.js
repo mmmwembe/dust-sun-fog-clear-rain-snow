@@ -48,13 +48,9 @@ async function start() {
 
     function preview_image(event) {
 
-        removeAllChildNodes(imageView) 
-
         var reader = new FileReader();
         reader.onload = function () {
             img.src = reader.result;
-
-            // removeImageViewChildren()
 
         };
         reader.readAsDataURL(event.target.files[0]);
