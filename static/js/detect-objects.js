@@ -18,6 +18,13 @@ async function start() {
     document.querySelector("#predict-button").disabled = true;
 
 
+    function removeImageViewChildren(){
+
+        while (imageView.hasChildNodes()) {
+            imageView.removeChild(imageView.firstChild);
+          }
+    }
+
     // MODEL INFORMATION - Mwembeshi 9/12/2022
     // Google Drive: DUST-SUN-FOG-CLEAR
     // Model Directory: model-object-detection
@@ -37,16 +44,12 @@ async function start() {
 
 
 
+
     input.addEventListener("change", preview_image);
 
     function preview_image(event) {
 
-        // Remove any highlighting we did previous frame.
-        for (let i = 0; i < children.length; i++) {
-            imageView.removeChild(children[i]);
-        }
-         children.splice(0);
-
+        removeImageViewChildren()
 
         var reader = new FileReader();
         reader.onload = function () {
@@ -118,8 +121,6 @@ function create_json_for_object_detection(preds){
 
             json_object = [i+1,label, confidence]; 
             jsonArr.push(json_object);
-
-
 
             const p = document.createElement("p");
 
