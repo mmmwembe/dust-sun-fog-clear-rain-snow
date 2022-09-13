@@ -16,9 +16,17 @@ async function start() {
 
     document.querySelector("#predict-button").disabled = true;
 
+
+    // MODEL INFORMATION - Mwembeshi 9/12/2022
+    // Google Drive: DUST-SUN-FOG-CLEAR
+    // Model Directory: model-object-detection
+    // Model URL: /content/drive/MyDrive/DUST-SUN-FOG-CLEAR/model-object-detection/model-obj-detect-dust-sun-fog-clear-blurry-rain-snow.tflite
+    // Google Cloud URL: https://storage.googleapis.com/2021_tflite_glitch_models/dust-sun-fog-clear-rain-snow-blurry/model-obj-detect-dust-sun-fog-clear-blurry-rain-snow.tflite
+
     var model = undefined;
     // https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2?lite-format=tflite   
-    tflite.ObjectDetector.create("https://storage.googleapis.com/2021_tflite_glitch_models/stack-plume-dust-object-detection/obj-detection-dust-model.tflite").then((loadedModel) => {
+    // https://storage.googleapis.com/2021_tflite_glitch_models/stack-plume-dust-object-detection/obj-detection-dust-model.tflite
+    tflite.ObjectDetector.create("https://storage.googleapis.com/2021_tflite_glitch_models/dust-sun-fog-clear-rain-snow-blurry/model-obj-detect-dust-sun-fog-clear-blurry-rain-snow.tflite").then((loadedModel) => {
     model = loadedModel;
     // Show demo section now model is ready to use.
     // demosSection.classList.remove("invisible");
