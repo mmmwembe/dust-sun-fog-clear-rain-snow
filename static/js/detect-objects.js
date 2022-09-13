@@ -53,8 +53,16 @@ async function start() {
             return;
         }
 
+
+        var children = [];
         // Run inference on an image.
         const predictions = model.detect(img);
+
+          // Remove any highlighting we did previous frame.
+        for (let i = 0; i < children.length; i++) {
+            imageView.removeChild(children[i]);
+        }
+        children.splice(0);
         // const predictions = await model.predict(img);
         // console.log(predictions.classes);
 
