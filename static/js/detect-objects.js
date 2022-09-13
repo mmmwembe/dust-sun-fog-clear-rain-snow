@@ -16,9 +16,7 @@ async function start() {
 
     var model = undefined;
 // https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2?lite-format=tflite   
-    tflite.ObjectDetector.create(
-    "https://storage.googleapis.com/2021_tflite_glitch_models/stack-plume-dust-object-detection/obj-detection-dust-model.tflite"
-    ).then((loadedModel) => {
+    tflite.ObjectDetector.create("https://storage.googleapis.com/2021_tflite_glitch_models/stack-plume-dust-object-detection/obj-detection-dust-model.tflite").then((loadedModel) => {
     model = loadedModel;
     // Show demo section now model is ready to use.
     // demosSection.classList.remove("invisible");
