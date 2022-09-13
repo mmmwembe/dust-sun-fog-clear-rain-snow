@@ -108,6 +108,38 @@ function create_json_for_object_detection(preds){
             json_object = [i+1,label, confidence]; 
             jsonArr.push(json_object);
 
+
+
+            const p = document.createElement("p");
+
+            p.innerText =label +  " - with " + confidence + " confidence.";
+
+            p.style = "margin-left: " + currentObject.boundingBox.originX + "px; margin-top: " + (currentObject.boundingBox.originY - 10) + "px; width: " + (currentObject.boundingBox.width - 10) + "px; top: 0; left: 0;";
+      
+            const highlighter = document.createElement("div");
+            highlighter.setAttribute("class", "highlighter");
+            highlighter.style =
+              "left: " +
+              currentObject.boundingBox.originX +
+              "px; top: " +
+              currentObject.boundingBox.originY +
+              "px; width: " +
+              currentObject.boundingBox.width +
+              "px; height: " +
+              currentObject.boundingBox.height +
+              "px;";
+      
+            imageView.appendChild(highlighter);
+            imageView.appendChild(p);
+            
+            children.push(highlighter);
+            children.push(p);
+
+
+
+
+
+
         }
     }
 
