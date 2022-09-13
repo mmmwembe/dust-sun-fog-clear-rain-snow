@@ -121,6 +121,7 @@ function create_json_for_object_detection(preds){
             jsonArr.push(json_object);
 
             const p = document.createElement("p");
+            p.setAttribute("id","p-label");
 
             p.innerText =label +  " - with " + confidence + " confidence.";
 
