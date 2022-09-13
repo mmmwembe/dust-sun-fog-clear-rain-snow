@@ -20,7 +20,7 @@ async function start() {
     model = loadedModel;
     // Show demo section now model is ready to use.
     // demosSection.classList.remove("invisible");
-    alert("Model Loaded Mate!!!")
+        alert("Model Loaded Mate!!!")
     });
 
     input.addEventListener("change", preview_image);
