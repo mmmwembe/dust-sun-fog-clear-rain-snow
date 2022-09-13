@@ -17,7 +17,7 @@ async function start() {
     document.querySelector("#predict-button").disabled = true;
 
     var model = undefined;
-// https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2?lite-format=tflite   
+    // https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2?lite-format=tflite   
     tflite.ObjectDetector.create("https://storage.googleapis.com/2021_tflite_glitch_models/stack-plume-dust-object-detection/obj-detection-dust-model.tflite").then((loadedModel) => {
     model = loadedModel;
     // Show demo section now model is ready to use.
@@ -25,6 +25,8 @@ async function start() {
         alert("Model Loaded Mate!!!")
         document.querySelector("#predict-button").disabled = false;
     });
+
+
 
     input.addEventListener("change", preview_image);
 
@@ -38,6 +40,11 @@ async function start() {
 
     document.querySelector("#predict-button").addEventListener("click", async () => {
 
+
+        if (!model) {
+            return;
+        }
+
         // Run inference on an image.
         const predictions = await model.predict(img);
         console.log(predictions.classes);
@@ -45,11 +52,16 @@ async function start() {
         // Show the results.
         // resultDiv.textContent = predictions.classes.map((c) => `${c.className}: ${c.score.toFixed(3)}`).join(", ");
 
-        results_JSON = create_json_from_predictions(predictions)
+        // results_JSON = create_json_from_predictions(predictions)
 
-        datatable.clear();
-        datatable.rows.add(results_JSON);
-        datatable.draw();
+        // datatable.clear();
+        // datatable.rows.add(results_JSON);
+        // datatable.draw();
+
+        alert('It gets here')
+
+
+
     });
 
 }
