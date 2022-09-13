@@ -4,6 +4,7 @@ async function start() {
     var input = document.getElementById("image-selector");
     const resultDiv = document.querySelector(".result");
     let results_JSON =[];
+    var children = [];
 
     var datatable =  $('#results-datatable').DataTable( {data: results_JSON,
         columns: [{ title: "#" },{ title: "Class/Label" },{ title: "Confidence" }],
@@ -44,6 +45,12 @@ async function start() {
             img.src = reader.result;
         };
         reader.readAsDataURL(event.target.files[0]);
+
+                  // Remove any highlighting we did previous frame.
+        for (let i = 0; i < children.length; i++) {
+        imageView.removeChild(children[i]);
+        }
+        children.splice(0);
     }
 
     document.querySelector("#predict-button").addEventListener("click", async () => {
@@ -54,7 +61,7 @@ async function start() {
         }
 
 
-        var children = [];
+
         // Run inference on an image.
         const predictions = model.detect(img);
 
@@ -131,7 +138,7 @@ function create_json_for_object_detection(preds){
       
             imageView.appendChild(highlighter);
             imageView.appendChild(p);
-            
+
             children.push(highlighter);
             children.push(p);
 
