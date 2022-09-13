@@ -40,19 +40,17 @@ async function start() {
     input.addEventListener("change", preview_image);
 
     function preview_image(event) {
-        var reader = new FileReader();
-        reader.onload = function () {
-            img.src = reader.result;
-
 
         // Remove any highlighting we did previous frame.
         for (let i = 0; i < children.length; i++) {
             imageView.removeChild(children[i]);
-            }
-            children.splice(0);
+        }
+         children.splice(0);
 
 
-
+        var reader = new FileReader();
+        reader.onload = function () {
+            img.src = reader.result;
         };
         reader.readAsDataURL(event.target.files[0]);
 
