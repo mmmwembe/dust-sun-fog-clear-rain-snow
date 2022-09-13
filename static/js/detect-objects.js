@@ -87,7 +87,7 @@ function create_json_for_object_detection(preds){
         if (currentObject.classes[0].probability > 0.5) {
 
             label = currentObject.classes[0].className
-            confidence = Math.round(parseFloat(curObject.classes[0].probability) * 100) + "%"; 
+            confidence = Math.round(parseFloat(currentObject.classes[0].probability) * 100) + "%"; 
 
             json_object = [i+1,label, confidence]; 
             jsonArr.push(json_object);
