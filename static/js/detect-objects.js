@@ -43,14 +43,20 @@ async function start() {
         var reader = new FileReader();
         reader.onload = function () {
             img.src = reader.result;
+
+
+        // Remove any highlighting we did previous frame.
+        for (let i = 0; i < children.length; i++) {
+            imageView.removeChild(children[i]);
+            }
+            children.splice(0);
+
+
+
         };
         reader.readAsDataURL(event.target.files[0]);
 
-                  // Remove any highlighting we did previous frame.
-        for (let i = 0; i < children.length; i++) {
-        imageView.removeChild(children[i]);
-        }
-        children.splice(0);
+
     }
 
     document.querySelector("#predict-button").addEventListener("click", async () => {
