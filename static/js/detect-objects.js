@@ -22,7 +22,7 @@ async function start() {
     model = loadedModel;
     // Show demo section now model is ready to use.
     // demosSection.classList.remove("invisible");
-        alert("Model Loaded Mate!!!")
+        // alert("Model Loaded Mate!!!")
         document.querySelector("#predict-button").disabled = false;
     });
 
@@ -46,8 +46,9 @@ async function start() {
         }
 
         // Run inference on an image.
-        const predictions = await model.predict(img);
-        console.log(predictions.classes);
+        const predictions = model.detect(img);
+        // const predictions = await model.predict(img);
+        // console.log(predictions.classes);
 
         // Show the results.
         // resultDiv.textContent = predictions.classes.map((c) => `${c.className}: ${c.score.toFixed(3)}`).join(", ");
