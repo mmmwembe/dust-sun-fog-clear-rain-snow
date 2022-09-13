@@ -54,14 +54,11 @@ async function start() {
         // resultDiv.textContent = predictions.classes.map((c) => `${c.className}: ${c.score.toFixed(3)}`).join(", ");
 
         // results_JSON = create_json_from_predictions(predictions)
+        results_JSON = create_json_for_object_detection(predictions)
 
-        // datatable.clear();
-        // datatable.rows.add(results_JSON);
-        // datatable.draw();
-
-        alert('It gets here')
-
-
+        datatable.clear();
+        datatable.rows.add(results_JSON);
+        datatable.draw();
 
     });
 
@@ -77,5 +74,28 @@ function create_json_from_predictions(preds){
        }
       return jsonArr
     }
+
+function create_json_for_object_detection(preds){
+
+    var jsonArr = [];
+    var json_object
+
+    for (let i = 0; i < preds.length; i++) {
+
+        const currentObject = preds[i];
+
+        if (currentObject.classes[0].probability > 0.5) {
+
+            label = currentObject.classes[0].className
+            confidence = Math.round(parseFloat(curObject.classes[0].probability) * 100) + "%"; 
+
+            json_object = [i+1,label, confidence]; 
+            jsonArr.push(json_object);
+
+        }
+    }
+
+    return jsonArr 
+}
 
 start();
