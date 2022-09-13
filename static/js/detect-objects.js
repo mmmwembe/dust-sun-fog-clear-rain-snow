@@ -18,11 +18,10 @@ async function start() {
     document.querySelector("#predict-button").disabled = true;
 
 
-    function removeImageViewChildren(){
-
-        while (imageView.hasChildNodes()) {
-            imageView.removeChild(imageView.firstChild);
-          }
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
     }
 
     // MODEL INFORMATION - Mwembeshi 9/12/2022
@@ -49,12 +48,14 @@ async function start() {
 
     function preview_image(event) {
 
+        removeAllChildNodes(imageView) 
+
         var reader = new FileReader();
         reader.onload = function () {
             img.src = reader.result;
 
-            removeImageViewChildren()
-            
+            // removeImageViewChildren()
+
         };
         reader.readAsDataURL(event.target.files[0]);
 
