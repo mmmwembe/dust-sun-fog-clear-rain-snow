@@ -24,6 +24,14 @@ async function start() {
         }
     }
 
+    function remove_ptag_elements(){
+
+        var elms = document.querySelectorAll("[id='p-label']");
+        for(var i = 0; i < elms.length; i++) 
+        elms[i].style.display='none'; 
+
+    }
+
     // MODEL INFORMATION - Mwembeshi 9/12/2022
     // Google Drive: DUST-SUN-FOG-CLEAR
     // Model Directory: model-object-detection
@@ -47,6 +55,9 @@ async function start() {
     input.addEventListener("change", preview_image);
 
     function preview_image(event) {
+
+
+        remove_ptag_elements()
 
         var reader = new FileReader();
         reader.onload = function () {
@@ -138,8 +149,8 @@ function create_json_for_object_detection(preds){
             imageView.appendChild(highlighter);
             imageView.appendChild(p);
 
-            // children.push(highlighter);
-            // children.push(p);
+            children.push(highlighter);
+            children.push(p);
 
 
 
