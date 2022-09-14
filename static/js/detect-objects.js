@@ -93,7 +93,7 @@ async function start() {
 
         threshold = parseFloat(x/100.0).toFixed(2)
 
-        alert(' pct ' + threshold)
+        // alert(' pct ' + threshold)
 
 
 
@@ -145,7 +145,8 @@ function create_json_for_object_detection(preds){
 
         const currentObject = preds[i];
 
-        if (currentObject.classes[0].probability > 0.5) {
+        // if (currentObject.classes[0].probability > 0.5) {        
+        if (currentObject.classes[0].probability > threshold) {
 
             label = currentObject.classes[0].className
             confidence = Math.round(parseFloat(currentObject.classes[0].probability) * 100) + "%"; 
