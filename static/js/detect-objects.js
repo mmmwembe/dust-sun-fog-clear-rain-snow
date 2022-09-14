@@ -90,11 +90,13 @@ async function start() {
         // Run inference on an image.
         const predictions = model.detect(img);
 
-          // Remove any highlighting we did previous frame.
-        for (let i = 0; i < children.length; i++) {
-            imageView.removeChild(children[i]);
-        }
-        children.splice(0);
+        // Remove bounding boxes and labels from previous frame
+
+       // Remove any highlighting we did previous frame.
+       // for (let i = 0; i < children.length; i++) {
+       //     imageView.removeChild(children[i]);
+        //}
+       // children.splice(0);
         // const predictions = await model.predict(img);
         // console.log(predictions.classes);
 
@@ -159,8 +161,8 @@ function create_json_for_object_detection(preds){
             imageView.appendChild(highlighter);
             imageView.appendChild(p);
 
-            children.push(highlighter);
-            children.push(p);
+            //children.push(highlighter);
+            //children.push(p);
 
 
 
