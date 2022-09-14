@@ -24,12 +24,19 @@ async function start() {
         }
     }
 
-    function remove_ptag_elements(){
+    function remove_bboxes_and_labels(){
 
-        var elms = document.querySelectorAll("[id='p-label']");
-        for(var i = 0; i < elms.length; i++) 
+        // Remove labels
+        var elms1 = document.querySelectorAll("[id='p-label']");
+        for(var i = 0; i < elms1.length; i++) 
         // elms[i].style.display='none'; 
-        elms[i]?.remove()
+          elms1[i]?.remove()
+
+        // Remove labels
+        var elms2 = document.querySelectorAll("[id='bbox-highlighter']");
+        for(var i = 0; i < elms2.length; i++) 
+          // elms[i].style.display='none'; 
+            elms2[i]?.remove()        
 
     }
 
@@ -58,7 +65,8 @@ async function start() {
     function preview_image(event) {
 
 
-        remove_ptag_elements()
+        // remove_ptag_elements()
+        remove_bboxes_and_labels()
 
         var reader = new FileReader();
         reader.onload = function () {
@@ -141,7 +149,7 @@ function create_json_for_object_detection(preds){
       
             const highlighter = document.createElement("div");
             highlighter.setAttribute("class", "highlighter");
-            highlighter.setAttribute("id", "p-tag-highlighter");
+            highlighter.setAttribute("id", "bbox-highlighter");
             highlighter.style ="left: " +
               currentObject.boundingBox.originX + "px; top: " +
               currentObject.boundingBox.originY + "px; width: " +
