@@ -7,7 +7,7 @@ async function start() {
     let results_JSON =[];
     var children = [];
     var threshold = 0.5
-    var x = 50 
+    let x = 50 
 
     var datatable =  $('#results-datatable').DataTable( {data: results_JSON,
         columns: [{ title: "#" },{ title: "Class/Label" },{ title: "Confidence" }],
@@ -90,7 +90,7 @@ async function start() {
 
 
         // Get threshold value from pct_confidence element
-        x = pct_confidence.value
+        x = parseInt(pct_confidence.value)
 
         //threshold = parseFloat(x/100.0).toFixed(1)
 
