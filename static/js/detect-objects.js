@@ -93,7 +93,7 @@ async function start() {
 
         //threshold = parseFloat(x/100.0).toFixed(1)
 
-        threshold = (x/100.0).toFixed(2)
+        threshold = Number(x/100.0)
 
         alert(' pct ' + threshold)
 
