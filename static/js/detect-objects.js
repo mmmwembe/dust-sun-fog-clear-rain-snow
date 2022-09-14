@@ -3,8 +3,10 @@ async function start() {
     const img = document.querySelector("#selected-image");
     var input = document.getElementById("image-selector");
     const resultDiv = document.querySelector(".result");
+    const pct_confidence = document.querySelector("#pct_confidence"); 
     let results_JSON =[];
     var children = [];
+    var threshold = 0.5
 
     var datatable =  $('#results-datatable').DataTable( {data: results_JSON,
         columns: [{ title: "#" },{ title: "Class/Label" },{ title: "Confidence" }],
@@ -84,6 +86,12 @@ async function start() {
         if (!model) {
             return;
         }
+
+
+        // Get threshold value from pct_confidence element
+        x = pct_confidence.value
+
+        alert(' pct ' + x )
 
 
 
