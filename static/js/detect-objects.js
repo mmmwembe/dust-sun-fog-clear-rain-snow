@@ -148,8 +148,8 @@ function create_json_for_object_detection(preds){
 
         const currentObject = preds[i];
 
-        // if (currentObject.classes[0].probability > 0.5) {        
-        if (currentObject.classes[0].probability > Number(x/100)) {
+        if (currentObject.classes[0].probability > 0.5) {        
+        // if (currentObject.classes[0].probability > threshold) {
 
             label = currentObject.classes[0].className
             confidence = Math.round(parseFloat(currentObject.classes[0].probability) * 100) + "%"; 
