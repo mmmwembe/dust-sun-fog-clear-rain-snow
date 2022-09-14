@@ -129,22 +129,17 @@ function create_json_for_object_detection(preds){
       
             const highlighter = document.createElement("div");
             highlighter.setAttribute("class", "highlighter");
-            highlighter.style =
-              "left: " +
-              currentObject.boundingBox.originX +
-              "px; top: " +
-              currentObject.boundingBox.originY +
-              "px; width: " +
-              currentObject.boundingBox.width +
-              "px; height: " +
-              currentObject.boundingBox.height +
-              "px;";
+            highlighter.style ="left: " +
+              currentObject.boundingBox.originX + "px; top: " +
+              currentObject.boundingBox.originY + "px; width: " +
+              currentObject.boundingBox.width +   "px; height: " +
+              currentObject.boundingBox.height +  "px;";
       
             imageView.appendChild(highlighter);
             imageView.appendChild(p);
 
-            children.push(highlighter);
-            children.push(p);
+            // children.push(highlighter);
+            // children.push(p);
 
 
 
