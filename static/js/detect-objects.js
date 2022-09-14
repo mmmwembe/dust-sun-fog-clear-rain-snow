@@ -91,9 +91,9 @@ async function start() {
         // Get threshold value from pct_confidence element
         x = pct_confidence.value
 
-        threshold = parseFloat(x/100.0).toFixed(2)
+        threshold = parseFloat(x/100.0).toFixed(1)
 
-        // alert(' pct ' + threshold)
+        alert(' pct ' + threshold)
 
 
 
