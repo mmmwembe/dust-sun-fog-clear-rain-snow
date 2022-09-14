@@ -91,6 +91,7 @@ async function start() {
         const predictions = model.detect(img);
 
         // Remove bounding boxes and labels from previous frame
+        remove_bboxes_and_labels()
 
        // Remove any highlighting we did previous frame.
        // for (let i = 0; i < children.length; i++) {
