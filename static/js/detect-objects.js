@@ -28,7 +28,8 @@ async function start() {
 
         var elms = document.querySelectorAll("[id='p-label']");
         for(var i = 0; i < elms.length; i++) 
-        elms[i].style.display='none'; 
+        // elms[i].style.display='none'; 
+        elms[i]?.remove()
 
     }
 
@@ -140,6 +141,7 @@ function create_json_for_object_detection(preds){
       
             const highlighter = document.createElement("div");
             highlighter.setAttribute("class", "highlighter");
+            highlighter.setAttribute("id", "p-tag-highlighter");
             highlighter.style ="left: " +
               currentObject.boundingBox.originX + "px; top: " +
               currentObject.boundingBox.originY + "px; width: " +
