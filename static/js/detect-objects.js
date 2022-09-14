@@ -91,7 +91,9 @@ async function start() {
         // Get threshold value from pct_confidence element
         x = pct_confidence.value
 
-        alert(' pct ' + x )
+        threshold = Math.round(x/100.0)
+
+        alert(' pct ' + threshold)
 
 
 
