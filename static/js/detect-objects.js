@@ -7,6 +7,7 @@ async function start() {
     let results_JSON =[];
     var children = [];
     var threshold = 0.5
+    var x = 50 
 
     var datatable =  $('#results-datatable').DataTable( {data: results_JSON,
         columns: [{ title: "#" },{ title: "Class/Label" },{ title: "Confidence" }],
@@ -148,7 +149,7 @@ function create_json_for_object_detection(preds){
         const currentObject = preds[i];
 
         // if (currentObject.classes[0].probability > 0.5) {        
-        if (currentObject.classes[0].probability > threshold) {
+        if (currentObject.classes[0].probability > parseFloat(x/100)) {
 
             label = currentObject.classes[0].className
             confidence = Math.round(parseFloat(currentObject.classes[0].probability) * 100) + "%"; 
