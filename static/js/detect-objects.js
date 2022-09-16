@@ -168,8 +168,16 @@ function create_json_for_object_detection(preds){
       
             const highlighter = document.createElement("div");
             highlighter.setAttribute("id", "bbox-highlighter");
+
+            const myStyles = `
+            background: rgba(0, 255, 0, 0.25);
+            border: 5px dashed #C2175B;
+            z-index: 1;
+            position: absolute;
+          `;
+            highlighter.style.cssText = myStyles;
             //highlighter.setAttribute("class", "highlighter");
-            highlighter.style.setProperty('background-color', 'red', 'important');
+            // highlighter.style.setProperty('background-color', 'red', 'important');
             //highlighter.style.zIndex = "-1";
             //highlighter.style.position = "absolute";
             //highlighter.style.backgroundColor =  "#00FF00";
