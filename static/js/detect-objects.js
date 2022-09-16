@@ -161,6 +161,7 @@ function create_json_for_object_detection(preds){
 
             const p = document.createElement("p");
             p.setAttribute("id","p-label");
+            p.setAttribute('style', 'background-color:#218838;');
 
             p.innerText =label +  " - with " + confidence + " confidence.";
 
