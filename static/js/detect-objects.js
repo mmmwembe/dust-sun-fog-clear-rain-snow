@@ -169,7 +169,10 @@ function create_json_for_object_detection(preds){
             const highlighter = document.createElement("div");
             highlighter.setAttribute("class", "highlighter");
             highlighter.setAttribute("id", "bbox-highlighter");
-            highlighter.setAttribute("border", "1px dashed #fff;");
+            highlighter.style.borderColor = "lightblue";
+            highlighter.style.borderStyle = "solid";
+            highlighter.style.borderWidth ="5px";
+            // highlighter.setAttribute("border", "1px dashed #fff;");
             // highlighter.setAttribute("border-width", "10px");
             // highlighter.setAttribute("border-style", "solid");
             //  /* border: 1px dashed #fff; */ 
