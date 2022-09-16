@@ -148,7 +148,7 @@ async function start() {
         // results_JSON = create_json_from_predictions(predictions)
         results_JSON = create_json_for_object_detection(predictions)
 
-        update_caption_and_bbox_colors()
+        // update_caption_and_bbox_colors()
 
         datatable.clear();
         datatable.rows.add(results_JSON);

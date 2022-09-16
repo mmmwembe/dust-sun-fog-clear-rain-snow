@@ -16,6 +16,9 @@ bootstrap = Bootstrap(app)
 def home():
   return render_template('detect-objects.html')
 
+@app.route('/labeling')
+def labeling():
+  return render_template('labeling.html')
 
 if __name__ == '__main__':
     

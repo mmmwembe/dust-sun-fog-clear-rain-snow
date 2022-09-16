@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Labeling Images </title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/521/fabric.min.js"></script>
+<script src="https://www.marvinj.org/releases/marvinj-1.0.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.canvas {
+  width: 100%;
+  height: auto;
+  display:block;
+}
+
+.row:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+
+@media only screen and (min-width: 768px) {
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+.header {
+  background-color: #252526;
+  color: #ffffff;
+  padding: 15px;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color :#35363A;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.menu li:hover {
+  background-color: #5854DC;
+}
+
+.aside {
+  background-color: #9ACD32;
+  padding: 15px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.footer {
+  background-color: #252526;
+  color: #ffffff;
+  text-align: center;
+  font-size: 18px;
+  padding: 15px;
+}
+
+th{ 
+   color:#fff;
+  }
+
+th, td {
+    font-size: 15px;   
+    font-weight: bold;
+}
+
+#myTable tr {
+    background-color: #eee;
+    border-top: 1px solid #fff;
+}
+#myTable tr:hover {
+    background-color: #ccc;
+}
+#myTable th {
+    background-color: #fff;
+}
+#myTable td:hover {
+    cursor: pointer;
+}
+
+.modal-header {
+     color: white;
+     background-color: rgb(97, 101, 102);  
+}
+
+.modal-body {
+     color: rgb(10, 10, 10);
+     background-color: rgb(222, 228, 230);  
+}
+
+body.modal-open .modal {
+    display: flex !important;
+    height: 100%;
+} 
+
+body.modal-open .modal .modal-dialog {
+    margin: auto;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+
+    <div class="row">
+
+        <div class="col-sm">
+           <h1>Amina</h1>
+        </div>
+        <div class="col-sm">
+            Shape:
+            <select id="shape">
+            <option value="rect">Rectangle</option>
+            </select> 
+        </div>
+        <div class="col-sm">
+            Color:
+            <select id="color">
+            <option value="#83f52c">Green</option>
+            <option value="#0dd5fc">Blue</option> 
+            <option value="#f3f313">Yellow</option>
+            <option value="#ff0099">Pink</option>
+            </select>
+        </div>
+        <div class="col-sm">
+            <button class="btn btn-danger" onclick="window.location.href='{{ url_for('view_images') }}';">View Images</button>
+        </div>
+        <div class="col-sm">
+            <button id="btnSubmit" class="btn btn-primary" onclick="window.location.href='{{ url_for('upload') }}';">Upload Images</button>
+        </div>
+        <div class="col-sm">
+          <button class="btn btn-danger" onclick="window.location.href='{{ url_for('dashboard') }}';">Home</button>
+      </div>
+      <div class="col-sm">
+          <button id="btnSubmit" class="btn btn-primary" onclick="window.location.href='{{ url_for('payMe') }}';">Pay Me</button>
+      </div>       
+        <div class="col-sm">
+          <h2 id="total_number_of_labels"></h2>
+        </div>
+
+        <div class="col-sm">
+          <h2 id="today_total_duration"></h2>
+        </div>
+
+        <div class="col-sm">
+          <h2 id="date"></h2>
+        </div>
+    
+      </div>
+
+  <h1 id="amina_heading"></h1>
+  <div id="object_info"></div>
+  <div id="string_content"></div>
+  <div id ="object_selected"></div>
+  <div id="object_created"></div>
+  <div id="output"></div>
+  <div id="output2"></div>
+  <div id="output3"></div>
+  <div id="output5"></div>
+  <div id="output_normalized_values"></div>
+  <div id="amina_heading"></div>
+
+</div>
+
+<div class="row">
+
+   <!-- Modal for Creating A New Folder -->
+  <div class="container mt-3">
+  
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createFolderModal">
+      <i class="fa-solid fa-folder-plus"></i> Create Folder 
+    </button>
+  </div>
+  
+  <!-- The Modal -->
+  <div class="modal" id="createFolderModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Folder name</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+  
+          <div>
+            <i class="fa-solid fa-folder"></i>
+            <!-- <label for="foldername">Folder name</label>-->
+            <input id="foldername"
+                   placeholder="label"
+                   class="">
+          </div>
+  
+  
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button id="createFolderBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">Create Folder</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+   <!-- Modal for Creating A New Folder Ends Here -->
+
+
+  <div class="col-3 col-s-3 menu">
+    <ul id="folders-list">
+      <li>
+        <span class="glyphicon glyphicon-menu-down"></span> Dogs
+        <span class="badge bg-primary rounded-pill"  title="Number of images">14</span>
+        <span class="badge bg-success rounded-pill"  title="Labeled images">10</span> 
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-menu-right"></span> 
+          Chickens
+         <span class="badge bg-primary rounded-pill"   title="Number of images">10</span>
+         <span class="badge bg-success rounded-pill"   title="Labeled images">10</span>          
+       </li>
+      <li>
+        <span class="glyphicon glyphicon-menu-down"></span>          
+          Fish
+          <span class="badge bg-primary rounded-pill"   title="Number of images">100</span>
+          <span class="badge bg-success rounded-pill"   title="Labeled images">5</span>          
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-menu-up"></span>          
+          Cars
+          <span class="badge bg-primary rounded-pill"   title="Number of images">100</span> 
+          <span class="badge bg-success rounded-pill"   title="Labeled images">100</span>            
+      </li>
+
+    </ul>
+  </div>
+
+  <div id="canvasHolder" class="col-6 col-s-9">
+    <!--img id ="mainImage" src="/static/Uploads/colorful-birds-05.jpg">-->
+    <!--<canvas id="canvas" style="border:1px solid #000000;"></canvas>-->
+    <canvas id="canvas" style="border:1px solid #000000;width:100%"></canvas>
+  </div>
+  
+
+  <div class="col-3 col-s-12">
+    <div class="aside">
+      <h2 id="image_header">Dog/Image01.jpg</h2>
+      <p>
+        <div class="container" text-center-align>
+            <table class="table table-striped">
+                <tr  class="bg-info">
+                    <th>Show/Hide</th>
+                    <th>Label</th>
+                    <th>Duration (Sec) </th>
+                </tr>
+            
+                <tbody id="myTable">
+                    
+                </tbody>
+            </table>
+      </div>
+      </p>
+
+      <p></p>
+      <h5 id="table_num_of_labels"></h5>
+      <h5 id="table_total_duration"></h5>
+      <p></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+
+<p>
+        <button type="button" class="btn btn-primary btn-lg"  id="previousBtn">
+        <span class="glyphicon glyphicon-triangle-left"></span> Prev
+        </button>
+       
+        <button type="button" class="btn btn-success btn-lg" id="nextBtn">
+        <span class="glyphicon glyphicon-triangle-right"></span>   Next
+        </button>
+</p> 
+
+<div id="show_canvas_json"></div>
+
+
+
+
+
+<script>
+
+// $( document ).ready(function() {
+// Execute Javascript only after the page has been fully loaded - use window.addEventListener("load",...)
+window.addEventListener("load", function(){
+
+var user_id = 'user1'
+var imgArray = new Array();
+// var imgArray = ['/img/pexels-photo-2074122.jpeg','/img/soil-in-hand.png']
+var imgArray =  new Array();
+var ALL_IMAGES =[]
+var DYNAMIC_TABLE_RECORD_HOLDER = {}  // This holds the table data array for each image during navigations
+var CANVAS_JSON_HOLDER = {}   // This will hold the jsons from each image's canvas
+var canvas_json = null       // Each labeled image will get an instance of canvas_json to capture the canvas state
+var canvas = null
+var canvasWidth = null
+var canvasHeight = null
+var originalImageWidth = null
+var originalImageHeight = null
+var num_of_images = null
+var image_url = null
+var cropped_image_dataURL = null
+var activity = null
+var rect, isDown, origX, origY;
+var current_image_index= 0
+var FlaskData = null
+var directData  = null
+var label = "Cloud"
+var label_number = null
+var labels_Table_Array = []
+var LABEL_STATUS = 'ACTIVE' // ACTIVE VS DELETED
+const table_num_of_labels = document.getElementById('table_num_of_labels')
+const table_total_duration = document.getElementById('table_total_duration')
+
+const MODE = {
+        drawing :  'drawing',
+        notDrawing : 'notDrawing'  // // notDrawing = {scaling rotating skewing resizing moving }
+}
+var currentMode = MODE.drawing
+const LABEL_STATUS_OPTIONS ={
+        'active': 'ACTIVE',
+        'deleted' : 'DELETED'
+}
+
+var LABEL_IMAGES_FOLDERS = []
+var WORKING_LABELS_FOLDER = "dogs"  // This is the current folder the images being labeled belong to
+var WORKING_CROPPED_LABELS_FOLDER = []
+var WORKING_CANVAS_JSON_FOLDER
+
+// DATE AND TIMING
+    // TIMER 
+var startTime, endTime, elapsed_time_seconds;
+var total_duration = null, units_of_measure ='s', total_duration_array = [], date = null
+
+var x_min = null, y_min = null, x_max = null, y_max = null
+var norm_x_min = null,norm_y_min = null,norm_x_max = null,norm_y_max = null
+
+var angle = 0, angle_radians = 0, intial_angle = 0, initial_angle_radians = 0, final_angle = 0, final_angle_radians = 0
+
+const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const d = new Date()
+var year = d.getFullYear();
+var month = d.getMonth() + 1;
+var month_text = months[d.getMonth()];
+var day = d.getDate();
+var today = new Date();
+var ISODate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var Date_Month_Text = today.getDate() + '-' + month_text +'-'+ today.getFullYear()
+var iso_date_timestamp  
+
+
+$('#date').html(Date_Month_Text)
+
+var today_total_duration = 0
+var today_total_number_of_labels = 0
+
+$.ajax({
+    type: "POST",
+    url: '/imageAPI',
+    dataType: 'json',
+    data: { user_id : user_id, image_directory : 'img' },
+    success: function(data) {
+
+        directData = data.result
+        // alert(directData)
+        var i = 0
+        Object.keys(directData).forEach(function(key) {
+
+            var _data = {image_id : directData[key].image_id , image_url : directData[key].image_url, image_name: directData[key].image_name }
+            ALL_IMAGES.push(_data)
+            imgArray[i] = new Image();
+            tmp_img_url = directData[key].image_url 
+            imgArray[i].src = tmp_img_url.replace(/\\/g, "/");
+            imgArray[i].image_id = directData[key].image_id;
+            imgArray[i].image_name = directData[key].image_name;
+            //alert('image_id : ' + ALL_IMAGES[i].image_id)
+            // alert(JSON.stringify(_data))
+            // alert(imgArray[i].src) 
+            i += 1
+            // alert('key ' + key)
+        });
+
+        num_of_images = imgArray.length;
+        image_url = imgArray[0].src
+        image_name = imgArray[0].image_name
+        image_id = imgArray[0].image_id 
+        updateCanvasBackgroundImage(image_url)
+        // FlaskData = data
+        // $('#output5').text(JSON.stringify(data));
+    }
+});
+
+
+$.ajax({
+    type: "POST",
+    url: '/createFoldersAPI',
+    dataType: 'json',
+    data: { user_id : user_id, image_directory : 'img' },
+    success: function(data) {
+
+      var myData = data.result
+      LABEL_IMAGES_FOLDERS = data.result
+      // alert(LABEL_IMAGES_FOLDERS)
+
+      addFolderToList(LABEL_IMAGES_FOLDERS[0]) 
+
+
+
+    }
+});
+
+/*
+$.ajax({
+    type: "POST",
+    url: '/imageAPI_allImagePaths',
+    dataType: 'json',
+    data: { user_id : user_id, image_directory : 'img' },
+    success: function(data) {
+
+        var all_images_data = data.result
+        // alert(directData)
+      
+        Object.keys(all_images_data).forEach(function(key) {
+
+            // alert('key 1 ' + key)
+            //alert(JSON.stringify(all_images_data[key]))
+
+            //var item = all_images_data[key]
+
+              var image_obj = all_images_data[key]
+
+            Object.keys(image_obj).forEach(function(key2) {
+
+                        // alert('key 2 ' + key2)
+
+
+            });
+
+
+
+        });
+
+
+    }
+});
+*/
+/*
+// var directData= {{ data|tojson|safe }}; // Get data from flask
+
+var i = 0
+Object.keys(directData).forEach(function(key) {
+    // alert(key + '  image_id ' + directData[key].image_id +  ' image_url : ' + directData[key].image_url +  '  image_name ' + directData[key].image_name );
+    var _data = {image_id : directData[key].image_id , image_url : directData[key].image_url, image_name: directData[key].image_name }
+    ALL_IMAGES.push(_data)
+
+    imgArray[i] = new Image();
+    imgArray[i].src = directData[key].image_url;
+    imgArray[i].image_id = directData[key].image_id;
+    imgArray[i].image_name = directData[key].image_name;
+    alert('image_id : ' + ALL_IMAGES[i].image_id)
+    i += 1
+});
+
+
+ // $(demo).html(jsonData)
+
+//num_of_images = imgArray.length;
+*/
+
+
+
+
+// get canvas height
+
+getCanvasSize()
+
+// get original image size
+// getOriginalImageSize()
+getMeta(image_url,function(width, height) { 
+
+  originalImageHeight = height
+  originalImageWidth = width
+
+  //alert(width + 'px ' + height + 'px') }
+});
+
+
+function addFolderToList(folder_name) {
+  var ul = document.getElementById("folders-list");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode(folder_name));
+  ul.appendChild(li);
+  var span = document.createElement('span');
+  span.classList.add('glyphicon glyphicon-menu-up');
+  span.setAttribute("id", folder_name);
+  span.setAttribute("title", 'New Title')
+  li.appendChild(span);
+}
+
+
+function getMeta(url, callback) {
+    var img = new Image();
+    img.src = url;
+    img.onload = function() { callback(this.width, this.height); }
+}
+
+function getOriginalImageSize(){
+        var myImg = document.querySelector("#canvas");
+        originalImageWidth = myImg.naturalWidth;
+        originalImageHeight  = myImg.naturalHeight;
+       // alert("Original width=" + originalImageWidth + ", " + "Original height=" + originalImageHeight);
+}
+
+
+function getCanvasSize(){
+        var myCanvas = document.querySelector("#canvas");
+        canvasWidth = myCanvas.clientWidth;
+        canvasHeight = myCanvas.clientHeight;
+        // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);
+}
+
+
+previousBtn.onclick = function(event) {
+  previousImage()
+}
+
+nextBtn.onclick = function(event) {
+  nextImage()
+}
+
+
+// var canvas = new fabric.Canvas('c', { selection: true });
+//canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: 1452*0.8, height: 749*0.8 });
+canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
+fabric.Object.prototype.transparentCorners = false;
+
+// https://github.com/fabricjs/fabric.js/issues/3652
+
+
+canvas.on('mouse:down', function(o){
+
+    isDown = true;
+    startTimer() 
+    var pointer = canvas.getPointer(o.e);
+    origX = pointer.x;
+    origY = pointer.y;
+    var pointer = canvas.getPointer(o.e);
+    rect = new fabric.Rect({
+        left: origX,
+        top: origY,
+        originX: 'left',
+        originY: 'top',
+        width: pointer.x-origX,
+        height: pointer.y-origY,
+        angle: 0,
+        fill: 'rgba(5,0,0,0.05)',
+        stroke:'#0dd5fc',
+        strokeWidth: 3,
+        // selectable: true
+        //transparentCorners: false
+    });
+
+
+    // Add custom variables
+    // rect.set("norm_x_min", getRandomInt(100))
+    // rect.set("norm_y_min", getRandomInt(100))
+    // rect.set("norm_x_max", getRandomInt(100))
+    // rect.set("norm_y_max", getRandomInt(100))
+
+    canvas.add(rect);
+    
+    
+});
+
+canvas.on('mouse:move', function(o){
+    if (!isDown) return;
+
+    currentMode = MODE.drawing
+
+    var pointer = canvas.getPointer(o.e);
+    
+    if(origX>pointer.x){
+        rect.set({ left: Math.abs(pointer.x) });
+    }
+    if(origY>pointer.y){
+        rect.set({ top: Math.abs(pointer.y) });
+    }
+    
+    rect.set({ width: Math.abs(origX - pointer.x) });
+    rect.set({ height: Math.abs(origY - pointer.y) });
+    
+    canvas.renderAll();
+});
+
+canvas.on('mouse:up', function(o){
+
+if (isDown && currentMode === MODE.drawing) {
+
+    endTimer()
+
+
+
+    var canvas_objects, last_object, last_object_index  = getObjectIndexOnCanvas()
+    canvas.setActiveObject(canvas.item(last_object_index))
+    canvas.item(last_object_index).set({selectable: true})
+    // canvas.item(last_object_index).setCoords();
+
+    label_num = last_object_index
+    var label_item = {'index': label_num, 'label': label, 'duration': elapsed_time_seconds}
+
+    // ADD ADDITIONAL DATA PARAMETERS TO THE RECT OBJECT
+    x_min = rect.get("left")
+    y_min = rect.get("top")
+    x_max = rect.get("left") + rect.get("width")
+    y_max = rect.get("top") + rect.get("height")
+
+    norm_x_min = rect.get("left")/canvasWidth
+    norm_y_min = rect.get("top")/canvasHeight
+    norm_x_max = (rect.get("left") + rect.get("width"))/canvasWidth
+    norm_y_max = (rect.get("top") + rect.get("height"))/canvasHeight
+    iso_date_timestamp = new Date().toISOString()
+
+    rect.set({ data: { 
+        'originator': user_id,
+        'label' : label,
+        'image' : {'image_name' : image_name, 'originalImageWidth' : originalImageWidth,  'originalImageHeight' : originalImageHeight , 'image_folder' : WORKING_LABELS_FOLDER, 'image_url' : image_url},
+        'ISODate' : ISODate,
+        'date_month_text' : Date_Month_Text,
+        'canvas': {'canvasWidth' :canvasWidth, 'canvasHeight' : canvasHeight, 'canvas_item_num': last_object_index},
+        'label_item' : {'index': label_num, 'label': label, 'duration': elapsed_time_seconds},  
+        'raw_values' :  {'x_min' : x_min, 'y_min': y_min, 'x_max': x_max, 'y_max' : y_max },
+        'norm_values' : {'norm_x_min' : norm_x_min, 'norm_y_min': norm_y_min, 'norm_x_max': norm_x_max, 'norm_y_max' :  norm_y_max },
+        'ai_ready_normalized_data' : { 'test_train_validation' : 'TESTING', 'image_url': image_url, 'label': label, 'norm_x_min': norm_x_min, 'norm_y_min': norm_y_min, 'norm_x_tr' : '', 'norm_y_tr' :'', 'norm_x_max' : norm_x_max, 'norm_y_max' : norm_y_max, 'norm_x_bl': '', 'norm_y_bl':'', 'label_status' : LABEL_STATUS, 'ISODate': iso_date_timestamp },
+        'ai_ready_raw_data': {'test_train_validation' : 'TESTING', 'image_url': image_url, 'label': label, 'x_min': x_min, 'y_min': y_min, 'x_tr' : '', 'y_tr': '', 'x_max' : x_max, 'y_max' : y_max, 'x_bl': '', 'y_bl':  '', 'label_status' : LABEL_STATUS, 'ISODate': iso_date_timestamp },
+        'timer_tracker': {'elapsed_time_seconds' : elapsed_time_seconds, 'total_duration_array': total_duration_array, 'total_duration': total_duration, 'units_of_measure' : units_of_measure},
+        'rewards_tracker' : {'num_tokens_award' : 'TBD', 'token_type': 'TBD', 'rewards_category': 'TBD'},
+        'canvasBackgroundImage' : {'scaleX' : canvas.backgroundImage.scaleX, 'scaleY': canvas.backgroundImage.scaleY, 'height': canvas.backgroundImage.height, 'width': canvas.backgroundImage.width},
+        'label_status' : {'status' : LABEL_STATUS, 'ISODate': iso_date_timestamp }
+        //'rotation_data': {'angle' :  rect.angle, 'intial_angle' : initial_angle, 'initial_angle_radians' : initial_angle_radians, 'final_angle' : rect.angle, 'final_angle_radians' : rect.angle}
+
+      } })
+
+    canvas.toJSON(['data'])
+
+    // Section of image on canvas to be cropped out and saved in the cropped-images
+    // cropped_image_dataURL = canvas.toDataURLWithCropping('png', { y: rect.top, x: rect.left, width: rect.width, height: rect.height, quality: 1 })
+    // https://stackoverflow.com/questions/40083942/fabricjs-set-clipped-object-as-background-to-canvas-after-clipping
+    cropped_image_dataURL = canvas.toDataURL({
+                      format: 'image/png',
+                      left: rect.left,      //  canvas.offsetLeft,
+                      top: rect.top,        // canvas.offsetTop,
+                      width: rect.width,
+                      height: rect.height
+                  })
+
+    // Remove data:image/png;base64, at beginning of the cropped_image_dataURL string
+    cropped_image_dataURL= cropped_image_dataURL.replace("data:image/png;base64,", "");
+    // cropped_image_dataURL = canvas.toDataURLWithCropping('png', { y: 0, x: 0, width: 50, height: 50, quality: 1 })
+    // alert(cropped_image_dataURL)
+    saveCroppedSection() // save to Server
+
+    labels_Table_Array.push(label_item)
+    buildTable(labels_Table_Array)
+
+
+    $('#table_num_of_labels').html('Number of Labels : ' + (Number(last_object_index) + Number(1)))
+    $('#table_total_duration').html('Total Duration : ' + total_duration.toFixed(2) + ' secs')
+
+    x1 = rect.get("norm_x_min")
+    y1 = rect.get("norm_y_min")
+    x2 = rect.get("norm_x_max")
+    y2 = rect.get("norm_y_max")
+
+    x1_to_y2 = 'x1 : ' + x1 + '  y1 : ' + y1 + '  x2 : ' + x2 + 'y2 : ' + y2
+    $('#object_info').html(x1_to_y2)
+
+
+
+
+    // Save CanvasJSON
+    // saveCanvasJSONFile()
+
+    // alert(JSON.stringify(labels_Table_Array))
+    // 
+    // alert(' last item is : ' + last_object_index)
+    //canvas.item(last_object_index) 
+    //var a1 = last_object.get('width'); // 0
+    //var a2 = last_object.get('height'); // 0
+    //var a3 = last_object.get('left'); // 0
+    //var a4 = last_object.get('top'); // 0
+    //var a5 = last_object.get('fill'); // rgb(0,0,0)
+    //var a6 = last_object.get('stroke'); // null
+    //var a7 = last_object.get('opacity'); // 1
+
+    // $('#output3').html(' width:  ' + a1  + ' height :  '  + a2)
+
+    //canvas.item(last_object_index).set({borderColor: 'red',cornerColor: 'green',cornerSize: 6,transparentCorners: false});
+    //canvas.setActiveObject(canvas.item(last_object_index));
+    //this.__canvases.push(canvas);
+
+
+};
+  isDown = false;
+  currentMode = MODE.notDrawing
+});
+
+
+
+
+function nextImage(){ 
+    // alert('index ' + current_image_index + 'num of images ' + num_of_images)
+    if (current_image_index < num_of_images){  
+
+        if(checkIfCanvasHasLabels()){
+        // alert(' image name ' + image_name + ' has ' +  addTwoStringsAsInts(label_num,1) + ' labels')
+        // Use toJSON to make a JSON of canvas and load it again using loadFromJSON.
+        // (1) Make JSON from canvas 
+        canvas_json = canvas.toJSON(['data'])
+        // (2) Save JSON for the image
+        CANVAS_JSON_HOLDER[image_name] = canvas_json
+        DYNAMIC_TABLE_RECORD_HOLDER[image_name] = [labels_Table_Array,addTwoStringsAsInts(label_num,1), total_duration, total_duration_array]
+        getTotalTimeAndLabels()
+        // Re-initialize the labels_Table_Array = []
+        labels_Table_Array = []
+        total_duration =''
+        total_duration_array = []
+       $('#table_num_of_labels').html('')
+       $('#table_total_duration').html(total_duration)
+        buildTable(labels_Table_Array)
+        // checkIfJSONKeyHasValue(CANVAS_JSON_HOLDER, image_name)
+
+        // saveCanvasJSON File
+        saveCanvasJSONFile()
+
+        }
+
+        current_image_index += 1
+        image_url = imgArray[current_image_index].src 
+        image_name = imgArray[current_image_index].image_name
+        image_id = imgArray[current_image_index].image_id 
+        updateCanvasBackgroundImage(image_url)
+
+        }
+    else{
+        alert('This is the last image')
+        }
+}
+
+function previousImage(){
+    if (current_image_index > 0){
+
+        
+
+        if(checkIfCanvasHasLabels()){
+        // alert(' image name ' + image_name + ' has ' +  addTwoStringsAsInts(label_num,1) + ' labels')
+        // Use toJSON to make a JSON of canvas and load it again using loadFromJSON.
+        // (1) Make JSON from canvas 
+        canvas_json = canvas.toJSON();
+        // (2) Save JSON for the image
+        CANVAS_JSON_HOLDER[image_name] = canvas_json
+        // DYNAMIC_TABLE_RECORD_HOLDER[image_name] = labels_Table_Array
+        // Re-initialize the labels_Table_Array = []
+        // DYNAMIC_TABLE_RECORD_HOLDER[image_name] = [labels_Table_Array,addTwoStringsAsInts(label_num,1), total_duration, total_duration_array]
+        DYNAMIC_TABLE_RECORD_HOLDER[image_name] = DYNAMIC_TABLE_RECORD_HOLDER[image_name]
+        getTotalTimeAndLabels()
+        // Re-initialize the labels_Table_Array = []
+        labels_Table_Array = []
+        total_duration =''
+        total_duration_array = []
+       $('#table_num_of_labels').html('')
+       $('#table_total_duration').html(total_duration)
+        buildTable(labels_Table_Array)
+
+        // saveCanvasJSON File
+        saveCanvasJSONFile()
+
+        }
+
+        current_image_index -= 1
+        image_url = imgArray[current_image_index].src 
+        image_name = imgArray[current_image_index].image_name
+        image_id = imgArray[current_image_index].image_id 
+        updateCanvasBackgroundImage(image_url)
+
+        }
+    else {
+        alert('This is the first image')
+        }
+}
+
+
+function updateCanvasBackgroundImage(img_url){
+
+
+  // getTotalTimeAndLabels(DYNAMIC_TABLE_RECORD_HOLDER)
+
+
+    var imgObj = new Image();
+    imgObj.src = img_url;
+    imgObj.onload = function() {
+
+    //canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: 1452*0.8, height: 749*0.8,stopContextMenu: true,fireRightClick: true });
+    canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight,stopContextMenu: true,fireRightClick: true });
+    fabric.Object.prototype.transparentCorners = false;
+
+    fabric.Image.fromURL(img_url, function(img) {
+
+        originalImageWidth = img.width
+        originalImageHeight =img.height
+
+        // alert('canvas H/Wratio :' + canvasHeight/canvasWidth +  ' original image H/W ratio :' +  originalImageHeight/originalImageWidth)
+
+        canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+        scaleX: canvas.width / img.width,
+        scaleY: canvas.height / img.height
+
+        });
+
+
+        
+
+
+        if(checkIfJSONKeyHasValue(CANVAS_JSON_HOLDER, image_name)){
+            // retrieve saved canvas json and update canvas
+            // $('#image_header').html(image_name)
+            // https://stackoverflow.com/questions/49021867/updating-the-json-stringifycanvas-with-latest-canvas-changes
+            canvas_json = CANVAS_JSON_HOLDER[image_name]
+            canvas.loadFromJSON(canvas_json,canvas.renderAll.bind(canvas));
+            canvas.renderAll();
+            // alert('TODO - Line 574 canvas.loadFromJSON needs more work...plus the dynamic array for the table also needs to be aligned with this CANVAS_JSON_HOLDER')
+
+           /*
+
+            labels_Table_Array = DYNAMIC_TABLE_RECORD_HOLDER[image_name][0] 
+            xlabel_num = DYNAMIC_TABLE_RECORD_HOLDER[image_name][1] 
+            total_duration = DYNAMIC_TABLE_RECORD_HOLDER[image_name][2] 
+            total_duration_array = DYNAMIC_TABLE_RECORD_HOLDER[image_name][3] 
+
+
+            buildTable(labels_Table_Array)
+            $('#table_num_of_labels').html('Number of Labels : ' + xlabel_num)
+            $('#table_total_duration').html('Total Duration :' + total_duration + 'secs')
+ 
+           */
+
+            //alert('JSON OBJECT ' + JSON.stringify(CANVAS_JSON_HOLDER[image_name]))
+
+            // Make objects selectable
+            // makeObjectsSelectable()
+
+     }
+
+
+    });
+
+    } // end  of  imgObj.onload = function() {
+
+
+
+}
+
+/*
+var myArray = [
+	    {'index': 0, 'label':'Dog', 'duration':10},
+	    {'index':1, 'label':'Dog', 'duration':5.2},
+	    {'index':2, 'label':'Dog', 'duration':4.6},
+	    {'index':3, 'label':'Dog', 'duration':20},
+	    {'index':4, 'label':'Dog', 'duration':21},
+	    {'index':5, 'label':'Dog', 'duration':22},
+]
+	
+buildTable(myArray)
+*/
+function buildTable(data){
+		var table = document.getElementById('myTable')
+        table.innerHTML = ''
+		for (var i = 0; i < data.length; i++){
+            // <td>${data[i].index}</td>
+            //<td><a id="${data[i].index}" href="#"  onclick="href_onclick(this.id)">${data[i].index}</a></td>
+			var row = `<tr class = "align-middle">        
+                            <td><button id="${data[i].index}" onclick="hello()" type="button" class="btn btn-outline-dark">${data[i].index}</button></td>
+							<td>${data[i].label}</td>
+							<td>${data[i].duration}</td>
+					  </tr>`
+			table.innerHTML += row
+
+
+		}
+}
+
+function startTimer() {
+    startTime = Date.now();
+};
+  
+function endTimer() {
+    endTime = Date.now();
+    var timeDiff = (endTime - startTime)/1000; //in seconds
+
+    // to 2 decimal places 
+    elapsed_time_seconds = timeDiff.toFixed(2);
+    //console.log(seconds + " seconds");
+    total_duration_array.push(elapsed_time_seconds)
+    total_duration = sum_of_array(total_duration_array)
+   // $('#amina_heading').html(' Amina -  ' + total_duration + 's')
+}
+
+
+
+function sum_of_array(myarray){
+    let sum = 0;
+    for (let i = 0; i < myarray.length; i++) {
+        sum += parseFloat(myarray[i]);
+    }
+    return sum
+}
+
+
+function getObjectIndexOnCanvas(){
+    var last_object = null
+    var last_object_index = null
+
+    canvas_objects = canvas._objects;
+
+    if(canvas_objects.length !== 0){
+        
+        last_object = canvas_objects[canvas_objects.length -1]; //Get last object 
+        last_object_index = canvas_objects.length -1
+
+    // canvas.remove(last);
+    }
+    else {
+
+        canvas_objects = null
+
+    }
+    return canvas_objects, last_object, last_object_index 
+}
+
+/*
+
+var canvas_objects, last_object, last_object_index  = getObjectIndexOnCanvas()
+
+alert(' last item is : ' + last_object_index)
+canvas.setActiveObject(canvas.item(last_object_index))
+canvas.setActiveObject(sel);
+
+
+canvas.item(0).set({borderColor: 'red',cornerColor: 'green',cornerSize: 6,transparentCorners: false});
+canvas.setActiveObject(canvas.item(0));
+this.__canvases.push(canvas);
+
+*/
+
+// When anchor on table 
+$("a").click(function(){
+    alert(this.id);
+});
+
+function href_onclick(clicked_id){
+      alert(clicked_id);
+}
+
+function hello() {
+    alert('Hello');
+}
+
+// Datatable....https://stackoverflow.com/questions/49718960/update-datatable-using-an-array-of-objects
+
+function checkIfCanvasHasLabels(){
+/*
+var group = new fabric.Group([profilepic, text], {left: 0,top: 0,angle: 0,hasRectangle: true});
+let rectanglegroups = canvasobj._objects.filter(obj => obj.hasRectangle === true);
+rectanglegroups.map(obj => canvasobj.setActiveObject(obj));
+
+const objectsWithWidth50 = canvas.getObjects().filter(obj => obj.width === 50);
+canvas.getObjects().filter(obj => obj.name === 'test');
+const objectsWithWidth50 = canvas.getObjects().filter(obj => obj.width === 50);
+var objects = canvas.getObjects('line')
+*/
+    var objects = canvas.getObjects('rect')
+
+        // alert('rectangles on the canvas: ' + JSON.stringify(objects))
+
+        //for (obj in objects) { }
+
+        //alert(objects.length)
+
+        if (objects.length > 1) {
+            
+            return true;
+        }
+        else {
+
+            return false;
+        }
+
+}
+
+
+
+function addTwoStringsAsInts(a,b){
+
+    // alert('a : ' +  a)
+
+    var sum = Number(a) + Number(b);
+
+    return sum.toString();
+}
+
+
+function stringToNumber(a){
+
+var _a = Number(a) ;
+
+return _a;
+}
+
+function checkIfJSONKeyHasValue(JSONObject, image_name){
+    var output = false
+    if (JSON.stringify(JSONObject[image_name]).length > 0){
+        output = true
+    }
+    // alert('Does Holder contain canvas_json ? : ' + output)
+return output
+
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function makeObjectsSelectable(){
+   objs = canvas.getObjects();
+   objs.forEach(function(item, i) {
+      item.set('selectable', true);
+      canvas.renderAll();
+   });
+}
+
+function getTotalTimeAndLabels(){
+
+  Object.keys(DYNAMIC_TABLE_RECORD_HOLDER).forEach(function(image_name_key) {
+
+    today_total_number_of_labels +=stringToNumber(DYNAMIC_TABLE_RECORD_HOLDER[image_name_key][1]) 
+    today_total_duration += sum_of_array(DYNAMIC_TABLE_RECORD_HOLDER[image_name_key][3])
+
+    $('#total_number_of_labels').html('Labels :' + today_total_number_of_labels)
+    $('#today_total_duration').html('Duration :' + today_total_duration.toFixed(2) + ' secs')
+
+    // alert('item : ' + JSON.stringify(DYNAMIC_TABLE_RECORD_HOLDER[image_name_key][1]))
+
+});
+
+}
+
+
+function saveCanvasJSONFile(){
+
+  $.ajax({
+    type: "POST",
+    url: '/saveCanvasJSON',
+    dataType: 'json',
+    data: { 
+      user_id : 'user1', 
+      image_name : image_name,
+      current_folder: WORKING_LABELS_FOLDER,
+      canvas_json : JSON.stringify(canvas_json),
+      dynamic_table_record : JSON.stringify(DYNAMIC_TABLE_RECORD_HOLDER[image_name])
+         },
+    success: function(data) {
+      var myData = data.result
+      alert('CanvasJSONFIle URL : ' + myData)
+    }
+});
+
+
+}
+
+
+function readCanvasJSONFile(){
+
+$.ajax({
+  type: "POST",
+  url: '/readCanvasJSON',
+  dataType: 'json',
+  data: { 
+    user_id : user_id, 
+    image_name : image_name,
+    current_folder: WORKING_LABELS_FOLDER
+       },
+  success: function(data) {
+
+    canvas_json = data.result
+    var myData = data.result
+    //alert('CanvasJSONFIle canvas_json : ' + JSON.stringify(CANVAS_JSON_HOLDER))
+    // $('#show_canvas_json').html(JSON.stringify(myData))
+    alert('output from the check thingy ' + checkIf_CANVAS_JSON_HOLDER_is_Empty(image_name))
+
+    if(checkIf_CANVAS_JSON_HOLDER_is_Empty){
+
+      CANVAS_JSON_HOLDER[image_name] = canvas_json
+
+      updateCanvasBackgroundImage(image_url)
+
+    }
+
+
+
+  }
+});
+
+}
+
+
+function checkIf_CANVAS_JSON_HOLDER_is_Empty(image_name){
+
+  var isEmpty = true
+
+  isEmpty = Object.keys(CANVAS_JSON_HOLDER).length === 0;
+
+  alert(isEmpty)
+
+  if (isEmpty === false) {
+
+     if (CANVAS_JSON_HOLDER[image_name].length > 0)
+          isEmpty = false
+  } 
+ else {
+
+     isEmpty = true
+  } 
+
+  return isEmpty
+
+}
+
+
+function saveCroppedSection(){
+
+  $.ajax({
+      type: "POST",
+      url: "/saveCroppedImage",
+      data: { 
+         imgBase64: cropped_image_dataURL,
+         user_id : 'user1', 
+         image_name : image_name,
+         label_num : label_num,
+         current_folder: WORKING_LABELS_FOLDER
+      },
+      success: function(data) {
+        var myData = data.result
+        // alert('cropped-image-dataURL : ' + JSON.stringify(myData))
+      }
+
+    });
+
+}
+
+function createFolder(folder_name){
+
+$.ajax({
+    type: "POST",
+    url: "/createFolder",
+    data: { 
+       user_id : user_id, 
+       folder_name : folder_name,
+    },
+    success: function(data) {
+      // var myData = data.result
+      //  alert('Result from server ' + myData)
+      window.location(url_for('home'));
+    }
+
+  });
+
+}
+
+
+
+// Modal Functions
+
+$('#myModal').on('shown.bs.modal', function (e) {
+  // alert('show')
+  readCanvasJSONFile()
+  // $(this).find('.modal-body').append('This is where we want the content to b success')
+  // $('#myModal').modal('hide');
+
+})
+
+
+
+
+
+
+// EXTENSIONS OF FABRICJS OBJECT PROTOTYPES
+// field: the property you want to set for all types of objects 
+// value: the value you want to set that field for all types of objects
+fabric.Object.prototype.set("field", "value");
+//You can access this property in other objects. e.g., Rect, Circle, Image...
+//fabric.Object.prototype.Rect.field // It returns "value"
+
+fabric.Object.prototype.getAngleInRadians = function() {
+  return this.getAngle() / 180 * Math.PI;
+};
+
+
+
+// Modal for creating Folder
+
+
+$("#createFolderBtn").click(function () {
+   // alert('You clicked the create folder directory ')
+   var folder_name = $('#foldername').val();
+
+
+
+   // Remove all white space
+
+  folder_name = removeAllWhiteSpace(folder_name)
+
+  folder_name = replaceAllPeriods(folder_name)
+
+  
+  if (folder_name.length > 0) {
+
+    folder_name = replaceCommasInStringWith_(folder_name)
+
+   // Create Folder on Server
+    createFolder(folder_name)
+
+    // alert('folder name: ' + folder_name)
+
+   }
+
+  // clear the text field
+  $('#foldername').val('');
+
+});
+
+function replaceCommasInStringWith_(myStr){
+    var newStr = myStr.replace(/,/g, '_');
+    return newStr
+}
+
+function stringLength(myStr){
+    var len = myStr.length
+    return len
+}
+
+function removeAllWhiteSpace(myStr){
+
+  var new_str = myStr.replace(/\s+/g, '')
+
+  return new_str
+
+
+}
+
+function replaceAllPeriods(myStr){
+
+  var new_str = myStr.replace(/\./g,'_')
+
+  return new_str
+}
+
+
+
+
+
+}); 
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+
+</body>
+</html>
