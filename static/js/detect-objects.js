@@ -170,7 +170,7 @@ function create_json_for_object_detection(preds){
             highlighter.setAttribute("class", "highlighter");
             highlighter.setAttribute("id", "bbox-highlighter");
             // highlighter.style["border"] = "10px dashed #FF984F;"
-            highlighter.setAttribute('style', 'border: 10px dashed #FF984F');
+            // highlighter.setAttribute('style', 'border: 10px dashed #FF984F');
             // highlighter.setAttribute("border","10px dashed #FF984F")
             // highlighter.setAttribute("borderColor","red");
             // highlighter.setAttribute("borderStyle", "solid");
@@ -180,6 +180,7 @@ function create_json_for_object_detection(preds){
             // highlighter.setAttribute("border-style", "solid");
             //  /* border: 1px dashed #fff; */ 
             //  border: 1px dashed #fff;
+            //  border: 5px dashed #FF984F;
             // highlighter.style ="border: 10px dashed #FF984F;"
 
             highlighter.style ="left: " +
