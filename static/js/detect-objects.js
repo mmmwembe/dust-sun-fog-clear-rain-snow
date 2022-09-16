@@ -53,16 +53,17 @@ async function start() {
         for(var i = 0; i < elms1.length; i++) 
         // elms[i].style.display='none'; 
          // elms1[i]?.remove()
-         //alert(elm1.getAttribute('label'))
-         alert('p-label')
+         alert('p-label '+ elms1[i].getAttribute('label'))
+         // alert('p-label')
 
         // Remove labels
         var elms2 = document.querySelectorAll("[id='bbox-highlighter']");
         for(var i = 0; i < elms2.length; i++) 
           // elms[i].style.display='none'; 
           //  elms2[i]?.remove()   
-          alert('bbox-highlighter')
-          // alert(elm2.getAttribute('label'))     
+          // alert('bbox-highlighter')
+          
+          alert('highligther ' + elms2[i].getAttribute('label'))     
 
     }
 
