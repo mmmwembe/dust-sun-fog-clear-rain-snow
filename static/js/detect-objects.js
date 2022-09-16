@@ -9,6 +9,8 @@ async function start() {
     var threshold = 0.5
     let x = 50 
 
+    var colorArray = ['#FF984F','#C2175B','#FF8F6B','#FF0000','#01AEF3','#065FD4','#A2D93D','#FF68C7','#00C7DE'];
+
     var datatable =  $('#results-datatable').DataTable( {data: results_JSON,
         columns: [{ title: "#" },{ title: "Class/Label" },{ title: "Confidence" }],
         searching: false,ordering: false,lengthChange: false} );
@@ -167,6 +169,10 @@ function create_json_for_object_detection(preds){
             const highlighter = document.createElement("div");
             highlighter.setAttribute("class", "highlighter");
             highlighter.setAttribute("id", "bbox-highlighter");
+            highlighter.setAttribute("border-color", red);
+            highlighter.setAttribute("border-width", "10px");
+            highlighter.setAttribute("border-style", "solid");
+             
             highlighter.style ="left: " +
               currentObject.boundingBox.originX + "px; top: " +
               currentObject.boundingBox.originY + "px; width: " +
