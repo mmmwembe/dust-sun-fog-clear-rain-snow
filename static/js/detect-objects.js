@@ -45,6 +45,26 @@ async function start() {
 
     }
 
+
+    function update_caption_and_bbox_colors(){
+
+        // Remove labels
+        var elms1 = document.querySelectorAll("[id='p-label']");
+        for(var i = 0; i < elms1.length; i++) 
+        // elms[i].style.display='none'; 
+         // elms1[i]?.remove()
+         alert(elm1.getAttribute('label'))
+
+        // Remove labels
+        var elms2 = document.querySelectorAll("[id='bbox-highlighter']");
+        for(var i = 0; i < elms2.length; i++) 
+          // elms[i].style.display='none'; 
+          //  elms2[i]?.remove()   
+          alert(elm2.getAttribute('label'))     
+
+    }
+
+
     // MODEL INFORMATION - Mwembeshi 9/12/2022
     // Google Drive: DUST-SUN-FOG-CLEAR
     // Model Directory: model-object-detection
@@ -161,6 +181,7 @@ function create_json_for_object_detection(preds){
 
             const p = document.createElement("p");
             p.setAttribute("id","p-label");
+            p.setAttribute('label', label);
             // p.setAttribute('style', 'background-color:#218838;');
 
             p.innerText =label +  " - with " + confidence + " confidence.";
@@ -170,6 +191,7 @@ function create_json_for_object_detection(preds){
             const highlighter = document.createElement("div");
             highlighter.setAttribute("id", "bbox-highlighter");
             highlighter.setAttribute("class", "highlighter");
+            highlighter.setAttribute('label', label);
             // highlighter.setAttribute('style', 'background-color:darkblue;');
 
             const myStyles = `
@@ -215,8 +237,7 @@ function create_json_for_object_detection(preds){
             //children.push(highlighter);
             //children.push(p);
 
-
-
+            update_caption_and_bbox_colors()
 
 
 
