@@ -169,12 +169,13 @@ function create_json_for_object_detection(preds){
             const highlighter = document.createElement("div");
             highlighter.setAttribute("id", "bbox-highlighter");
             //highlighter.setAttribute("class", "highlighter");
-            highlighter.style.zIndex = "-1";
-            highlighter.style.position = "absolute";
-            highlighter.style.backgroundColor =  "#00FF00";
-            highlighter.style.borderWidth ="2px";
-            highlighter.style.borderStyle = "dashed";
-            highlighter.style.borderColor ="#C2175B"
+            highlighter.style.setProperty('background-color', 'red', 'important');
+            //highlighter.style.zIndex = "-1";
+            //highlighter.style.position = "absolute";
+            //highlighter.style.backgroundColor =  "#00FF00";
+            //highlighter.style.borderWidth ="2px";
+            //highlighter.style.borderStyle = "dashed";
+            //highlighter.style.borderColor ="#C2175B"
             // highlighter.style.border = "2px dashed #C2175B";
 
             // highlighter.style["border"] = "10px dashed #FF984F;"
