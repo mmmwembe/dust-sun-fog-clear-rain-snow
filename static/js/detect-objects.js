@@ -9,7 +9,7 @@ async function start() {
     var threshold = 0.5
     let x = 50 
 
-    var colorArray = ['#FF984F','#C2175B','#FF8F6B','#FF0000','#01AEF3','#065FD4','#A2D93D','#FF68C7','#00C7DE'];
+    var colorArray = ['#FF984F','#C2175B','#FF8F6B','#FF0000','#01AEF3','#065FD4','#A2D93D','#FF68C7','#00C7DE','#218838'];
 
     var datatable =  $('#results-datatable').DataTable( {data: results_JSON,
         columns: [{ title: "#" },{ title: "Class/Label" },{ title: "Confidence" }],
