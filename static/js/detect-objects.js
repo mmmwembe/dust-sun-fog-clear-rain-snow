@@ -172,6 +172,7 @@ function create_json_for_object_detection(preds){
             highlighter.setAttribute("borderColor", red);
             // highlighter.setAttribute("border-width", "10px");
             // highlighter.setAttribute("border-style", "solid");
+            //  /* border: 1px dashed #fff; */ 
              
             highlighter.style ="left: " +
               currentObject.boundingBox.originX + "px; top: " +
