@@ -62,7 +62,7 @@ async function start() {
           // elms[i].style.display='none'; 
           //  elms2[i]?.remove()   
           // alert('bbox-highlighter')
-          elms2[i].style["border"] = "10px dashed #FF984F;"
+          elms2[i].style["border"] = "10px dashed #C2175B;"
 
           
           // alert('highligther ' + elms2[i].getAttribute('label'))     
