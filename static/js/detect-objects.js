@@ -172,7 +172,10 @@ function create_json_for_object_detection(preds){
             highlighter.style.zIndex = "-1";
             highlighter.style.position = "absolute";
             highlighter.style.backgroundColor =  "#00FF00";
-            highlighter.style.border = "2px dashed #C2175B";
+            highlighter.style.borderWidth ="2px";
+            highlighter.style.borderStyle = "dashed";
+            highlighter.style.borderColor ="#C2175B"
+            // highlighter.style.border = "2px dashed #C2175B";
 
             // highlighter.style["border"] = "10px dashed #FF984F;"
             // highlighter.setAttribute('style', 'border: 10px dashed #FF984F');
