@@ -169,6 +169,7 @@ function create_json_for_object_detection(preds){
       
             const highlighter = document.createElement("div");
             highlighter.setAttribute("id", "bbox-highlighter");
+            highlighter.setAttribute("class", "highlighter");
             // highlighter.setAttribute('style', 'background-color:darkblue;');
 
             const myStyles = `
