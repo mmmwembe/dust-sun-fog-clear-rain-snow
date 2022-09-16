@@ -27,6 +27,23 @@
             .imageViewer p {
                 position: absolute;
                 padding: 5px;
+                background-color: #218838;
+                color: #fff;
+                border: 2px solid #218838;
+                z-index: 2;
+                font-size: 12px;
+            }
+            
+            .highlighter {
+                border: 2px dashed #218838;
+                z-index: 1;
+                position: absolute;
+            }
+
+
+            .imageViewer2 p2 {
+                position: absolute;
+                padding: 5px;
                 background-color: rgba(255, 111, 0, 0.85);
                 color: #fff;
                 border: 1px dashed rgba(255, 255, 255, 0.7);
@@ -34,13 +51,12 @@
                 font-size: 12px;
             }
             
-            .highlighter {
+            .highlighter2 {
                 background: rgba(0, 255, 0, 0.25);
                 border: 5px dashed #C2175B;
                 z-index: 1;
                 position: absolute;
             }
-
           </style>
 
            <!--<link rel="shortcut icon" href="{{ url_for('static', filename='fav-icon/3mega-favicon-32x32.png') }}">-->
