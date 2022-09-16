@@ -169,14 +169,15 @@ function create_json_for_object_detection(preds){
             const highlighter = document.createElement("div");
             highlighter.setAttribute("class", "highlighter");
             highlighter.setAttribute("id", "bbox-highlighter");
-            highlighter.setAttribute("borderColor","red");
-            highlighter.setAttribute("borderStyle", "solid");
-            highlighter.setAttribute("borderWidth","10px");
+            // highlighter.setAttribute("borderColor","red");
+            // highlighter.setAttribute("borderStyle", "solid");
+            // highlighter.setAttribute("borderWidth","10px");
             // highlighter.setAttribute("border", "1px dashed #fff;");
             // highlighter.setAttribute("border-width", "10px");
             // highlighter.setAttribute("border-style", "solid");
             //  /* border: 1px dashed #fff; */ 
-             
+            highlighter.style ="border: " + "10px dashed #FF984F;"
+            
             highlighter.style ="left: " +
               currentObject.boundingBox.originX + "px; top: " +
               currentObject.boundingBox.originY + "px; width: " +
