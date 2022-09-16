@@ -167,8 +167,13 @@ function create_json_for_object_detection(preds){
             p.style = "margin-left: " + currentObject.boundingBox.originX + "px; margin-top: " + (currentObject.boundingBox.originY - 10) + "px; width: " + (currentObject.boundingBox.width - 10) + "px; top: 0; left: 0;";
       
             const highlighter = document.createElement("div");
-            highlighter.setAttribute("class", "highlighter");
             highlighter.setAttribute("id", "bbox-highlighter");
+            //highlighter.setAttribute("class", "highlighter");
+            highlighter.style.zIndex = "-1";
+            highlighter.style.position = "absolute";
+            highlighter.style.backgroundColor =  "#00FF00";
+            highlighter.style.border = "2px dashed #C2175B";
+
             // highlighter.style["border"] = "10px dashed #FF984F;"
             // highlighter.setAttribute('style', 'border: 10px dashed #FF984F');
             // highlighter.setAttribute("border","10px dashed #FF984F")
