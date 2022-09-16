@@ -53,14 +53,16 @@ async function start() {
         for(var i = 0; i < elms1.length; i++) 
         // elms[i].style.display='none'; 
          // elms1[i]?.remove()
-         alert(elm1.getAttribute('label'))
+         //alert(elm1.getAttribute('label'))
+         alert('p-label')
 
         // Remove labels
         var elms2 = document.querySelectorAll("[id='bbox-highlighter']");
         for(var i = 0; i < elms2.length; i++) 
           // elms[i].style.display='none'; 
           //  elms2[i]?.remove()   
-          alert(elm2.getAttribute('label'))     
+          alert('bbox-highlighter')
+          // alert(elm2.getAttribute('label'))     
 
     }
 
@@ -141,6 +143,8 @@ async function start() {
 
         // results_JSON = create_json_from_predictions(predictions)
         results_JSON = create_json_for_object_detection(predictions)
+
+        update_caption_and_bbox_colors()
 
         datatable.clear();
         datatable.rows.add(results_JSON);
@@ -236,10 +240,6 @@ function create_json_for_object_detection(preds){
 
             //children.push(highlighter);
             //children.push(p);
-
-            update_caption_and_bbox_colors()
-
-
 
         }
     }
