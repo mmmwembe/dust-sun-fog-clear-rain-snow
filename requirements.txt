@@ -16,6 +16,7 @@ Jinja2==3.0.1
 MarkupSafe==2.0.1
 passlib==1.7.4
 pymongo==3.11.4
+Pillow==9.1.0
 requests==2.25.1
 urllib3==1.26.6
 visitor==0.1.3
