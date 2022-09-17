@@ -161,6 +161,26 @@ body.modal-open .modal .modal-dialog {
     margin: auto;
 }
 
+
+
+/*      Thumbnail Gallery Styles         */
+
+* {box-sizing: border-box;}
+
+/* The grid: Four equal columns that floats next to each other */
+.gallery_column {float: left; width: 25%; padding: 10px;}
+
+/* Style the images inside the grid */
+.gallery_column img {opacity: 0.8; cursor: pointer; }
+
+.gallery_column img:hover {opacity: 1;}
+
+/* Clear floats after the columns */
+.row:after {content: "";display: table;clear: both;}
+
+/* The expanding image container */
+.container {position: relative;display: none;}
+
 </style>
 
 </head>
@@ -302,6 +322,25 @@ body.modal-open .modal .modal-dialog {
       </li>
 
     </ul>
+
+   <!--THUMBNAIL GALLERY STARTS HERE -->
+   <!-- The four columns -->
+<div class="row">
+  <div class="gallery_column">
+    <img src="/static/project-test-images/gallery/img_nature.jpg" alt="Nature" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="gallery_column">
+    <img src="/static/project-test-images/gallery/img_snow.jpg" alt="Snow" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="gallery_column">
+    <img src="/static/project-test-images/gallery/img_mountains.jpg" alt="Mountains" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="gallery_column">
+    <img src="/static/project-test-images/gallery/img_lights.jpg" alt="Lights" style="width:100%" onclick="myFunction(this);">
+  </div>
+</div>
+
+
   </div>
 
   <div id="canvasHolder" class="col-6 col-s-9">
@@ -379,6 +418,10 @@ body.modal-open .modal .modal-dialog {
 <div id="image_width"></div>
 <div id="image_height"></div>
 
+<div class="container">
+  <img id="expandedImg" style="width:100%">
+</div>
+
 
 
 
@@ -404,8 +447,8 @@ fabric.Object.prototype.transparentCorners = false;
 
 
 updateCanvasBackgroundImage(img_url)
-document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
-document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
+// document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
+// document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
 
 
 document.getElementById('imgLoader').addEventListener("change", function (e) {
@@ -474,8 +517,15 @@ function updateCanvasBackgroundImage(img_url){
 
   } // end  of  imgObj.onload = function() {
 
+}
 
 
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  // var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  // imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
 }
 
 
