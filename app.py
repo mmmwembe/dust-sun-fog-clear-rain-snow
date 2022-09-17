@@ -11,22 +11,77 @@ import os
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'static/uploads/'
+IMAGES_FOLDER = 'static/images/'
 
 app = Flask(__name__)
 app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-
-
-# If directory doe not exist, create it
-isExist = os.path.exists(UPLOAD_FOLDER)
-if not isExist:
-  # Create a new directory because it does not exist 
-  os.makedirs(UPLOAD_FOLDER)
-
 # Bootstrap
 bootstrap = Bootstrap(app)
+
+
+
+def create_dir(dir):
+  # If directory doe not exist, create it
+  isExist = os.path.exists(dir)
+  if not isExist:
+    # Create a new directory because it does not exist 
+    os.makedirs(dir)
+
+def basicFolderSetupForEachNewUser(user_id):
+
+        labelling_dir = 'static/images/' + user_id + '/labelling'
+        cropped_labels = 'static/images/' + user_id + '/cropped-labels'
+        canvas_jsons = 'static/images/' + user_id + '/canvas_jsons'
+        dynamic_table_records = 'static/images/' + user_id + '/dynamic_table_records'
+        normalized_ai_labels = 'static/images/' + user_id + '/normalized_ai_labels'
+        raw_ai_labels = 'static/images/' + user_id + '/raw_ai_labels'
+        explorer_data = 'static/images/explorer_data'        
+
+        doesDirectoryExist = os.path.exists(labelling_dir)
+        
+        if doesDirectoryExist is False:
+            os.makedirs(labelling_dir)
+            os.makedirs(cropped_labels)
+            os.makedirs(canvas_jsons)
+            os.makedirs(dynamic_table_records)
+            os.makedirs(normalized_ai_labels)            
+            os.makedirs(raw_ai_labels)       
+            os.makedirs(explorer_data)       
+
+        folders_in_labelling_dir = os.listdir(labelling_dir)
+
+        for x in folders_in_labelling_dir:
+
+            new_subdir1 = cropped_labels + '/' + x
+            new_subdir2 = canvas_jsons   + '/' + x
+            new_subdir3 = dynamic_table_records   + '/' + x
+            new_subdir4 = normalized_ai_labels   + '/' + x
+            new_subdir5 = raw_ai_labels  + '/' + x
+
+            if (os.path.exists(new_subdir1)) is False:
+                os.makedirs(new_subdir1)
+            if (os.path.exists(new_subdir2)) is False:
+                os.makedirs(new_subdir2)
+            if (os.path.exists(new_subdir3)) is False:
+                os.makedirs(new_subdir3)
+            if (os.path.exists(new_subdir4)) is False:
+                os.makedirs(new_subdir4)
+            if (os.path.exists(new_subdir5)) is False:
+                os.makedirs(new_subdir5)  
+
+
+
+create_dir(UPLOAD_FOLDER)
+
+create_dir(IMAGES_FOLDER)
+
+# Create User's Data Directory Structure (if does not exist)
+user_id ="user_2"  # TO DO - make this dynamic
+
+basicFolderSetupForEachNewUser(user_id)
 
 
 def allowed_file(filename):
@@ -49,6 +104,7 @@ def get_images_list(dir):
     if image.lower().endswith(tuple(["JPG", "JPEG", "jpg", "jpeg", "png", "PNG"])):
        images_list_filtered.append(image) 
   return images_list_filtered
+
 
 @app.route('/')
 def home():
@@ -103,9 +159,9 @@ def upload_image():
 		#	flash('Allowed image types are -> png, jpg, jpeg, gif')
 		#	return redirect(request.url)
 
-	images_in_dir = get_images_list(app.config['UPLOAD_FOLDER'])
+	# images_in_dir = get_images_list(app.config['UPLOAD_FOLDER'])
 
-	return render_template('labeling.html', filenames=file_names, images_in_dir = images_in_dir)
+	return render_template('labeling.html', filenames=file_names, images_in_dir=get_images_list(app.config['UPLOAD_FOLDER']))
 
 @app.route('/display/<filename>')
 def display_image(filename):
