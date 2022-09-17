@@ -499,7 +499,8 @@ body.modal-open .modal .modal-dialog {
   </div>
   
   <div class="col-3 col-s-12">
-
+    <div id="width_ratio"></div>
+    <div id="height_ratio"></div>
   </div>
   
 </div>
@@ -533,7 +534,9 @@ var img = document.getElementById('my-image');
 getOriginalImageSize()
 document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
 document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
-  
+
+document.getElementById("width_ratio").innerHTML = "canvas-width to img_width : " + canvasWidth/originalImageWidth;
+document.getElementById("height_ratio").innerHTML = "canvas-height to img_height : " + canvasHeight/originalImageHeight;  
 // Creating the image instance 
  var geeks = new fabric.Image(img, {left: 0, top: 0, angle: 0}); 
   geeks.scaleToHeight(canvasHeight);
