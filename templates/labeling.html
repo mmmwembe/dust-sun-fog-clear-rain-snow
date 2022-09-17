@@ -586,11 +586,12 @@ height_ratio = originalImageHeight/canvasHeight
 // document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
 
 const png_all_canvas = canvas.toDataURL('png')
-const cropped_png_canvas = canvas.toDataURL({format: 'png',left: 0,top: 0,width: 200,height: 150});
+const cropped_png_canvas = canvas.toDataURL({format: 'png',left: 0,top: 0,width: 150,height: 50});
 const jpg_all_canvas = canvas.toDataURL({format: 'jpeg',quality: 0.3})
 
 // document.getElementById('test').src = canvas.toDataURL('image/png');
-document.getElementById('test').src = canvas.toDataURL({format: 'png',left: 0,top: 0,width: new_img_width,height: new_img_height});
+document.getElementById('test').src = cropped_png_canvas;
+// canvas.toDataURL({format: 'png',left: 0,top: 0,width: new_img_width,height: new_img_height});
 // document.getElementById("test'").width = new_img_width
 // document.getElementById("test'").height = new_img_height
 
@@ -601,7 +602,7 @@ var image_name = img.getAttribute("src").split("/").reverse()[0]
 var label_num = 1
 var WORKING_LABELS_FOLDER="dog"
 
-alert('image name '+ image_name)
+// alert('image name '+ image_name)
 
 // Section of image on canvas to be cropped out and saved in the cropped-images
 // cropped_image_dataURL = canvas.toDataURLWithCropping('png', { y: rect.top, x: rect.left, width: rect.width, height: rect.height, quality: 1 })
@@ -714,8 +715,8 @@ $.ajax({
        current_folder: WORKING_LABELS_FOLDER
     },
     success: function(data) {
-      var new_url = data.url
-      alert('cropped-image-dataURL : ' + JSON.stringify(new_url))
+      // var new_url = data.url
+      // alert('cropped-image-dataURL : ' + JSON.stringify(new_url))
     }
 
   });
