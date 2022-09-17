@@ -17,6 +17,14 @@ app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+
+
+# If directory doe not exist, create it
+isExist = os.path.exists(UPLOAD_FOLDER)
+if not isExist:
+  # Create a new directory because it does not exist 
+  os.makedirs(UPLOAD_FOLDER)
+
 # Bootstrap
 bootstrap = Bootstrap(app)
 
