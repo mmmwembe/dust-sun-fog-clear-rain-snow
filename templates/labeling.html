@@ -371,8 +371,13 @@ body.modal-open .modal .modal-dialog {
 
 <div class="div">
 </div>
-<div id="show_canvas_json">dfjdhfhdjhfjdd</div>
+<div id="show_canvas_json"></div>
 
+<div id="canvas_width"></div>
+<div id="canvas_height"></div>
+<div id="sp"></div>
+<div id="image_width"></div>
+<div id="image_height"></div>
 
 
 
@@ -391,6 +396,8 @@ var image_url = null
 // var canvas = new fabric.Canvas('canvas');
 
 getCanvasSize()
+document.getElementById("canvas_width").innerHTML = canvasWidth;
+document.getElementById("canvas_height").innerHTML = canvasHeight;     
 
 canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
 fabric.Object.prototype.transparentCorners = false;
@@ -430,7 +437,7 @@ function getCanvasSize(){
         var myCanvas = document.querySelector("#canvas");
         canvasWidth = myCanvas.clientWidth;
         canvasHeight = myCanvas.clientHeight;
-        // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);
+        // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);   
 }
 
 
