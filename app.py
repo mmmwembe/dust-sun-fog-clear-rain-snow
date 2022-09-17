@@ -86,20 +86,22 @@ def basicFolderSetupForEachNewUser(user_id):
 # Create User's Data Directory Structure (if does not exist)
 user_id ="user_2"  # TO DO - make this dynamic
 WORKING_DIR ="dog"
-
+basicFolderSetupForEachNewUser(user_id)
 # USER_IMAGES_DIR = os.path.join(IMAGES_FOLDER, user_id, 'user_images')
 # USER_CROPPED_IMG_DIR = os.path.join(IMAGES_FOLDER, user_id, 'cropped-labels')
 # USER_CURRENT_IMG_WORKING_SUBDIR = os.path.join(USER_IMAGES_DIR, WORKING_DIR)
 # USER_CROPPED_IMG_WORKING_SUBDIR = os.path.join(USER_CROPPED_IMG_DIR, WORKING_DIR)
+try:
+  create_dir(UPLOAD_FOLDER)
+  create_dir(IMAGES_FOLDER)
+  create_dir(USER_IMAGES_DIR)
+  create_dir(USER_CROPPED_IMG_DIR)
+  create_dir(USER_CURRENT_IMG_WORKING_SUBDIR)
+  create_dir(USER_CROPPED_IMG_WORKING_SUBDIR)
+except:
+  pass
 
-create_dir(UPLOAD_FOLDER)
-create_dir(IMAGES_FOLDER)
-create_dir(USER_IMAGES_DIR)
-create_dir(USER_CROPPED_IMG_DIR)
-create_dir(USER_CURRENT_IMG_WORKING_SUBDIR)
-create_dir(USER_CROPPED_IMG_WORKING_SUBDIR)
 
-basicFolderSetupForEachNewUser(user_id)
 
 
 def allowed_file(filename):
