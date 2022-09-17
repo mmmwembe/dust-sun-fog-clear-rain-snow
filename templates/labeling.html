@@ -535,8 +535,8 @@ getOriginalImageSize()
 document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
 document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
 
-document.getElementById("width_ratio").innerHTML = "canvas-width to img_width : " + canvasWidth/originalImageWidth;
-document.getElementById("height_ratio").innerHTML = "canvas-height to img_height : " + canvasHeight/originalImageHeight;  
+document.getElementById("width_ratio").innerHTML = "img_width to canvas-width : " + originalImageWidth/canvasWidth;
+document.getElementById("height_ratio").innerHTML = "img_height to canvas-height : " + originalImageHeight/canvasHeight;  
 // Creating the image instance 
  var geeks = new fabric.Image(img, {left: 0, top: 0, angle: 0}); 
   geeks.scaleToHeight(canvasHeight);
