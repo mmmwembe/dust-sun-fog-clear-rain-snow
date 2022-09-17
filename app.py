@@ -102,7 +102,8 @@ def get_images_list(dir):
   images_list_filtered =[]
   for image in images_list_raw:
     if image.lower().endswith(tuple(["JPG", "JPEG", "jpg", "jpeg", "png", "PNG"])):
-       images_list_filtered.append(image) 
+      image_path = os.path.join(dir, image)
+      images_list_filtered.append(image) 
   return images_list_filtered
 
 
