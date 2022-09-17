@@ -1,4 +1,5 @@
-from flask import Flask, render_template, session, redirect, url_for, request, jsonify
+from flask import Flask,flash, render_template, session, redirect, url_for, request, jsonify
+from werkzeug.utils import secure_filename
 from flask_bootstrap import Bootstrap
 from functools import wraps
 from flask_pymongo import PyMongo
@@ -7,13 +8,20 @@ from PIL import Image
 from io import BytesIO
 import os
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+UPLOAD_FOLDER = 'static/uploads/'
 
 app = Flask(__name__)
 app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # Bootstrap
 bootstrap = Bootstrap(app)
+
+
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def getImageNameAndExtension(image_name):
 
@@ -32,7 +40,6 @@ def labeling():
 
 
 @app.route('/saveCroppedImage', methods=['POST','GET'])
-
 def saveCroppedImage():
 
     if request.method =='POST':
@@ -58,6 +65,30 @@ def saveCroppedImage():
         # encoded_string = base64.b64encode(cropped_image_dataURL)
    
     return jsonify(result = 'success', url=cropped_image_file_path)
+
+
+@app.route('/', methods=['POST'])
+def upload_image():
+	if 'files[]' not in request.files:
+		flash('No file part')
+		return redirect(request.url)
+	files = request.files.getlist('files[]')
+	file_names = []
+	for file in files:
+		if file and allowed_file(file.filename):
+			filename = secure_filename(file.filename)
+			file_names.append(filename)
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		#else:
+		#	flash('Allowed image types are -> png, jpg, jpeg, gif')
+		#	return redirect(request.url)
+	return render_template('labeling.html', filenames=file_names)
+
+@app.route('/display/<filename>')
+def display_image(filename):
+	#print('display_image filename: ' + filename)
+	return redirect(url_for('static', filename='uploads/' + filename), code=301) 
+  
 
 if __name__ == '__main__':
     
