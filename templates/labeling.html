@@ -597,9 +597,9 @@ document.getElementById('test').src = canvas.toDataURL({format: 'png',left: 0,to
 
 // SAVE CROPPED IMAGE
 var user_id ='user2'
-var image_name = img.getAttribute("src").split("/").reverse()[0]
+var image_name = img.getAttribute("src").split("/").reverse()[0].replace('.', '_')
 var label_num = 1
-var WORKING_LABELS_FOLDER="Dog"
+var WORKING_LABELS_FOLDER="dog"
 
 // Section of image on canvas to be cropped out and saved in the cropped-images
 // cropped_image_dataURL = canvas.toDataURLWithCropping('png', { y: rect.top, x: rect.left, width: rect.width, height: rect.height, quality: 1 })
@@ -610,7 +610,8 @@ cropped_image_dataURL = canvas.toDataURL({
                       left: rect_to_crop.left,      //  canvas.offsetLeft,
                       top: rect_to_crop.top,        // canvas.offsetTop,
                       width: rect_to_crop.width,
-                      height: rect_to_crop.height
+                      height: rect_to_crop.height,
+                      selection: false
                   })
 
 // Remove data:image/png;base64, at beginning of the cropped_image_dataURL string
