@@ -595,6 +595,30 @@ document.getElementById('test').src = canvas.toDataURL({format: 'png',left: 0,to
 // document.getElementById("test'").height = new_img_height
 
 
+// SAVE CROPPED IMAGE
+var user_id ='user2'
+var image_name = img.getAttribute("src").split("/").reverse()[0]
+var label_num = 1
+var WORKING_LABELS_FOLDER="Dog"
+
+// Section of image on canvas to be cropped out and saved in the cropped-images
+// cropped_image_dataURL = canvas.toDataURLWithCropping('png', { y: rect.top, x: rect.left, width: rect.width, height: rect.height, quality: 1 })
+// https://stackoverflow.com/questions/40083942/fabricjs-set-clipped-object-as-background-to-canvas-after-clipping
+rect_to_crop = new fabric.Rect({left: 0,top: 0,width: 150,height: 50,angle: 0});
+cropped_image_dataURL = canvas.toDataURL({
+                      format: 'image/png',
+                      left: rect_to_crop.left,      //  canvas.offsetLeft,
+                      top: rect_to_crop.top,        // canvas.offsetTop,
+                      width: rect_to_crop.width,
+                      height: rect_to_crop.height
+                  })
+
+// Remove data:image/png;base64, at beginning of the cropped_image_dataURL string
+cropped_image_dataURL= cropped_image_dataURL.replace("data:image/png;base64,", "");
+
+// Save image to server
+saveCroppedSection()
+
 
 document.getElementById('imgLoader').addEventListener("change", function (e) {
   var file = e.target.files[0];
@@ -671,6 +695,27 @@ function myFunction(imgs) {
   // imgText.innerHTML = imgs.alt;
   alert(imgs.src)
   // expandImg.parentElement.style.display = "block";
+}
+
+function saveCroppedSection(){
+
+$.ajax({
+    type: "POST",
+    url: "/saveCroppedImage",
+    data: { 
+       imgBase64: cropped_image_dataURL,
+       user_id : 'user1', 
+       image_name : image_name,
+       label_num : label_num,
+       current_folder: WORKING_LABELS_FOLDER
+    },
+    success: function(data) {
+      var myData = data.result
+      alert('cropped-image-dataURL : ' + JSON.stringify(myData))
+    }
+
+  });
+
 }
 
 
