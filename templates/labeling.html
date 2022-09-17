@@ -481,7 +481,7 @@ body.modal-open .modal .modal-dialog {
 <div class="div">
 </div>
 <div id="show_canvas_json"></div>
-
+<img id="test" ></div>
 
 <div id="sp"></div>
 
@@ -584,6 +584,13 @@ height_ratio = originalImageHeight/canvasHeight
 // updateCanvasBackgroundImage(img_url)
 // document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
 // document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
+
+const png_all_canvas = canvas.toDataURL('png')
+const cropped_png_canvas = canvas.toDataURL({format: 'png',left: 0,top: 0,width: 200,height: 150});
+const jpg_all_canvas = canvas.toDataURL({format: 'jpeg',quality: 0.3})
+
+document.getElementById('test').src = canvas.toDataURL('image/png');
+
 
 
 document.getElementById('imgLoader').addEventListener("change", function (e) {
