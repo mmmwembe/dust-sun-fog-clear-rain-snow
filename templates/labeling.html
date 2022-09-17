@@ -589,9 +589,10 @@ const png_all_canvas = canvas.toDataURL('png')
 const cropped_png_canvas = canvas.toDataURL({format: 'png',left: 0,top: 0,width: 200,height: 150});
 const jpg_all_canvas = canvas.toDataURL({format: 'jpeg',quality: 0.3})
 
-document.getElementById('test').src = canvas.toDataURL('image/png');
-document.getElementById("test'").width = new_img_width
-document.getElementById("test'").height = new_img_height
+// document.getElementById('test').src = canvas.toDataURL('image/png');
+document.getElementById('test').src = canvas.toDataURL({format: 'png',left: 0,top: 0,width: new_img_width,height: new_img_height});
+// document.getElementById("test'").width = new_img_width
+// document.getElementById("test'").height = new_img_height
 
 
 
