@@ -516,6 +516,10 @@ var canvasWidth = null
 var canvasHeight = null
 var originalImageWidth = null
 var originalImageHeight = null
+var width_ratio = null   // image-width to canvas-width ratio
+var height_ratio = null  // image-height to canvas-height ratio
+var new_img_width = null
+var new_img_height = null
 var num_of_images = null
 var image_url ="/static/project-test-images/dust/sun-in-view-0001.jpg"
 
@@ -537,12 +541,29 @@ document.getElementById("image_height").innerHTML = "original height: " + origin
 
 document.getElementById("width_ratio").innerHTML = "img_width to canvas-width : " + originalImageWidth/canvasWidth;
 document.getElementById("height_ratio").innerHTML = "img_height to canvas-height : " + originalImageHeight/canvasHeight;  
+
+
+width_ratio = originalImageWidth/canvasWidth
+height_ratio = originalImageHeight/canvasHeight
+
 // Creating the image instance 
  var geeks = new fabric.Image(img, {left: 0, top: 0, angle: 0}); 
-  geeks.scaleToHeight(canvasHeight);
-  // geeks.scaleToWidth(canvasWidth);
+
+ if (height_ratio >= width_ratio){
+   geeks.scaleToHeight(canvasHeight);
+   }
+ if (height_ratio < width_ratio){
+    geeks.scaleToWidth(canvasWidth);
+    }
+  
+  new_img_height = geeks.height
+  new_img_width = geeks.width
+
+
  canvas.add(geeks); 
  // canvas.centerObject(geeks);
+
+ alert(' new img height : ' + new_img_height  + ' new img width ' + new_img_width)
 
 
 // updateCanvasBackgroundImage(img_url)
