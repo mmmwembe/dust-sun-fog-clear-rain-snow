@@ -556,14 +556,18 @@ height_ratio = originalImageHeight/canvasHeight
     geeks.scaleToWidth(canvasWidth);
     }
   
-  new_img_height = geeks.scaleY
-  new_img_width = geeks.scaleX
-
-
- canvas.add(geeks); 
+  new_img_height = originalImageHeight*geeks.scaleY
+  new_img_width = originalImageWidth*geeks.scaleX
+  canvas.add(geeks); 
+  canvas.setDimensions({width:new_img_width, height:new_img_height})
  // canvas.centerObject(geeks);
 
- alert(' new img height : ' + new_img_height  + ' new img width ' + new_img_width)
+ // alert(' new img height : ' + new_img_height  + ' new img width ' + new_img_width)
+
+ // canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
+ // fabric.Object.prototype.transparentCorners = false;
+
+ ;
 
 
 // updateCanvasBackgroundImage(img_url)
