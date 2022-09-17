@@ -529,7 +529,7 @@ getCanvasSize()
 document.getElementById("canvas_width").innerHTML = "canvas width : " + canvasWidth;
 document.getElementById("canvas_height").innerHTML = "canvas height: " + canvasHeight;     
 
-canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
+canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvasWidth, height: canvasHeight });
 fabric.Object.prototype.transparentCorners = false;
 
 // Getting the image 
@@ -572,6 +572,15 @@ height_ratio = originalImageHeight/canvasHeight
 
  ;
 
+ var rect = new fabric.Rect({
+    left: 100,
+    top: 0,
+    width: 100,
+    height: new_img_height,
+    fill: 'green',
+    angle: 0,
+  });
+  canvas.add(rect);
 
 // updateCanvasBackgroundImage(img_url)
 // document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
