@@ -46,7 +46,7 @@ def saveCroppedImage():
         cropped_image_dataURL = request.form['imgBase64']
         # print(cropped_image_dataURL)
         # save cropped imageBase64 string as PNG image
-        cropped_image_file_path = 'static/images/' + user_id + '/cropped-labels/'+ currentFolder + '/' + file_name +  extension.replace(".", "_") + '_' + label_num + '.png'
+        cropped_image_file_path = '/static/images/' + user_id + '/cropped-labels/'+ currentFolder + '/' + file_name +  extension.replace(".", "_") + '_' + label_num + '.png'
 
         img = Image.open(BytesIO(base64.decodebytes(bytes(cropped_image_dataURL, "utf-8"))))
         img.save(cropped_image_file_path)
