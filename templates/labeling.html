@@ -380,9 +380,26 @@ body.modal-open .modal .modal-dialog {
 <script>
 window.addEventListener("load", function(){
 
+var canvas = null
+var canvasWidth = null
+var canvasHeight = null
+var originalImageWidth = null
+var originalImageHeight = null
+var num_of_images = null
+var image_url = null
+
+// var canvas = new fabric.Canvas('canvas');
+
+getCanvasSize()
+
+canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
+fabric.Object.prototype.transparentCorners = false;
 
 
-var canvas = new fabric.Canvas('canvas');
+
+
+
+
 document.getElementById('imgLoader').addEventListener("change", function (e) {
   var file = e.target.files[0];
   var reader = new FileReader();
@@ -400,6 +417,21 @@ document.getElementById('imgLoader').addEventListener("change", function (e) {
 });
 
 
+
+function getOriginalImageSize(){
+        var myImg = document.querySelector("#canvas");
+        originalImageWidth = myImg.naturalWidth;
+        originalImageHeight  = myImg.naturalHeight;
+       // alert("Original width=" + originalImageWidth + ", " + "Original height=" + originalImageHeight);
+}
+
+
+function getCanvasSize(){
+        var myCanvas = document.querySelector("#canvas");
+        canvasWidth = myCanvas.clientWidth;
+        canvasHeight = myCanvas.clientHeight;
+        // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);
+}
 
 
 }); 
