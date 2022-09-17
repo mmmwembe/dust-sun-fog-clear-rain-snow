@@ -391,20 +391,21 @@ var canvasHeight = null
 var originalImageWidth = null
 var originalImageHeight = null
 var num_of_images = null
-var image_url = null
+var image_url ="static/project-test-images/dust/sun-in-view-0001.jpg"
 
 // var canvas = new fabric.Canvas('canvas');
 
 getCanvasSize()
-document.getElementById("canvas_width").innerHTML = canvasWidth;
-document.getElementById("canvas_height").innerHTML = canvasHeight;     
+document.getElementById("canvas_width").innerHTML = "canvas width : " + canvasWidth;
+document.getElementById("canvas_height").innerHTML = "canvas height: " + canvasHeight;     
 
 canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
 fabric.Object.prototype.transparentCorners = false;
 
 
-
-
+updateCanvasBackgroundImage(img_url)
+document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
+document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
 
 
 document.getElementById('imgLoader').addEventListener("change", function (e) {
@@ -438,6 +439,43 @@ function getCanvasSize(){
         canvasWidth = myCanvas.clientWidth;
         canvasHeight = myCanvas.clientHeight;
         // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);   
+}
+
+function updateCanvasBackgroundImage(img_url){
+
+
+// getTotalTimeAndLabels(DYNAMIC_TABLE_RECORD_HOLDER)
+
+
+  var imgObj = new Image();
+  imgObj.src = img_url;
+  imgObj.onload = function() {
+
+  //canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: 1452*0.8, height: 749*0.8,stopContextMenu: true,fireRightClick: true });
+  canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight,stopContextMenu: true,fireRightClick: true });
+  fabric.Object.prototype.transparentCorners = false;
+
+  fabric.Image.fromURL(img_url, function(img) {
+
+      originalImageWidth = img.width
+      originalImageHeight =img.height
+
+      // alert('canvas H/Wratio :' + canvasHeight/canvasWidth +  ' original image H/W ratio :' +  originalImageHeight/originalImageWidth)
+
+      canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+      scaleX: canvas.width / img.width,
+      scaleY: canvas.height / img.height
+
+      });
+
+
+    
+  });
+
+  } // end  of  imgObj.onload = function() {
+
+
+
 }
 
 
