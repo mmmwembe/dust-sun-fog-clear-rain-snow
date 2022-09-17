@@ -325,7 +325,7 @@ body.modal-open .modal .modal-dialog {
 
    <!--THUMBNAIL GALLERY STARTS HERE -->
    <!-- The four columns -->
-  <div class="overflow-scroll">
+  <div class="overflow-auto">
 
       <div class="row">
           <div class="gallery_column">
@@ -584,12 +584,12 @@ function updateCanvasBackgroundImage(img_url){
 
 
 function myFunction(imgs) {
-  var expandImg = document.getElementById("expandedImg");
+  //var expandImg = document.getElementById("expandedImg");
   // var imgText = document.getElementById("imgtext");
-  expandImg.src = imgs.src;
+  // expandImg.src = imgs.src;
   // imgText.innerHTML = imgs.alt;
   alert(imgs.src)
-  expandImg.parentElement.style.display = "block";
+  // expandImg.parentElement.style.display = "block";
 }
 
 
