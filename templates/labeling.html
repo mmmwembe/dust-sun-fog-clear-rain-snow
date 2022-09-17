@@ -434,7 +434,7 @@ var canvasHeight = null
 var originalImageWidth = null
 var originalImageHeight = null
 var num_of_images = null
-var image_url ="/static/project-test-images/dust/sun-in-view-0001.jpg"
+var image_url ="static/project-test-images/dust/sun-in-view-0001.jpg"
 
 // var canvas = new fabric.Canvas('canvas');
 
@@ -525,6 +525,7 @@ function myFunction(imgs) {
   // var imgText = document.getElementById("imgtext");
   expandImg.src = imgs.src;
   // imgText.innerHTML = imgs.alt;
+  alert(imgs.src)
   expandImg.parentElement.style.display = "block";
 }
 
