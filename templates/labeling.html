@@ -558,8 +558,11 @@ height_ratio = originalImageHeight/canvasHeight
   
   new_img_height = originalImageHeight*geeks.scaleY
   new_img_width = originalImageWidth*geeks.scaleX
-  canvas.add(geeks); 
+
+  canvas.setBackgroundImage(geeks);
+  // canvas.add(geeks); 
   canvas.setDimensions({width:new_img_width, height:new_img_height})
+  canvas.renderAll();
  // canvas.centerObject(geeks);
 
  // alert(' new img height : ' + new_img_height  + ' new img width ' + new_img_width)
