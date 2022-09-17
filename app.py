@@ -12,6 +12,10 @@ import os
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'static/uploads/'
 IMAGES_FOLDER = 'static/images/'
+USER_IMAGES_DIR = 'static/images/user_2/user_images'
+USER_CROPPED_IMG_DIR = 'static/images/user_2/cropped-labels'
+USER_CURRENT_IMG_WORKING_SUBDIR ='static/images/user_2/user_images/dog'
+USER_CROPPED_IMG_WORKING_SUBDIR ='static/images/user_2/cropped-labels/dog'
 
 app = Flask(__name__)
 app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
@@ -38,6 +42,7 @@ def basicFolderSetupForEachNewUser(user_id):
         dynamic_table_records = 'static/images/' + user_id + '/dynamic_table_records'
         normalized_ai_labels = 'static/images/' + user_id + '/normalized_ai_labels'
         raw_ai_labels = 'static/images/' + user_id + '/raw_ai_labels'
+        user_images_dir = 'static/images/' + user_id + '/user_images'
         explorer_data = 'static/images/explorer_data'        
 
         doesDirectoryExist = os.path.exists(labelling_dir)
@@ -50,6 +55,7 @@ def basicFolderSetupForEachNewUser(user_id):
             os.makedirs(normalized_ai_labels)            
             os.makedirs(raw_ai_labels)       
             os.makedirs(explorer_data)       
+            os.makedirs(user_images_dir)   
 
         folders_in_labelling_dir = os.listdir(labelling_dir)
 
@@ -74,12 +80,24 @@ def basicFolderSetupForEachNewUser(user_id):
 
 
 
-create_dir(UPLOAD_FOLDER)
 
-create_dir(IMAGES_FOLDER)
+
 
 # Create User's Data Directory Structure (if does not exist)
 user_id ="user_2"  # TO DO - make this dynamic
+WORKING_DIR ="dog"
+
+# USER_IMAGES_DIR = os.path.join(IMAGES_FOLDER, user_id, 'user_images')
+# USER_CROPPED_IMG_DIR = os.path.join(IMAGES_FOLDER, user_id, 'cropped-labels')
+# USER_CURRENT_IMG_WORKING_SUBDIR = os.path.join(USER_IMAGES_DIR, WORKING_DIR)
+# USER_CROPPED_IMG_WORKING_SUBDIR = os.path.join(USER_CROPPED_IMG_DIR, WORKING_DIR)
+
+create_dir(UPLOAD_FOLDER)
+create_dir(IMAGES_FOLDER)
+create_dir(USER_IMAGES_DIR)
+create_dir(USER_CROPPED_IMG_DIR)
+create_dir(USER_CURRENT_IMG_WORKING_SUBDIR)
+create_dir(USER_CROPPED_IMG_WORKING_SUBDIR)
 
 basicFolderSetupForEachNewUser(user_id)
 
@@ -103,7 +121,7 @@ def get_images_list(dir):
   for image in images_list_raw:
     if image.lower().endswith(tuple(["JPG", "JPEG", "jpg", "jpeg", "png", "PNG"])):
       image_path = os.path.join(dir, image)
-      images_list_filtered.append(image) 
+      images_list_filtered.append(image_path) 
   return images_list_filtered
 
 
@@ -130,8 +148,8 @@ def saveCroppedImage():
         cropped_image_dataURL = request.form['imgBase64']
         # print(cropped_image_dataURL)
         # save cropped imageBase64 string as PNG image
-        # cropped_image_file_path = 'static/images/' + user_id + '/cropped-labels/'+ currentFolder + '/' + file_name +  extension.replace(".", "-") + '-' + label_num + '.png'
-        cropped_image_file_path = 'static/images/'  + file_name + extension.replace(".", "-") + '-' + label_num + '.png'
+        cropped_image_file_path = 'static/images/' + user_id + '/cropped-labels/'+ currentFolder + '/' + file_name +  extension.replace(".", "-") + '-' + label_num + '.png'
+        # cropped_image_file_path = 'static/images/'  + file_name + extension.replace(".", "-") + '-' + label_num + '.png'
 
         img = Image.open(BytesIO(base64.decodebytes(bytes(cropped_image_dataURL, "utf-8"))))
         img.save(cropped_image_file_path)
@@ -155,15 +173,17 @@ def upload_image():
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			file_names.append(filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			file.save(os.path.join(USER_CURRENT_IMG_WORKING_SUBDIR, filename))
+      # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      #file.save(os.path.join(USER_CURRENT_IMG_WORKING_SUBDIR, filename)
 		#else:
 		#	flash('Allowed image types are -> png, jpg, jpeg, gif')
 		#	return redirect(request.url)
 
 	# images_in_dir = get_images_list(app.config['UPLOAD_FOLDER'])
 
-	return render_template('labeling.html', filenames=file_names, images_in_dir=get_images_list(app.config['UPLOAD_FOLDER']))
-
+	return render_template('labeling.html', filenames=file_names, images_in_dir=get_images_list(USER_CURRENT_IMG_WORKING_SUBDIR))
+	# return render_template('labeling.html', filenames=file_names, images_in_dir=get_images_list(app.config['UPLOAD_FOLDER']))
 @app.route('/display/<filename>')
 def display_image(filename):
 	#print('display_image filename: ' + filename)
