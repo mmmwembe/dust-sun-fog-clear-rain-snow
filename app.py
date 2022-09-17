@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 import base64
 from PIL import Image
 from io import BytesIO
+import os
 
 
 app = Flask(__name__)
@@ -13,6 +14,12 @@ app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 
 # Bootstrap
 bootstrap = Bootstrap(app)
+
+def getImageNameAndExtension(image_name):
+
+    file_name, ext = os.path.splitext(image_name)
+
+    return file_name, ext
 
 
 @app.route('/')
@@ -49,7 +56,7 @@ def saveCroppedImage():
         
         # encoded_string = base64.b64encode(cropped_image_dataURL)
    
-    return jsonify(result = 'success')
+    return jsonify(result = 'success', url=cropped_image_file_path)
 
 if __name__ == '__main__':
     
