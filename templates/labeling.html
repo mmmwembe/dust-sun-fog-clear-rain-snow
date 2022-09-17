@@ -572,15 +572,14 @@ height_ratio = originalImageHeight/canvasHeight
 
  ;
 
- var rect = new fabric.Rect({
-    left: 100,
-    top: 0,
-    width: 100,
-    height: new_img_height,
-    fill: 'green',
-    angle: 0,
-  });
-  canvas.add(rect);
+ var rect1 = new fabric.Rect({left: 100,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.1});
+ var rect2 = new fabric.Rect({left: 200,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.3});
+ var rect3 = new fabric.Rect({left: 300,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.5});
+ var rect4 = new fabric.Rect({left: 400,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.75});
+ var rect5 = new fabric.Rect({left: 500,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.80});
+
+ var group = new fabric.Group([rect1,rect2,rect3,rect4,rect5])
+  canvas.add(group);
 
 // updateCanvasBackgroundImage(img_url)
 // document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
