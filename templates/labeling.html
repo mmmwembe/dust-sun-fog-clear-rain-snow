@@ -537,6 +537,11 @@ body.modal-open .modal .modal-dialog {
   </div>
   
   <div class="col-3 col-s-12">
+    {% if images_in_dir %}
+    {% for image_path in images_in_dir %}
+    <div class="row">{{ image_path }}</div>
+    {% endfor %}
+  {% endif %}
 
   </div>
   

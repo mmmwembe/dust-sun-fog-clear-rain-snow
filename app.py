@@ -33,11 +33,22 @@ def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def getImageNameAndExtension(image_name):
-
     file_name, ext = os.path.splitext(image_name)
-
     return file_name, ext
 
+def get_filename_and_extension(file_path):
+  """ This function splits a filepath to a filename and extension
+    It takes as an argument the file path and outputs the filename and the extension"""
+  filename, ext = os.path.splitext(file_path)
+  return filename, ext
+
+def get_images_list(dir):
+  images_list_raw = os.listdir(dir)
+  images_list_filtered =[]
+  for image in images_list_raw:
+    if image.lower().endswith(tuple(["JPG", "JPEG", "jpg", "jpeg", "png", "PNG"])):
+       images_list_filtered.append(image) 
+  return images_list_filtered
 
 @app.route('/')
 def home():
@@ -91,7 +102,10 @@ def upload_image():
 		#else:
 		#	flash('Allowed image types are -> png, jpg, jpeg, gif')
 		#	return redirect(request.url)
-	return render_template('labeling.html', filenames=file_names)
+
+	images_in_dir = get_images_list(app.config['UPLOAD_FOLDER'])
+
+	return render_template('labeling.html', filenames=file_names, images_in_dir = images_in_dir)
 
 @app.route('/display/<filename>')
 def display_image(filename):
