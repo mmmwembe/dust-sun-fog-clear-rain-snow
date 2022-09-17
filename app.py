@@ -8,6 +8,7 @@ from PIL import Image
 from io import BytesIO
 import os
 
+
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 UPLOAD_FOLDER = 'static/uploads/'
 
@@ -88,7 +89,7 @@ def upload_image():
 def display_image(filename):
 	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301) 
-  
+
 
 if __name__ == '__main__':
     
