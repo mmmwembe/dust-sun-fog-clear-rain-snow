@@ -180,7 +180,7 @@ body.modal-open .modal .modal-dialog {
 
 .ScrollStyle
 {
-    max-height: 100%;
+    max-height: 400px;
     overflow-y: scroll;
 }
 
@@ -413,6 +413,11 @@ body.modal-open .modal .modal-dialog {
     <!--img id ="mainImage" src="/static/Uploads/colorful-birds-05.jpg">-->
     <!--<canvas id="canvas" style="border:1px solid #000000;"></canvas>-->
     <canvas id="canvas" style="border:1px solid #000000;width:100%"></canvas>
+    <img src= 
+    "https://media.geeksforgeeks.org/wp-content/uploads/20200327230544/g4gicon.png"
+            width="100" height="100" id="my-image"
+            style="display: none;"> 
+
   </div>
   
 
@@ -511,8 +516,17 @@ document.getElementById("canvas_height").innerHTML = "canvas height: " + canvasH
 canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
 fabric.Object.prototype.transparentCorners = false;
 
+// Getting the image 
+var img = document.getElementById('my-image'); 
+  
+// Creating the image instance 
+ var geeks = new fabric.Image(img, {dirty : false}); 
+  
+ canvas.add(geeks); 
+ canvas.centerObject(geeks);
 
-updateCanvasBackgroundImage(img_url)
+
+// updateCanvasBackgroundImage(img_url)
 // document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
 // document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
 
