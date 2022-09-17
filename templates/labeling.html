@@ -414,7 +414,7 @@ body.modal-open .modal .modal-dialog {
     <!--<canvas id="canvas" style="border:1px solid #000000;"></canvas>-->
     <canvas id="canvas" style="border:1px solid #000000;width:100%"></canvas>
     <img src="/static/project-test-images/dust/sun-in-view-0001.jpg"
-            width="100%" height="auto" id="my-image"
+            id="my-image"
             style="display: none;"> 
 
   </div>
@@ -517,6 +517,10 @@ fabric.Object.prototype.transparentCorners = false;
 
 // Getting the image 
 var img = document.getElementById('my-image'); 
+
+getOriginalImageSize()
+document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
+document.getElementById("image_height").innerHTML = "original height: " + originalImageHeight;  
   
 // Creating the image instance 
  var geeks = new fabric.Image(img, {left: 0, top: 0, angle: 0}); 
@@ -550,7 +554,7 @@ document.getElementById('imgLoader').addEventListener("change", function (e) {
 
 
 function getOriginalImageSize(){
-        var myImg = document.querySelector("#canvas");
+        var myImg = document.querySelector("#my-image");
         originalImageWidth = myImg.naturalWidth;
         originalImageHeight  = myImg.naturalHeight;
        // alert("Original width=" + originalImageWidth + ", " + "Original height=" + originalImageHeight);
