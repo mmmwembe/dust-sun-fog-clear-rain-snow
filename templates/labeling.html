@@ -386,7 +386,8 @@ document.getElementById('imgLoader').addEventListener("change", function (e) {
   reader.onload = function (f) {
     var data = f.target.result;                    
     fabric.Image.fromURL(data, function (img) {
-      var oImg = img.set({left: 0, top: 0, angle: 0,width:auto, height:auto}).scale(0.9);
+      //var oImg = img.set({left: 0, top: 0, angle: 0,width:auto, height:auto}).scale(0.9);
+      var oImg = img.set({left: 0, top: 0, angle: 0});
       canvas.add(oImg).renderAll();
       var a = canvas.setActiveObject(oImg);
       var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
