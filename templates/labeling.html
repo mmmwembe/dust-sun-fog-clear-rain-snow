@@ -409,7 +409,7 @@ body.modal-open .modal .modal-dialog {
 
   </div>
 
-  <div id="canvasHolder" class="col-6 col-s-9">
+  <div id="canvasHolder" class="col-6 col-s-9" style="border:2px solid red;width:100%">
     <!--img id ="mainImage" src="/static/Uploads/colorful-birds-05.jpg">-->
     <!--<canvas id="canvas" style="border:1px solid #000000;"></canvas>-->
     <canvas id="canvas" style="border:1px solid #000000;width:100%"></canvas>
@@ -500,6 +500,8 @@ body.modal-open .modal .modal-dialog {
   <div class="col-3 col-s-3">
     <div id="canvas_width"></div>
     <div id="canvas_height"></div>
+    <div id="canvas_parent_width"></div>
+    <div id="canvas_parent_height"></div>
   </div>
 
   <div class="col-6 col-s-9">
@@ -582,7 +584,14 @@ var num_of_images = null
 var image_url ="/static/project-test-images/dust/sun-in-view-0001.jpg"
 var img_thumbnails = null
 
+var canvas_parent = null
+var canvas_parent_width = null
+var canvas_parent_height = null
 
+
+canvas_parent = document.getElementById('canvasHolder')
+canvas_parent_width = canvas_parent.offsetWidth;
+canvas_parent_height = canvas_parent.offsetHeight;
 
 var thumbnail = document.getElementById('thumbnail')
 thumbnail.addEventListener("click", function(e) {
@@ -613,7 +622,12 @@ getCanvasSize()
 document.getElementById("canvas_width").innerHTML = "canvas width : " + canvasWidth;
 document.getElementById("canvas_height").innerHTML = "canvas height: " + canvasHeight;     
 
+document.getElementById("canvas_parent_width").innerHTML = "canvas parent width : " + canvas_parent_width;
+document.getElementById("canvas_parent_height").innerHTML = "canvas parent height: " + canvas_parent_height;    
+
+
 canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvasWidth, height: canvasHeight });
+// new fabric.StaticCanvas('c');
 fabric.Object.prototype.transparentCorners = false;
 
 // Getting the image 
