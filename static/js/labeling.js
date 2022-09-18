@@ -2,9 +2,9 @@ $(document).ready(function() {
 
     $('.cropButton').on('click', function(event) {
 
-        event.preventDefault();
-
         alert('You clicked the crop button!!!')
+
+        event.preventDefault();
 
 
         // var member_id = $(this).attr('member_id');
