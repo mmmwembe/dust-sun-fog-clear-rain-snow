@@ -589,6 +589,7 @@ var new_img_height = null
 var num_of_images = null
 var image_url ="/static/project-test-images/dust/sun-in-view-0001.jpg"
 var img_thumbnails = null
+var selectedImage = null
 
 var canvas_parent = null
 var canvas_parent_width = null
@@ -617,7 +618,7 @@ x_btn.addEventListener("click", function(e) {
 img_thumbnails = document.getElementsByClassName('gallery_column');
 for(let i = 0; i < img_thumbnails.length; i++) {
   img_thumbnails[i].addEventListener("click", function(e) {
-            alert('thumbnail num ' + i + ' ' + e.target.src);
+           // alert('thumbnail num ' + i + ' ' + e.target.src);
 
             img_url = e.target.src
             var img_url2 = geturl(img_url)
@@ -646,6 +647,7 @@ canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: 
 fabric.Object.prototype.transparentCorners = false;
 
 // Getting the image 
+selectedImage = document.getElementById('my-image'); 
 var img = document.getElementById('my-image'); 
 
 getOriginalImageSize()
@@ -815,11 +817,12 @@ function updateCanvasBackgroundImage(img_url){
 
 function updateCanvasBackgroundImage2(img_url){
 
-  img = document.getElementById('my-image'); 
-  img.setAttribute('src',img_url);
+  //img = document.getElementById('my-image'); 
+  selectedImage = document.getElementById('my-image'); 
+  selectedImage.setAttribute('src',img_url);
   getOriginalImageSize()
 
-  canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvasWidth, height: canvasHeight });
+  canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvas_parent_width, height: canvas_parent_height });
   // new fabric.StaticCanvas('c');
   fabric.Object.prototype.transparentCorners = false;
   getCanvasSize()
@@ -828,19 +831,19 @@ function updateCanvasBackgroundImage2(img_url){
   height_ratio = originalImageHeight/canvasHeight
 
 // Creating the image instance 
- var geeks = new fabric.Image(img, {left: 0, top: 0, angle: 0}); 
+ var background_img = new fabric.Image(selectedImage, {left: 0, top: 0, angle: 0}); 
 
  if (height_ratio >= width_ratio){
-   geeks.scaleToHeight(canvasHeight);
+    background_img.scaleToHeight(canvasHeight);
    }
  if (height_ratio < width_ratio){
-    geeks.scaleToWidth(canvasWidth);
+    background_img.scaleToWidth(canvasWidth);
     }
   
-  new_img_height = originalImageHeight*geeks.scaleY
-  new_img_width = originalImageWidth*geeks.scaleX
+  new_img_height = originalImageHeight*background_img.scaleY
+  new_img_width = originalImageWidth*background_img.scaleX
 
-  canvas.setBackgroundImage(geeks);
+  canvas.setBackgroundImage(background_img);
   // canvas.add(geeks); 
   canvas.setDimensions({width:new_img_width, height:new_img_height})
   canvas.renderAll();
@@ -849,11 +852,13 @@ function updateCanvasBackgroundImage2(img_url){
 }
 
 
-
-
-
-
-
+function clearCanvasBackground() {
+  if (canvas) {
+    canvas.setBackgroundImage(null);
+    canvas.setBackgroundColor('');
+    canvas.renderAll();
+  }
+}
 
 function myFunction(imgs) {
   //var expandImg = document.getElementById("expandedImg");
