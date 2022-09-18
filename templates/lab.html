@@ -25,10 +25,18 @@
        <div class="col-3 col-s-12">
    
        </div>
-       
+
      </div>
 
 
+
+
+     {% if filenames %}
+     {% for filename in filenames %}
+       <div><img src="{{ url_for('display_image', filename=filename) }}"></div>
+     {% endfor %}
+   {% endif %}
+   
 
     
 </body>

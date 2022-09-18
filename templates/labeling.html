@@ -524,11 +524,20 @@ body.modal-open .modal .modal-dialog {
 
   <div class="col-3 col-s-3">
 
-    {% if filenames %}
-      {% for filename in filenames %}
-        <div><img src="{{ url_for('display_image', filename=filename) }}"></div>
-      {% endfor %}
-    {% endif %}
+    {% if images_in_dir %}
+
+    {% for image in images_in_dir|batch(4) %}
+    <div class="row">
+
+        <div class="gallery_column">
+          <img src="{{ image }}" alt="Nature" style="width:100%" onclick="myFunction(this);">
+        </div>
+
+    </div>
+    {% endfor %}
+
+  {% endif %}
+</div>
 
 
   </div>
