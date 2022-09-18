@@ -4,7 +4,7 @@ $(document).ready(function() {
 
         alert('You clicked the crop button!!!')
 
-        event.preventDefault();
+        // event.preventDefault();
 
 
         // var member_id = $(this).attr('member_id');
