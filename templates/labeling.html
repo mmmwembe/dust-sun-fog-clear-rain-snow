@@ -612,6 +612,9 @@ img_thumbnails = document.getElementsByClassName('gallery_column');
 for(let i = 0; i < img_thumbnails.length; i++) {
   img_thumbnails[i].addEventListener("click", function(e) {
             alert('thumbnail num ' + i + ' ' + e.target.src);
+
+            img_url = e.target.src
+            updateCanvasBackgroundImage2(img_url)
   })
 }
 
@@ -796,6 +799,48 @@ function updateCanvasBackgroundImage(img_url){
   } // end  of  imgObj.onload = function() {
 
 }
+
+
+function updateCanvasBackgroundImage2(img_url){
+
+  img = document.getElementById('my-image'); 
+  img.setAttribute('src',img_url);
+  getOriginalImageSize()
+
+  canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvasWidth, height: canvasHeight });
+  // new fabric.StaticCanvas('c');
+  fabric.Object.prototype.transparentCorners = false;
+  getCanvasSize()
+
+  width_ratio = originalImageWidth/canvasWidth
+  height_ratio = originalImageHeight/canvasHeight
+
+// Creating the image instance 
+ var geeks = new fabric.Image(img, {left: 0, top: 0, angle: 0}); 
+
+ if (height_ratio >= width_ratio){
+   geeks.scaleToHeight(canvasHeight);
+   }
+ if (height_ratio < width_ratio){
+    geeks.scaleToWidth(canvasWidth);
+    }
+  
+  new_img_height = originalImageHeight*geeks.scaleY
+  new_img_width = originalImageWidth*geeks.scaleX
+
+  canvas.setBackgroundImage(geeks);
+  // canvas.add(geeks); 
+  canvas.setDimensions({width:new_img_width, height:new_img_height})
+  canvas.renderAll();
+
+
+}
+
+
+
+
+
+
 
 
 function myFunction(imgs) {
