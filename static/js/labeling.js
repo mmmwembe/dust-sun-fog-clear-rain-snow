@@ -23,7 +23,7 @@ $(document).ready(function() {
               //  $('#memberSection'+member_id).fadeOut(1000).fadeIn(1000);
               //  $('#memberNumber'+member_id).text(data.member_num);
 
-        });
+        //});
     
 
     });
