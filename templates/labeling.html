@@ -459,14 +459,20 @@ body.modal-open .modal .modal-dialog {
   </div>
 
   <div class="col-6 col-s-9">
+
+    <form method="post" action="/" enctype="multipart/form-data">
+      <input class="form-control form-control-lg" id="imgLoader" type="file" name="files[]" multiple="true" autocomplete="off" required>
+      <input type="submit" value="Submit" class="btn btn-primary">
+  </form>
+  
+</div>
+  
+  <div class="col-3 col-s-12">
+
     <form method="post" action="/">
       <input type="submit" name="crop_image_btn" value="crop_image" class="btn btn-primary">
   </form>
-
   <button id="x_btn" type="button" class="btn btn-success">Cropping Image - Fabric JS</button>
-  </div>
-  
-  <div class="col-3 col-s-12">
 
   </div>
   
