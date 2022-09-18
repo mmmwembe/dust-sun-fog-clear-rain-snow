@@ -332,10 +332,10 @@ body.modal-open .modal .modal-dialog {
 
       <div class="row">
           <div class="gallery_column">
-            <img src="/static/project-test-images/gallery/img_nature.jpg" alt="Nature" style="width:100%" onclick="myFunction(this);">
+            <img id="thumbnail" src="/static/project-test-images/gallery/img_nature.jpg" alt="Nature" style="width:100%">
           </div>
           <div class="gallery_column">
-            <img src="/static/project-test-images/gallery/img_snow.jpg" alt="Snow" style="width:100%" onclick="myFunction(this);">
+            <img id="thumbnail"  src="/static/project-test-images/gallery/img_snow.jpg" alt="Snow" style="width:100%">
           </div>
           <div class="gallery_column">
             <img src="/static/project-test-images/gallery/img_mountains.jpg" alt="Mountains" style="width:100%" onclick="myFunction(this);">
@@ -578,6 +578,14 @@ var new_img_width = null
 var new_img_height = null
 var num_of_images = null
 var image_url ="/static/project-test-images/dust/sun-in-view-0001.jpg"
+
+
+
+var thumbnail = document.getElementById('thumbnail')
+thumbnail.addEventListener("click", function(e) {
+  alert(e.target.src);
+})
+
 
 // var canvas = new fabric.Canvas('canvas');
 
