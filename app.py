@@ -191,6 +191,18 @@ def display_image(filename):
 	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301) 
 
+@app.route('/', methods=['POST','GET'])
+def crop_image():
+    if request.method == 'POST':
+        if request.form['crop_image_btn'] == 'crop_image':
+
+          return render_template('labeling.html', images_in_dir=get_images_list(USER_CURRENT_IMG_WORKING_SUBDIR), cropped_imgs_in_dir=get_images_list(USER_CROPPED_IMG_WORKING_SUBDIR))
+
+        else:
+            pass # unknown
+    elif request.method == 'GET':
+        return render_template('labeling.html', images_in_dir=get_images_list(USER_CURRENT_IMG_WORKING_SUBDIR), cropped_imgs_in_dir=get_images_list(USER_CROPPED_IMG_WORKING_SUBDIR))
+
 
 if __name__ == '__main__':
     

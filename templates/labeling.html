@@ -453,12 +453,15 @@ body.modal-open .modal .modal-dialog {
   <div class="col-3 col-s-3">
     <form method="post" action="/" enctype="multipart/form-data">
       <input class="form-control form-control-lg" id="imgLoader" type="file" name="files[]" multiple="true" autocomplete="off" required>
-      <input type="submit" value="Submit" class="btn btn-outline-secondary">
+      <input type="submit" value="Submit" class="btn btn-primary">
   </form>
 
   </div>
 
   <div class="col-6 col-s-9">
+    <form method="post" action="/">
+      <input type="submit" name="crop_image_btn" value="crop_image">
+  </form>
   </div>
   
   <div class="col-3 col-s-12">
@@ -643,7 +646,7 @@ const cropped_png_canvas = canvas.toDataURL({format: 'png',left: 0,top: 0,width:
 const jpg_all_canvas = canvas.toDataURL({format: 'jpeg',quality: 0.3})
 
 // document.getElementById('test').src = canvas.toDataURL('image/png');
-document.getElementById('test').src = cropped_png_canvas;
+// document.getElementById('test').src = cropped_png_canvas;
 // canvas.toDataURL({format: 'png',left: 0,top: 0,width: new_img_width,height: new_img_height});
 // document.getElementById("test'").width = new_img_width
 // document.getElementById("test'").height = new_img_height
@@ -652,7 +655,7 @@ document.getElementById('test').src = cropped_png_canvas;
 // SAVE CROPPED IMAGE
 var user_id ='user2'
 var image_name = img.getAttribute("src").split("/").reverse()[0]
-var label_num = 1
+var label_num = Date.now() // 1
 var WORKING_LABELS_FOLDER="dog"
 
 // alert('image name '+ image_name)
@@ -660,23 +663,29 @@ var WORKING_LABELS_FOLDER="dog"
 // Section of image on canvas to be cropped out and saved in the cropped-images
 // cropped_image_dataURL = canvas.toDataURLWithCropping('png', { y: rect.top, x: rect.left, width: rect.width, height: rect.height, quality: 1 })
 // https://stackoverflow.com/questions/40083942/fabricjs-set-clipped-object-as-background-to-canvas-after-clipping
-rect_to_crop = new fabric.Rect({left: 0,top: 0,width: 150,height: 50,angle: 0});
-cropped_image_dataURL = canvas.toDataURL({
-                      format: 'image/png',
-                      left: rect_to_crop.left,      //  canvas.offsetLeft,
-                      top: rect_to_crop.top,        // canvas.offsetTop,
-                      width: rect_to_crop.width,
-                      height: rect_to_crop.height,
-                      selection: false
-                  })
 
-// Remove data:image/png;base64, at beginning of the cropped_image_dataURL string
-cropped_image_dataURL= cropped_image_dataURL.replace("data:image/png;base64,", "");
-// var imgBase64 = cropped_image_dataURL
+crop_image(user_id, image_name, label_num, WORKING_LABELS_FOLDER)
 
-// Save image to server
-saveCroppedSection()
+function crop_image(user_id, image_name, label_num, working_labels_dir) {
 
+      rect_to_crop = new fabric.Rect({left: 0,top: 0,width: 150,height: 50,angle: 0});
+      cropped_image_dataURL = canvas.toDataURL({
+                            format: 'image/png',
+                            left: rect_to_crop.left,      //  canvas.offsetLeft,
+                            top: rect_to_crop.top,        // canvas.offsetTop,
+                            width: rect_to_crop.width,
+                            height: rect_to_crop.height,
+                            selection: false
+                        })
+
+      // Remove data:image/png;base64, at beginning of the cropped_image_dataURL string
+      cropped_image_dataURL= cropped_image_dataURL.replace("data:image/png;base64,", "");
+      // var imgBase64 = cropped_image_dataURL
+
+      // Save image to server
+      saveCroppedSection()
+
+}
 
 document.getElementById('imgLoader').addEventListener("change", function (e) {
   var file = e.target.files[0];
