@@ -456,16 +456,6 @@ body.modal-open .modal .modal-dialog {
       <input type="submit" value="Submit" class="btn btn-outline-secondary">
   </form>
 
-  <div class="input-group">
-    <div class="custom-file">
-      <input type="file" class="custom-file-input" id="inputGroupFile04" name="files[]" multiple="true" autocomplete="off" required>
-      <label class="custom-file-label" for="inputGroupFile04">Choose files</label>
-    </div>
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button">Button</button>
-    </div>
-  </div>
-
   </div>
 
   <div class="col-6 col-s-9">
@@ -522,29 +512,32 @@ body.modal-open .modal .modal-dialog {
 
 <div class="row">
 
-  <div class="col-3 col-s-3">
+  <div class="ScrollStyle">
 
-    {% if images_in_dir %}
+      <div class="col-3 col-s-3">
 
-    {% for row in images_in_dir|batch(4) %}
-    <div class="row">
+        {% if images_in_dir %}
 
-      {% for column_img in row %}  
+        {% for row in images_in_dir|batch(4) %}
+        <div class="row">
 
-        <div class="gallery_column">
-          <img src="{{ column_img }}" alt="Nature" style="width:100%" onclick="myFunction(this);">
+          {% for column_img in row %}  
+
+            <div class="gallery_column">
+              <img src="{{ column_img }}" alt="Nature" style="width:100%" onclick="myFunction(this);">
+            </div>
+
+          {% endfor %}
+
         </div>
+        {% endfor %}
 
-       {% endfor %}
-
+      {% endif %}
     </div>
-    {% endfor %}
-
-  {% endif %}
-</div>
-
 
   </div>
+ 
+</div>
 
   <div class="col-6 col-s-9">
   </div>
