@@ -529,7 +529,7 @@ body.modal-open .modal .modal-dialog {
     {% for row in images_in_dir|batch(4) %}
     <div class="row">
 
-      {% for column_img in row %} 
+      {% for column_img in row %}  
 
         <div class="gallery_column">
           <img src="{{ column_img }}" alt="Nature" style="width:100%" onclick="myFunction(this);">
