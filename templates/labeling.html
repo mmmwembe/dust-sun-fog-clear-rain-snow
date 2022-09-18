@@ -529,7 +529,7 @@ body.modal-open .modal .modal-dialog {
     {% for row in images_in_dir|batch(4) %}
     <div class="row">
 
-      {% for column_img in row) %} 
+      {% for column_img in row %} 
 
         <div class="gallery_column">
           <img src="{{ column_img }}" alt="Nature" style="width:100%" onclick="myFunction(this);">
@@ -567,6 +567,9 @@ body.modal-open .modal .modal-dialog {
 
 <script>
 window.addEventListener("load", function(){
+
+  // https://roytuts.com/upload-and-display-multiple-images-using-python-and-flask/
+  // https://www.demo2s.com/javascript/javascript-fabric-js-number-a-grid-fabrics.html
 
 var canvas = null
 var canvasWidth = null
