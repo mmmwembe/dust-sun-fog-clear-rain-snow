@@ -462,6 +462,8 @@ body.modal-open .modal .modal-dialog {
     <form method="post" action="/">
       <input type="submit" name="crop_image_btn" value="crop_image" class="btn btn-primary">
   </form>
+
+  <button id="x_btn" type="button" class="btn btn-success">Cropping Image - Fabric JS</button>
   </div>
   
   <div class="col-3 col-s-12">
@@ -587,6 +589,11 @@ thumbnail.addEventListener("click", function(e) {
 
   // reset the canvas to original dimensions
   // canvas.setAttribute("class", "canvas");
+})
+
+var x_btn = document.getElementById('x_btn')
+x_btn.addEventListener("click", function(e) {
+   alert("you clicked the x_btn mate!!!")
 })
 
 
