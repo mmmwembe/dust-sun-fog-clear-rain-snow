@@ -338,10 +338,10 @@ body.modal-open .modal .modal-dialog {
             <img id="thumbnail"  src="/static/project-test-images/gallery/img_snow.jpg" alt="Snow" style="width:100%">
           </div>
           <div class="gallery_column">
-            <img src="/static/project-test-images/gallery/img_mountains.jpg" alt="Mountains" style="width:100%" onclick="myFunction(this);">
+            <img src="/static/project-test-images/gallery/img_mountains.jpg" alt="Mountains" style="width:100%" >
           </div>
           <div class="gallery_column">
-            <img src="/static/project-test-images/gallery/img_lights.jpg" alt="Lights" style="width:100%" onclick="myFunction(this);">
+            <img src="/static/project-test-images/gallery/img_lights.jpg" alt="Lights" style="width:100%">
           </div>
       </div>
 
@@ -580,6 +580,7 @@ var new_img_width = null
 var new_img_height = null
 var num_of_images = null
 var image_url ="/static/project-test-images/dust/sun-in-view-0001.jpg"
+var img_thumbnails = null
 
 
 
@@ -594,11 +595,16 @@ thumbnail.addEventListener("click", function(e) {
 var x_btn = document.getElementById('x_btn')
 x_btn.addEventListener("click", function(e) {
    alert("you clicked the x_btn mate!!!")
-
-   crop_image(user_id, image_name, label_num, WORKING_LABELS_FOLDER)
-
+   //crop_image(user_id, image_name, label_num, WORKING_LABELS_FOLDER)
 
 })
+
+img_thumbnails = document.getElementsByClassName('gallery_column');
+for(let i = 0; i < img_thumbnails.length; i++) {
+  img_thumbnails[i].addEventListener("click", function(e) {
+            alert('thumbnail num ' + i + ' ' + e.target.src);
+  })
+}
 
 
 // var canvas = new fabric.Canvas('canvas');
@@ -657,7 +663,8 @@ height_ratio = originalImageHeight/canvasHeight
  var rect5 = new fabric.Rect({left: 500,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.80});
 
  var group = new fabric.Group([rect1,rect2,rect3,rect4,rect5])
-  canvas.add(group);
+ canvas.add(group);
+ canvas.renderAll()
 
 // updateCanvasBackgroundImage(img_url)
 // document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
@@ -805,6 +812,18 @@ $.ajax({
 
   });
 
+}
+
+
+function enableClickThumbnailImages(){
+
+  img_thumbnails = document.getElementsByClassName('gallery_column');
+
+  for(let i = 0; i < img_thumbnails.length; i++) {
+        img_thumbnails[i].addEventListener("click", function(e) {
+          alert('thumbnail num ' + i + ' ' + e.target.src);
+  })
+}
 }
 
 
