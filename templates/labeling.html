@@ -593,13 +593,13 @@ canvas_parent = document.getElementById('canvasHolder')
 canvas_parent_width = canvas_parent.clientWidth; // offsetWidth; 
 canvas_parent_height = canvas_parent.clientHeight; // offsetHeight;
 
-var thumbnail = document.getElementById('thumbnail')
-thumbnail.addEventListener("click", function(e) {
-  alert(e.target.src);
+//var thumbnail = document.getElementById('thumbnail')
+//thumbnail.addEventListener("click", function(e) {
+//  alert(e.target.src);
 
   // reset the canvas to original dimensions
   // canvas.setAttribute("class", "canvas");
-})
+//})
 
 var x_btn = document.getElementById('x_btn')
 x_btn.addEventListener("click", function(e) {
@@ -621,7 +621,7 @@ for(let i = 0; i < img_thumbnails.length; i++) {
 
 function geturl(full_url)
 {
-	imgurl.substr(full_url.indexOf('/', 8) + 1)
+	var imgurl =full_url.substr(full_url.indexOf('/', 8) + 1)
   alert(imgurl)
 }
 
