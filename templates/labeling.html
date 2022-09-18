@@ -614,10 +614,16 @@ for(let i = 0; i < img_thumbnails.length; i++) {
             alert('thumbnail num ' + i + ' ' + e.target.src);
 
             img_url = e.target.src
-            updateCanvasBackgroundImage2(img_url)
+            geturl(img_url)
+            // updateCanvasBackgroundImage2(img_url)
   })
 }
 
+function geturl(full_url)
+{
+	imgurl.substr(full_url.indexOf('/', 8) + 1)
+  alert(imgurl)
+}
 
 // var canvas = new fabric.Canvas('canvas');
 
