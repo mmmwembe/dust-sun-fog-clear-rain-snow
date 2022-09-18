@@ -527,7 +527,7 @@ body.modal-open .modal .modal-dialog {
           {% for column_img in row %}  
 
             <div class="gallery_column">
-              <img src="{{ column_img }}" alt="Nature" style="width:100%" onclick="myFunction(this);">
+              <img id="thumbnail" src="{{ column_img }}" alt="Nature" style="width:100%">
             </div>
 
           {% endfor %}
@@ -584,6 +584,9 @@ var image_url ="/static/project-test-images/dust/sun-in-view-0001.jpg"
 var thumbnail = document.getElementById('thumbnail')
 thumbnail.addEventListener("click", function(e) {
   alert(e.target.src);
+
+  // reset the canvas to original dimensions
+  canvas.setAttribute("class", "canvas");
 })
 
 
