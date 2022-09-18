@@ -590,8 +590,8 @@ var canvas_parent_height = null
 
 
 canvas_parent = document.getElementById('canvasHolder')
-canvas_parent_width = canvas_parent.offsetWidth;
-canvas_parent_height = canvas_parent.offsetHeight;
+canvas_parent_width = canvas_parent.clientWidth; // offsetWidth; 
+canvas_parent_height = canvas_parent.clientHeight; // offsetHeight;
 
 var thumbnail = document.getElementById('thumbnail')
 thumbnail.addEventListener("click", function(e) {
