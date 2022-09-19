@@ -870,6 +870,8 @@ function updateCanvasBackgroundImage2(img_url){
 
 function set_new_background_image(imageUrl){
 
+  clearCanvasBackground()
+
   // Initialize a simple canvas
 canvas = new fabric.Canvas("canvas", {
     hoverCursor: 'pointer',
@@ -887,7 +889,7 @@ canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
     // Optionally add an opacity lvl to the image
     backgroundImageOpacity: 0.5,
     // should the image be resized to fit the container?
-    backgroundImageStretch: false
+    backgroundImageStretch: true
 });
 
 canvas.renderAll();
