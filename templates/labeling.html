@@ -462,11 +462,11 @@ body.modal-open .modal .modal-dialog {
 
     <div style="height:5rem; width:100%; margin: auto;">
 
-      <div style="height:5rem; width:80%; margin-left:4%; margin-right:0%; float:left;">
+      <div style="height:5rem; width:60%; margin-left:4%; margin-right:0%; float:left;">
         <form method="post" action="/" enctype="multipart/form-data">
         <input class="form-control form-control-lg" id="imgLoader" type="file" name="files[]" multiple="true" autocomplete="off" required>
       </div>
-      <div style="height:5rem; width:20%; margin-left:4%; margin-right:0%; float:left; ">
+      <div style="height:5rem; width:40%; margin-left:4%; margin-right:0%; float:left; ">
         <input type="submit" value="Submit" class="btn btn-primary">
         </form> 
       </div>
@@ -776,8 +776,8 @@ function getCanvasSize(){
         var myCanvas = document.querySelector("#canvas");
         // canvasWidth = myCanvas.clientWidth;
         // canvasHeight = myCanvas.clientHeight;
-        canvasWidth = Math.round(0.963344788*canvas_parent_width);  //myCanvas.clientWidth;
-        canvasHeight = Math.round(0.963344788*canvas_parent_height); // myCanvas.clientHeight;
+        canvasWidth = 0.963344788*canvas_parent_width;  //myCanvas.clientWidth;
+        canvasHeight = 0.963344788*canvas_parent_height; // myCanvas.clientHeight;
         // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);   
 }
 
