@@ -972,7 +972,7 @@ originalImageWidth, originalImageHeight = getImageWidthandHeight(imageUrl)
 var w_ratio = originalImageWidth/canvasWidth
 var h_ratio = originalImageHeight/canvasHeight
 
-alert('H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' + w_ratio +  ' height ration ' + h_ratio)
+alert('H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' + w_ratio +  ' height ratio ' + h_ratio)
 // Define the URL where your background image is located
 // var imageUrl = "/static/project-test-images/dust/sun-in-view-0001.jpg";
 // var imageUrl="https://dust-sun-fog-clear-rain-snow.herokuapp.com/static/project-test-images/gallery/img_nature.jpg"
@@ -984,6 +984,17 @@ canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
   // should the image be resized to fit the container?
   backgroundImageStretch: true
 });
+
+
+if (h_ratio >= w_ratio){
+     canvas.backgroundImage.scaleToHeight(canvasHeight);
+    }
+  if (h_ratio < w_ratio){
+    canvas.backgroundImage.scaleToWidth(canvasWidth);
+    }
+    
+    //var new_img_height = originalImageHeight * image.scaleY
+    //var new_img_width = originalImageWidth * image.scaleX
 
 canvas.renderAll();
 
