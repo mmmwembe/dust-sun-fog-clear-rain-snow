@@ -632,7 +632,8 @@ for(let i = 0; i < img_thumbnails.length; i++) {
 
             img_url = e.target.src
             //set_new_background_image(img_url)
-            set_new_background_image2(img_url)
+            // set_new_background_image2(img_url)
+            set_new_background_image3(img_url)
             // updateCanvasBackgroundImage2(img_url)
             //alert(img_url)
             //var img_url2 = geturl(img_url)
@@ -653,7 +654,8 @@ function geturl(full_url)
 // var canvas = new fabric.Canvas('canvas');
 
 // set_new_background_image(image_url)
-set_new_background_image2(image_url)
+// set_new_background_image2(image_url)
+set_new_background_image3(image_url)
 // updateCanvasBackgroundImage2(image_url)
 
 
@@ -947,11 +949,59 @@ function set_new_background_image2(imageUrl){
     new_img_height = originalImageHeight * image.scaleY
     new_img_width = originalImageWidth * image.scaleX
 
-  canvas.setDimensions({width:new_img_width, height:new_img_height})
+
   canvas.setBackgroundImage(image, canvas.renderAll.bind(canvas));
+  canvas.setDimensions({width:new_img_width, height:new_img_height})
   canvas.renderAll();
 
 
+}
+
+function set_new_background_image3(imageUrl){
+
+clearCanvasBackground()
+
+getCanvasSize()
+
+// Initialize a simple canvas
+canvas = new fabric.Canvas("canvas", { selection: false, width: canvasWidth, height: canvasHeight });
+
+// var img_width = null, img_height = null
+originalImageWidth, originalImageHeight = getImageWidthandHeight(imageUrl)
+
+var w_ratio = originalImageWidth/canvasWidth
+var h_ratio = originalImageHeight/canvasHeight
+
+alert('H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' + w_ratio +  ' height ration ' + h_ratio)
+// Define the URL where your background image is located
+// var imageUrl = "/static/project-test-images/dust/sun-in-view-0001.jpg";
+// var imageUrl="https://dust-sun-fog-clear-rain-snow.herokuapp.com/static/project-test-images/gallery/img_nature.jpg"
+
+// Define 
+canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
+  // Optionally add an opacity lvl to the image
+  backgroundImageOpacity: 0.5,
+  // should the image be resized to fit the container?
+  backgroundImageStretch: true
+});
+
+canvas.renderAll();
+
+
+}
+
+
+function getImageWidthandHeight(url) { 
+    var img_width = null
+    var img_height = null  
+    var img = new Image();
+    img.onload = function() {
+        img_width = this.width
+        img_height = this.height 
+    };
+    img.src = url;
+
+    return img_width, img_height
 }
 
 function clearCanvasBackground() {
