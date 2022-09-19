@@ -412,7 +412,8 @@ body.modal-open .modal .modal-dialog {
   <div id="canvasHolder" class="col-6 col-s-9" style="border:2px solid red;">
     <!--img id ="mainImage" src="/static/Uploads/colorful-birds-05.jpg">-->
     <!--<canvas id="canvas" style="border:1px solid #000000;"></canvas>-->
-    <canvas id="canvas" style="border:1px solid #000000;width:100%"></canvas>
+    <!--canvas id="canvas" style="border:1px solid #000000;width:100%"></canvas-->
+    <canvas id="canvas" style="width:100%"></canvas>
     <img src="/static/project-test-images/dust/sun-in-view-0001.jpg"
             id="my-image"
             style="display: none;"> 
@@ -790,7 +791,7 @@ function getCanvasSize(){
         // canvasWidth = myCanvas.clientWidth;
         // canvasHeight = myCanvas.clientHeight;
         canvasWidth = 0.90*canvas_parent_width;  //myCanvas.clientWidth;
-        canvasHeight = 0.90*canvas_parent_height; // myCanvas.clientHeight;
+        canvasHeight = 0.80*canvas_parent_height; // myCanvas.clientHeight;
         // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);   
 }
 
