@@ -670,11 +670,6 @@ document.getElementById("height_ratio").innerHTML = "img_height to canvas-height
 width_ratio = originalImageWidth/canvasWidth
 height_ratio = originalImageHeight/canvasHeight
 
-
-updateCanvasBackgroundImage2(img_url)
-
-/*
-
 // Creating the image instance 
  var geeks = new fabric.Image(img, {left: 0, top: 0, angle: 0}); 
 
@@ -690,16 +685,16 @@ updateCanvasBackgroundImage2(img_url)
 
   canvas.setBackgroundImage(geeks);
   // canvas.add(geeks); 
- canvas.setDimensions({width:new_img_width, height:new_img_height})
- canvas.renderAll();
-// canvas.centerObject(geeks);
+  canvas.setDimensions({width:new_img_width, height:new_img_height})
+  canvas.renderAll();
+ // canvas.centerObject(geeks);
 
-// alert(' new img height : ' + new_img_height  + ' new img width ' + new_img_width)
+ // alert(' new img height : ' + new_img_height  + ' new img width ' + new_img_width)
 
  // canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight });
  // fabric.Object.prototype.transparentCorners = false;
 
- */
+ ;
 
  var rect1 = new fabric.Rect({left: 100,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.1});
  var rect2 = new fabric.Rect({left: 200,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.3});
@@ -760,6 +755,22 @@ function crop_image(user_id, image_name, label_num, working_labels_dir) {
       saveCroppedSection()
 
 }
+
+document.getElementById('imgLoader').addEventListener("change", function (e) {
+  var file = e.target.files[0];
+  var reader = new FileReader();
+  reader.onload = function (f) {
+    var data = f.target.result;                    
+    fabric.Image.fromURL(data, function (img) {
+      //var oImg = img.set({left: 0, top: 0, angle: 0,width:auto, height:auto}).scale(0.9);
+      var oImg = img.set({left: 0, top: 0, angle: 0});
+      canvas.add(oImg).renderAll();
+      var a = canvas.setActiveObject(oImg);
+      var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+    });
+  };
+  reader.readAsDataURL(file);
+});
 
 
 
