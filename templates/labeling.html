@@ -978,13 +978,7 @@ alert('H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' 
 // var imageUrl="https://dust-sun-fog-clear-rain-snow.herokuapp.com/static/project-test-images/gallery/img_nature.jpg"
 
 // Define 
-canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
-  // Optionally add an opacity lvl to the image
-  backgroundImageOpacity: 0.5,
-  // should the image be resized to fit the container?
-  backgroundImageStretch: true
-});
-
+canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas));
 
 if (h_ratio >= w_ratio){
      canvas.backgroundImage.scaleToHeight(canvasHeight);
@@ -997,6 +991,9 @@ var new_img_height = originalImageHeight * canvas.backgroundImage.scaleY
 var new_img_width = originalImageWidth * canvas.backgroundImage.scaleX
 
 canvas.setDimensions({width:new_img_width, height:new_img_height})
+
+alert('new img height ' + new_img_height  + ' new img width ' + new_img_width)
+
 canvas.renderAll();
 
 
