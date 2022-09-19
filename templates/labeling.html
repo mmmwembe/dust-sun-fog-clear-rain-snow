@@ -672,6 +672,8 @@ height_ratio = originalImageHeight/canvasHeight
 
 updateCanvasBackgroundImage2(img_url)
 
+// https://ourcodeworld.com/articles/read/681/how-to-set-a-background-image-to-a-fabric-js-canvas
+
 /*
 
 // Creating the image instance 
@@ -815,6 +817,9 @@ function updateCanvasBackgroundImage(img_url){
 
 
 function updateCanvasBackgroundImage2(img_url){
+
+  // Remove existing canvas
+  clearCanvasBackground()
 
   //img = document.getElementById('my-image'); 
   selectedImage = document.getElementById('my-image'); 
