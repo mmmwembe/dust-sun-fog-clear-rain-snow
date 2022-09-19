@@ -636,7 +636,7 @@ for(let i = 0; i < img_thumbnails.length; i++) {
 
 function geturl(full_url)
 {
-	var imgurl =full_url.substr(full_url.indexOf('/', 7) + 1)
+	var imgurl = '/' + full_url.substr(full_url.indexOf('/', 8) + 1)
   alert(imgurl)
 }
 
