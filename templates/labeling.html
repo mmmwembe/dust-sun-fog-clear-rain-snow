@@ -907,8 +907,6 @@ function set_new_background_image2(imageUrl){
 
   clearCanvasBackground()
 
-  getCanvasSize()
-
   // Initialize a simple canvas
   canvas = new fabric.Canvas("canvas", {
     hoverCursor: 'pointer',
@@ -916,6 +914,8 @@ function set_new_background_image2(imageUrl){
     width: canvasWidth, 
     height: canvasHeight 
   });
+
+  getCanvasSize()
 
   // Create a new instance of the Image class
   var imgObj = new Image();
@@ -927,20 +927,22 @@ function set_new_background_image2(imageUrl){
     image.set({left: 0,top: 0,angle: 0,padding: 0});
 
     originalImageHeight = image.height
-    originalImageWidth = image.height
+    originalImageWidth = image.width
+
+    alert('H ' + originalImageHeight + 'W ' + originalImageWidth)
 
   }
 
 
   width_ratio = originalImageWidth/canvasWidth
-    height_ratio = originalImageHeight/canvasHeight
+  height_ratio = originalImageHeight/canvasHeight
 
   if (height_ratio >= width_ratio){
       image.scaleToHeight(canvasHeight);
     }
   if (height_ratio < width_ratio){
       image.scaleToWidth(canvasWidth);
-      }
+    }
     
     new_img_height = originalImageHeight*image.scaleY
     new_img_width = originalImageWidth*image.scaleX
