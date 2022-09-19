@@ -835,7 +835,7 @@ function updateCanvasBackgroundImage2(img_url){
   height_ratio = originalImageHeight/canvasHeight
 
 // Creating the image instance 
- var background_img = new fabric.Image(selectedImage, {left: 0, top: 0, angle: 0}); 
+ var background_img = new fabric.Image(img_url, {left: 0, top: 0, angle: 0}); 
 
  if (height_ratio >= width_ratio){
     background_img.scaleToHeight(canvasHeight);
