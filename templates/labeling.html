@@ -332,10 +332,10 @@ body.modal-open .modal .modal-dialog {
 
       <div class="row">
           <div class="gallery_column">
-            <img id="thumbnail" src="/static/project-test-images/gallery/img_nature.jpg" alt="Nature" style="width:100%">
+            <img id="thumbnail" src="/static/project-test-images/gallery/clean factory-0011.jpg" alt="Nature" style="width:100%">
           </div>
           <div class="gallery_column">
-            <img id="thumbnail"  src="/static/project-test-images/gallery/img_snow.jpg" alt="Snow" style="width:100%">
+            <img id="thumbnail"  src="/static/project-test-images/gallery/clean factory-0015.jpg" alt="Snow" style="width:100%">
           </div>
           <div class="gallery_column">
             <img src="/static/project-test-images/gallery/img_mountains.jpg" alt="Mountains" style="width:100%" >
@@ -929,7 +929,7 @@ function set_new_background_image2(imageUrl){
     originalImageHeight = image.height
     originalImageWidth = image.width
 
-    alert('H ' + originalImageHeight + 'W ' + originalImageWidth)
+    alert('H ' + originalImageHeight + ' W ' + originalImageWidth)
 
   }
 
@@ -944,8 +944,8 @@ function set_new_background_image2(imageUrl){
       image.scaleToWidth(canvasWidth);
     }
     
-    new_img_height = originalImageHeight*image.scaleY
-    new_img_width = originalImageWidth*image.scaleX
+    new_img_height = originalImageHeight * image.scaleY
+    new_img_width = originalImageWidth * image.scaleX
 
   canvas.setDimensions({width:new_img_width, height:new_img_height})
   canvas.setBackgroundImage(image, canvas.renderAll.bind(canvas));
