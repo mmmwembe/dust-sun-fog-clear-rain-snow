@@ -646,6 +646,12 @@ function geturl(full_url)
 
 // var canvas = new fabric.Canvas('canvas');
 
+set_new_background_image()
+
+
+
+
+
 getCanvasSize()
 document.getElementById("canvas_width").innerHTML = "canvas width : " + canvasWidth;
 document.getElementById("canvas_height").innerHTML = "canvas height: " + canvasHeight;     
@@ -674,7 +680,7 @@ width_ratio = originalImageWidth/canvasWidth
 height_ratio = originalImageHeight/canvasHeight
 
 
-updateCanvasBackgroundImage2(img_url)
+// updateCanvasBackgroundImage2(img_url)
 
 // https://ourcodeworld.com/articles/read/681/how-to-set-a-background-image-to-a-fabric-js-canvas
 
@@ -855,6 +861,34 @@ function updateCanvasBackgroundImage2(img_url){
   // canvas.add(geeks); 
   canvas.setDimensions({width:new_img_width, height:new_img_height})
   canvas.renderAll();
+
+
+}
+
+function set_new_background_image(){
+
+  // Initialize a simple canvas
+canvas = new fabric.Canvas("canvas-container", {
+    hoverCursor: 'pointer',
+    selection: true,
+    selectionBorderColor: 'green',
+    backgroundColor: null
+});
+
+// Define the URL where your background image is located
+var imageUrl = "./static/project-test-images/dust/sun-in-view-0001.jpg";
+
+// Define 
+canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
+    // Optionally add an opacity lvl to the image
+    backgroundImageOpacity: 0.5,
+    // should the image be resized to fit the container?
+    backgroundImageStretch: false
+});
+
+
+
+
 
 
 }
