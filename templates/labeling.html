@@ -877,7 +877,8 @@ canvas = new fabric.Canvas("canvas-container", {
 });
 
 // Define the URL where your background image is located
-var imageUrl = "/static/project-test-images/dust/sun-in-view-0001.jpg";
+// var imageUrl = "/static/project-test-images/dust/sun-in-view-0001.jpg";
+var imageUrl="https://dust-sun-fog-clear-rain-snow.herokuapp.com/static/project-test-images/gallery/img_nature.jpg"
 
 // Define 
 canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
@@ -887,9 +888,7 @@ canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
     backgroundImageStretch: false
 });
 
-
-
-
+canvas.renderAll();
 
 
 }
