@@ -989,13 +989,14 @@ canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
 if (h_ratio >= w_ratio){
      canvas.backgroundImage.scaleToHeight(canvasHeight);
     }
-  if (h_ratio < w_ratio){
+if (h_ratio < w_ratio){
     canvas.backgroundImage.scaleToWidth(canvasWidth);
-    }
+}
     
-    //var new_img_height = originalImageHeight * image.scaleY
-    //var new_img_width = originalImageWidth * image.scaleX
+var new_img_height = originalImageHeight * canvas.backgroundImage.scaleY
+var new_img_width = originalImageWidth * canvas.backgroundImage.scaleX
 
+canvas.setDimensions({width:new_img_width, height:new_img_height})
 canvas.renderAll();
 
 
