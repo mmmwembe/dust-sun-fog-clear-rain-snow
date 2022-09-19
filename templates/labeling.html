@@ -650,9 +650,9 @@ document.getElementById("canvas_parent_width").innerHTML = "canvas parent width 
 document.getElementById("canvas_parent_height").innerHTML = "canvas parent height: " + canvas_parent_height;    
 
 
-canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvasWidth, height: canvasHeight });
+//canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvasWidth, height: canvasHeight });
 // new fabric.StaticCanvas('c');
-fabric.Object.prototype.transparentCorners = false;
+//fabric.Object.prototype.transparentCorners = false;
 
 // Getting the image 
 selectedImage = document.getElementById('my-image'); 
@@ -709,8 +709,8 @@ updateCanvasBackgroundImage2(img_url)
  var rect5 = new fabric.Rect({left: 500,top: 0,width: 50,height: new_img_height,fill: 'green',angle: 0,opacity: 0.80});
 
  var group = new fabric.Group([rect1,rect2,rect3,rect4,rect5])
- canvas.add(group);
- canvas.renderAll()
+ // canvas.add(group);
+ // canvas.renderAll()
 
 // updateCanvasBackgroundImage(img_url)
 // document.getElementById("image_width").innerHTML = "original image width : " + originalImageWidth;
@@ -776,8 +776,8 @@ function getCanvasSize(){
         var myCanvas = document.querySelector("#canvas");
         // canvasWidth = myCanvas.clientWidth;
         // canvasHeight = myCanvas.clientHeight;
-        canvasWidth = 0.963344788*canvas_parent_width;  //myCanvas.clientWidth;
-        canvasHeight = 0.963344788*canvas_parent_height; // myCanvas.clientHeight;
+        canvasWidth = parseInt(0.963344788*canvas_parent_width);  //myCanvas.clientWidth;
+        canvasHeight = parseInt(0.963344788*canvas_parent_height); // myCanvas.clientHeight;
         // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);   
 }
 
