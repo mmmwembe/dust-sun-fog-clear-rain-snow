@@ -805,13 +805,15 @@ function auto_add_group_rects(){
 
 
   var num_columns = Math.floor(canvas.width/rect_width)
-  var num_rows = Math.floor(final_image_height/rect_height)
+  // var num_rows = Math.floor(final_image_height/rect_height)
   // var num_rows = Math.floor(canvas.height/rect_height)
+  var num_rows = Math.floor( canvasHeight/rect_height)
+ 
   var counter = 0
 
-  for (var x = 0; x < num_rows; x++) {
+  for (var x = 0; x <= num_rows; x++) {
 
-   for (var y = 0; y < num_columns; y++) {
+   for (var y = 0; y <= num_columns; y++) {
 
     x_value = x * rect_width;
     y_value = y * rect_height;
@@ -827,10 +829,11 @@ function auto_add_group_rects(){
    }  
 }
 
-// alert('rect group ' + rect_group)
+
 canvas.add(rect_group);
 canvas.renderAll()
 
+// alert('width of image )
   
 }
 
