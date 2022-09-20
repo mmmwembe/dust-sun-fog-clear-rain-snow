@@ -796,7 +796,8 @@ function add_group_of_rects(){
 
 function auto_add_group_rects(){
 
-  var rect_group =[]
+  // var rect_group =[]
+  var rect_group = new fabric.Group([])
   var rect_width = 150
   var rect_height = 50
   var rect_name = null
@@ -816,14 +817,18 @@ function auto_add_group_rects(){
 
     rect_name = "rect" + counter
 
-    rect_group[rect_name] = new fabric.Rect({left: x_value,top: y_value, width: rect_width,height: rect_height,angle: 0});
+    rect_group.addWithUpdate(new fabric.Rect({left: x_value,top: y_value, width: rect_width,height: rect_height,angle: 0}));
+
+    // rect_group.push(rect_name) = new fabric.Rect({left: x_value,top: y_value, width: rect_width,height: rect_height,angle: 0});
 
     counter +=1
 
    }  
 }
 
-alert('rect group ' + rect_group)
+// alert('rect group ' + rect_group)
+canvas.add(rect_group);
+canvas.renderAll()
 
   
 }
