@@ -982,7 +982,7 @@ let finalAspectRatio = Math.max(w_ratio, h_ratio)
 let finalHeight = originalImageHeight / finalAspectRatio;
 let finalWidth = originalImageWidth / finalAspectRatio;
 
-alert('AFTER H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' + w_ratio +  ' height ratio ' + h_ratio)
+alert('AFTER H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' + w_ratio +  ' height ratio ' + h_ratio + ' Aspect ratio ' + finalAspectRatio)
 // Define the URL where your background image is located
 // var imageUrl = "/static/project-test-images/dust/sun-in-view-0001.jpg";
 // var imageUrl="https://dust-sun-fog-clear-rain-snow.herokuapp.com/static/project-test-images/gallery/img_nature.jpg"
@@ -990,6 +990,8 @@ alert('AFTER H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ra
 // Define 
 // canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas));
 canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
+  top: 0,
+  left: 0,
   width: finalWidth,
   height: finalHeight
  });
