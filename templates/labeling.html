@@ -974,13 +974,13 @@ selectedImage.setAttribute('src',imageUrl);
 getOriginalImageSize()
 // originalImageWidth, originalImageHeight = getImageWidthandHeight(imageUrl)
 
-var w_ratio = canvasWidth/originalImageWidth
-var h_ratio = canvasHeight/originalImageHeight
+var w_ratio = originalImageWidth/canvasWidth
+var h_ratio = originalImageHeight/canvasHeight
 
-let finalAspectRatio = Math.min(w_ratio, h_ratio)
+let finalAspectRatio = Math.max(w_ratio, h_ratio)
 
-let finalHeight = originalImageHeight * finalAspectRatio;
-let finalWidth = originalImageWidth * finalAspectRatio;
+let finalHeight = originalImageHeight / finalAspectRatio;
+let finalWidth = originalImageWidth / finalAspectRatio;
 
 alert('AFTER H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' + w_ratio +  ' height ratio ' + h_ratio)
 // Define the URL where your background image is located
@@ -1011,9 +1011,9 @@ var new_img_width = originalImageWidth / finalAspectRatio
 //var new_img_height = originalImageHeight * canvas.backgroundImage.scaleY
 //var new_img_width = originalImageWidth * canvas.backgroundImage.scaleX
 
-canvas.setDimensions({width:new_img_width, height:new_img_height})
+canvas.setDimensions({width:finalWidth, height:finalHeight })
 
-alert('new img height ' + new_img_height  + ' new img width ' + new_img_width)
+alert('new img height ' + finalHeight + ' new img width ' + finalWidth)
 
 canvas.renderAll();
 
