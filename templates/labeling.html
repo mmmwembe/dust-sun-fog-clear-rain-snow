@@ -794,6 +794,41 @@ function add_group_of_rects(){
 
 }
 
+function auto_add_group_rects(){
+
+  var rect_group =[]
+  var rect_width = 150
+  var rect_height = 50
+  var rect_name = null
+  var x_value = null, y_value = null
+
+
+  var num_columns = Math.floor(canvas.width/rect_width)
+  var num_rows = Math.floor(canvas.height/rect_height)
+  var counter = 0
+
+  for (var x = 0; x < num_rows; x++) {
+
+   for (var y = 0; y < num_columns; y++) {
+
+    x_value = x * rect_width;
+    y_value = y * rect_height;
+
+    rect_name = "rect" + counter
+
+    rect_group[rect_name] = new fabric.Rect({left: x_value,top: y_value, width: rect_width,height: rect_height,angle: 0});
+
+    counter +=1
+
+   }  
+}
+
+alert('rect group ' + rect_group)
+
+  
+}
+
+
 function crop_image(user_id, image_name, label_num, working_labels_dir) {
 
       rect_to_crop = new fabric.Rect({left: 0,top: 0,width: 150,height: 50,angle: 0});
@@ -881,9 +916,11 @@ final_image_width = new_width
 final_image_height = new_height 
 
 // Add group of rects for testing purposes
-add_group_of_rects()
+// add_group_of_rects()
 
-alert(' canvas width : image width ' + final_canvas_width +' : ' + final_image_width + ' canvas height : image height ' +  + final_canvas_height +' : ' + final_image_height)
+auto_add_group_rects()
+
+// alert(' canvas width : image width ' + final_canvas_width +' : ' + final_image_width + ' canvas height : image height ' +  + final_canvas_height +' : ' + final_image_height)
 
 
 }
