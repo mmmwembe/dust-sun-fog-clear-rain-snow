@@ -776,6 +776,20 @@ var WORKING_LABELS_FOLDER="dog"
 
 // crop_image(user_id, image_name, label_num, WORKING_LABELS_FOLDER)
 
+function add_group_of_rects(){
+
+  var rect1 = new fabric.Rect({left: 0,top: 0,width: 150,height: 50,fill: 'green',angle: 0,opacity: 0.5});
+  var rect2 = new fabric.Rect({left: 150,top: 0,width: 150,height: 50,fill: 'yellow',angle: 0,opacity: 0.3});
+  var rect3 = new fabric.Rect({left: 300,top: 0,width: 150,height: 50,fill: 'blue',angle: 0,opacity: 0.5});
+  var rect4 = new fabric.Rect({left: 0,top: 50,width: 150,height: 50,fill: 'magenta',angle: 0,opacity: 0.75});
+  var rect5 = new fabric.Rect({left: 0,top: 100,width: 150,height: 50,fill: 'gray',angle: 0,opacity: 0.80});
+
+ var group = new fabric.Group([rect1,rect2,rect3,rect4,rect5])
+ canvas.add(group);
+ canvas.renderAll()
+
+}
+
 function crop_image(user_id, image_name, label_num, working_labels_dir) {
 
       rect_to_crop = new fabric.Rect({left: 0,top: 0,width: 150,height: 50,angle: 0});
@@ -856,6 +870,9 @@ if (new_height_ratio < new_width_ratio){
 canvas.setBackgroundImage(background_image);
 canvas.setDimensions({width:new_width, height:new_height})
 canvas.renderAll();
+
+// Add group of rects for testing purposes
+add_group_of_rects()
 
 
 }
