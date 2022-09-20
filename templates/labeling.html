@@ -609,6 +609,10 @@ var selectedImage = null
 var canvas_parent = null
 var canvas_parent_width = null
 var canvas_parent_height = null
+var final_canvas_width = null
+var final_canvas_height = null
+var final_image_width = null
+var final_image_height = null
 
  
 canvas_parent = document.getElementById('canvasHolder')
@@ -871,8 +875,15 @@ canvas.setBackgroundImage(background_image);
 canvas.setDimensions({width:new_width, height:new_height})
 canvas.renderAll();
 
+final_canvas_width = canvas.width
+final_canvas_height = canvas.height
+final_image_width = new_width
+final_image_height = new_height 
+
 // Add group of rects for testing purposes
 add_group_of_rects()
+
+alert(' canvas width : image width ' + final_canvas_width +' : ' + final_image_width + ' canvas height : image height ' +  + final_canvas_height +' : ' + final_image_height)
 
 
 }
