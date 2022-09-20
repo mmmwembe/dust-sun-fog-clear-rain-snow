@@ -969,9 +969,12 @@ canvas = new fabric.Canvas("canvas", { selection: false, width: canvasWidth, hei
 // var img_width = null, img_height = null
 selectedImage = document.getElementById('my-image'); 
 getOriginalImageSize()
-alert('BEFORE  H ' + originalImageHeight + ' W ' + originalImageWidth)
+width_before = originalImageWidth
+height_before =originalImageHeight
+// alert('BEFORE  H ' + originalImageHeight + ' W ' + originalImageWidth)
 selectedImage.setAttribute('src',imageUrl);
 getOriginalImageSize()
+alert('H - before and after ' + height_before + ' ' + originalImageHeight + ' W - before and after ' + width_before  + ' ' + originalImageWidth )
 // originalImageWidth, originalImageHeight = getImageWidthandHeight(imageUrl)
 
 var w_ratio = originalImageWidth/canvasWidth
