@@ -989,13 +989,10 @@ alert('AFTER H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ra
 
 // Define 
 // canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas));
-canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
-  top: 0,
-  left: 0,
-  width: finalWidth,
-  height: finalHeight
- });
-
+// canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {top: 0,left: 0,width: finalWidth,height: finalHeight });
+canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {top: 0,left: 0,width: finalWidth,height: finalHeight });
+canvas.backgroundImage.scaleToHeight(canvasHeight);
+canvas.backgroundImage.scaleToWidth(canvasWidth);
  /*
 
 if (h_ratio >= w_ratio){
@@ -1013,9 +1010,9 @@ var new_img_width = originalImageWidth / finalAspectRatio
 //var new_img_height = originalImageHeight * canvas.backgroundImage.scaleY
 //var new_img_width = originalImageWidth * canvas.backgroundImage.scaleX
 
-canvas.setDimensions({width:finalWidth, height:finalHeight })
+// canvas.setDimensions({width:finalWidth, height:finalHeight })
 
-alert('new img height ' + finalHeight + ' new img width ' + finalWidth)
+// alert('new img height ' + finalHeight + ' new img width ' + finalWidth)
 
 canvas.renderAll();
 
