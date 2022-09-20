@@ -633,7 +633,7 @@ for(let i = 0; i < img_thumbnails.length; i++) {
             img_url = e.target.src
             //set_new_background_image(img_url)
             // set_new_background_image2(img_url)
-            set_new_background_image(img_url)
+            set_new_background_image3(img_url)
             // updateCanvasBackgroundImage2(img_url)
             //alert(img_url)
             //var img_url2 = geturl(img_url)
@@ -655,7 +655,7 @@ function geturl(full_url)
 
 // set_new_background_image(image_url)
 // set_new_background_image2(image_url)
-set_new_background_image(image_url)
+set_new_background_image3(image_url)
 // updateCanvasBackgroundImage2(image_url)
 
 
@@ -796,13 +796,168 @@ function getCanvasSize(){
         var myCanvas = document.querySelector("#canvas");
         // canvasWidth = myCanvas.clientWidth;
         // canvasHeight = myCanvas.clientHeight;
-        canvasWidth = 0.95*canvas_parent_width;  //myCanvas.clientWidth;
-        canvasHeight = 0.95*canvas_parent_height; // myCanvas.clientHeight;
+        canvasWidth = 0.90*canvas_parent_width;  //myCanvas.clientWidth;
+        canvasHeight = 0.80*canvas_parent_height; // myCanvas.clientHeight;
         // alert("Canvas width=" + canvasWidth + ", " + "Canvas height=" + canvasHeight);   
 }
 
+function updateCanvasBackgroundImage(img_url){
+
+
+// getTotalTimeAndLabels(DYNAMIC_TABLE_RECORD_HOLDER)
+
+
+  var imgObj = new Image();
+  imgObj.src = img_url;
+  imgObj.onload = function() {
+
+  //canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: 1452*0.8, height: 749*0.8,stopContextMenu: true,fireRightClick: true });
+  canvas = this.__canvas = new fabric.Canvas('canvas', { selection: true, width: canvasWidth, height: canvasHeight,stopContextMenu: true,fireRightClick: true });
+  fabric.Object.prototype.transparentCorners = false;
+
+  fabric.Image.fromURL(img_url, function(img) {
+
+      originalImageWidth = img.width
+      originalImageHeight =img.height
+
+      // alert('canvas H/Wratio :' + canvasHeight/canvasWidth +  ' original image H/W ratio :' +  originalImageHeight/originalImageWidth)
+
+      canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+      scaleX: canvas.width / img.width,
+      scaleY: canvas.height / img.height
+
+      });
+
+    
+  });
+
+  } // end  of  imgObj.onload = function() {
+
+}
+
+
+function updateCanvasBackgroundImage2(img_url){
+
+  // Remove existing canvas
+  clearCanvasBackground()
+
+  //img = document.getElementById('my-image'); 
+  selectedImage = document.getElementById('my-image'); 
+  selectedImage.setAttribute('src',img_url);
+  getOriginalImageSize()
+
+  canvas = this.__canvas = new fabric.Canvas('canvas', { selection: false, width: canvas_parent_width, height: canvas_parent_height });
+  // new fabric.StaticCanvas('c');
+  fabric.Object.prototype.transparentCorners = false;
+  getCanvasSize()
+
+  width_ratio = originalImageWidth/canvasWidth
+  height_ratio = originalImageHeight/canvasHeight
+
+// Creating the image instance 
+ var background_img = new fabric.Image(img_url, {left: 0, top: 0, angle: 0}); 
+
+ if (height_ratio >= width_ratio){
+    background_img.scaleToHeight(canvasHeight);
+   }
+ if (height_ratio < width_ratio){
+    background_img.scaleToWidth(canvasWidth);
+    }
+  
+  new_img_height = originalImageHeight*background_img.scaleY
+  new_img_width = originalImageWidth*background_img.scaleX
+
+  canvas.setBackgroundImage(background_img);
+  // canvas.add(geeks); 
+  canvas.setDimensions({width:new_img_width, height:new_img_height})
+  canvas.renderAll();
+
+
+}
 
 function set_new_background_image(imageUrl){
+
+  clearCanvasBackground()
+
+  // Initialize a simple canvas
+canvas = new fabric.Canvas("canvas", {
+    hoverCursor: 'pointer',
+    selection: true,
+    selectionBorderColor: 'green',
+    backgroundColor: null
+});
+
+// Define the URL where your background image is located
+// var imageUrl = "/static/project-test-images/dust/sun-in-view-0001.jpg";
+// var imageUrl="https://dust-sun-fog-clear-rain-snow.herokuapp.com/static/project-test-images/gallery/img_nature.jpg"
+
+// Define 
+canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
+    // Optionally add an opacity lvl to the image
+    backgroundImageOpacity: 0.5,
+    // should the image be resized to fit the container?
+    backgroundImageStretch: true
+});
+
+canvas.renderAll();
+
+
+}
+
+
+function set_new_background_image2(imageUrl){
+
+  clearCanvasBackground()
+
+  // Initialize a simple canvas
+  canvas = new fabric.Canvas("canvas", {
+    hoverCursor: 'pointer',
+    selection: false,
+    width: canvasWidth, 
+    height: canvasHeight 
+  });
+
+  getCanvasSize()
+
+  // Create a new instance of the Image class
+  var imgObj = new Image();
+  var image = null
+  imgObj.src = imageUrl;
+  imgObj.onload = function () {
+    
+    image = new fabric.Image(imgObj); 
+    image.set({left: 0,top: 0,angle: 0,padding: 0});
+
+    originalImageHeight = image.height
+    originalImageWidth = image.width
+
+    alert('H ' + originalImageHeight + ' W ' + originalImageWidth)
+
+  }
+
+
+  width_ratio = originalImageWidth/canvasWidth
+  height_ratio = originalImageHeight/canvasHeight
+
+  if (height_ratio >= width_ratio){
+      image.scaleToHeight(canvasHeight);
+    }
+  if (height_ratio < width_ratio){
+      image.scaleToWidth(canvasWidth);
+    }
+    
+    new_img_height = originalImageHeight * image.scaleY
+    new_img_width = originalImageWidth * image.scaleX
+
+
+  canvas.setBackgroundImage(image, canvas.renderAll.bind(canvas));
+  canvas.setDimensions({width:new_img_width, height:new_img_height})
+  canvas.renderAll();
+
+
+}
+
+function set_new_background_image3(imageUrl){
 
 clearCanvasBackground()
 
@@ -819,7 +974,7 @@ height_before =originalImageHeight
 // alert('BEFORE  H ' + originalImageHeight + ' W ' + originalImageWidth)
 selectedImage.setAttribute('src',imageUrl);
 getOriginalImageSize()
-// alert('H - before and after ' + height_before + ' ' + originalImageHeight + ' W - before and after ' + width_before  + ' ' + originalImageWidth )
+alert('H - before and after ' + height_before + ' ' + originalImageHeight + ' W - before and after ' + width_before  + ' ' + originalImageWidth )
 // originalImageWidth, originalImageHeight = getImageWidthandHeight(imageUrl)
 
 var new_width_ratio = originalImageWidth/canvasWidth
@@ -841,6 +996,54 @@ if (new_height_ratio < new_width_ratio){
 canvas.setBackgroundImage(background_image);
 canvas.setDimensions({width:new_width, height:new_height})
 canvas.renderAll();
+// canvas.centerObject(geeks);
+
+
+
+/*
+var w_ratio = originalImageWidth/canvasWidth
+var h_ratio = originalImageHeight/canvasHeight
+
+let finalAspectRatio = Math.max(w_ratio, h_ratio)
+
+let finalHeight = originalImageHeight / finalAspectRatio;
+let finalWidth = originalImageWidth / finalAspectRatio;
+
+alert('AFTER H ' + originalImageHeight + ' W ' + originalImageWidth + ' width ratio ' + w_ratio +  ' height ratio ' + h_ratio + ' Aspect ratio ' + finalAspectRatio)
+// Define the URL where your background image is located
+// var imageUrl = "/static/project-test-images/dust/sun-in-view-0001.jpg";
+// var imageUrl="https://dust-sun-fog-clear-rain-snow.herokuapp.com/static/project-test-images/gallery/img_nature.jpg"
+
+// Define 
+// canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas));
+// canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {top: 0,left: 0,width: finalWidth,height: finalHeight });
+canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {top: 0,left: 0});
+// canvas.backgroundImage.scaleToHeight(canvasHeight);
+canvas.backgroundImage.scaleToWidth(canvasWidth);
+
+ 
+
+if (h_ratio >= w_ratio){
+     canvas.backgroundImage.scaleToHeight(canvasHeight);
+    }
+if (h_ratio < w_ratio){
+    canvas.backgroundImage.scaleToWidth(canvasWidth);
+}
+
+
+
+var new_img_height = originalImageHeight / finalAspectRatio
+var new_img_width = originalImageWidth / finalAspectRatio
+ 
+//var new_img_height = originalImageHeight * canvas.backgroundImage.scaleY
+//var new_img_width = originalImageWidth * canvas.backgroundImage.scaleX
+
+// canvas.setDimensions({width:finalWidth, height:finalHeight })
+
+// alert('new img height ' + finalHeight + ' new img width ' + finalWidth)
+
+canvas.renderAll();
+*/
 
 
 }
