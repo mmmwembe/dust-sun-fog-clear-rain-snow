@@ -977,6 +977,30 @@ getOriginalImageSize()
 alert('H - before and after ' + height_before + ' ' + originalImageHeight + ' W - before and after ' + width_before  + ' ' + originalImageWidth )
 // originalImageWidth, originalImageHeight = getImageWidthandHeight(imageUrl)
 
+var new_width_ratio = originalImageWidth/canvasWidth
+var new_height_ratio = originalImageHeight/canvasHeight
+
+// Creating the image instance 
+var background_image = new fabric.Image(selectedImage, {left: 0, top: 0, angle: 0}); 
+
+if (new_height_ratio >= new_width_ratio){
+  background_image.scaleToHeight(canvasHeight);
+  }
+if (new_height_ratio < new_width_ratio){
+  background_image.scaleToWidth(canvasWidth);
+   }
+ 
+ var new_height = originalImageHeight * background_image.scaleY
+ var new_width = originalImageWidth * background_image.scaleX
+
+canvas.setBackgroundImage(background_image);
+canvas.setDimensions({width:new_width, height:new_height})
+canvas.renderAll();
+// canvas.centerObject(geeks);
+
+
+
+/*
 var w_ratio = originalImageWidth/canvasWidth
 var h_ratio = originalImageHeight/canvasHeight
 
@@ -997,7 +1021,7 @@ canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {top: 0,left:
 // canvas.backgroundImage.scaleToHeight(canvasHeight);
 canvas.backgroundImage.scaleToWidth(canvasWidth);
 
- /*
+ 
 
 if (h_ratio >= w_ratio){
      canvas.backgroundImage.scaleToHeight(canvasHeight);
@@ -1006,7 +1030,7 @@ if (h_ratio < w_ratio){
     canvas.backgroundImage.scaleToWidth(canvasWidth);
 }
 
-*/
+
 
 var new_img_height = originalImageHeight / finalAspectRatio
 var new_img_width = originalImageWidth / finalAspectRatio
@@ -1019,6 +1043,7 @@ var new_img_width = originalImageWidth / finalAspectRatio
 // alert('new img height ' + finalHeight + ' new img width ' + finalWidth)
 
 canvas.renderAll();
+*/
 
 
 }
