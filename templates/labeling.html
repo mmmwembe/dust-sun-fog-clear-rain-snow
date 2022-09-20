@@ -974,8 +974,8 @@ selectedImage.setAttribute('src',imageUrl);
 getOriginalImageSize()
 // originalImageWidth, originalImageHeight = getImageWidthandHeight(imageUrl)
 
-var w_ratio = originalImageWidth/canvasWidth
-var h_ratio = originalImageHeight/canvasHeight
+var w_ratio = canvasWidth/originalImageWidth
+var h_ratio = canvasHeight/originalImageHeight
 
 let finalAspectRatio = Math.min(w_ratio, h_ratio)
 
