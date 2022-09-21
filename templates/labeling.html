@@ -835,12 +835,15 @@ function auto_add_group_rects(){
 canvas.add(rect_group);
 canvas.renderAll()
 
-image_name_from_url =  image_url.substring(0, image_url.lastIndexOf("/"))
+image_name_from_url = getFilename(image_url)
 
 alert('filename ' +  image_name_from_url)
   
 }
 
+function getFilename(fullPath) {
+  return fullPath.replace(/^.*[\\\/]/, '');
+}
 
 function crop_image(user_id, image_name, label_num, working_labels_dir) {
 
