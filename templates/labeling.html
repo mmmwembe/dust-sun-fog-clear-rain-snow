@@ -837,7 +837,7 @@ canvas.renderAll()
 
 var image_name_from_url = getFilename(image_url)
 
-fname, ext = get_name_and_ext(image_name_from_url)
+var fname = get_filename_without_ext(image_name_from_url)
 
 alert('filename ' +  fname)
   
@@ -847,13 +847,12 @@ function getFilename(fullPath) {
   return fullPath.replace(/^.*[\\\/]/, '');
 }
 
-function get_name_and_ext(file_url){
+function get_filename_without_ext(file_url){
 
   var parts = file_url.split(".");
   fname = parts[0];
-  ext = parts[1];
 
-  return fname, ext
+  return fname
 }
 
 function crop_image(user_id, image_name, label_num, working_labels_dir) {
