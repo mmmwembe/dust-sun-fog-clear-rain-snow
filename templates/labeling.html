@@ -835,14 +835,25 @@ function auto_add_group_rects(){
 canvas.add(rect_group);
 canvas.renderAll()
 
-image_name_from_url = getFilename(image_url)
+var image_name_from_url = getFilename(image_url)
 
-alert('filename ' +  image_name_from_url)
+var fname, ext = get_name_and_ext(image_name_from_url)
+
+alert('filename ' +  fname)
   
 }
 
 function getFilename(fullPath) {
   return fullPath.replace(/^.*[\\\/]/, '');
+}
+
+function get_name_and_ext(file_url){
+
+  var parts = file_url.split(".");
+  fname = parts[0];
+  ext = parts[1];
+
+  return fname, ext
 }
 
 function crop_image(user_id, image_name, label_num, working_labels_dir) {
