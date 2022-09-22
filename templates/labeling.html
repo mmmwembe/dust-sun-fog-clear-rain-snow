@@ -814,6 +814,9 @@ function auto_add_group_rects(){
   var x_value_opacity = null
   var y_value_opacity = null
   var opacity_fill_color ='#232D38'  // Black diesel
+  var opacity_array =[0,0.05,0.10,0.15,0.20,0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95,1.00]
+  var opacity_frame_of_interest = null
+
 
 
 
@@ -835,7 +838,7 @@ function auto_add_group_rects(){
     y_value_opacity = y_value
     opacity_rect_width =  50 + getRandomInt(-20, 20) 
 
-    opacity_value = 0.05
+    opacity_value = opacity_array[2] // 0.05
     opacity_label = opacity_value * 100
     
 
