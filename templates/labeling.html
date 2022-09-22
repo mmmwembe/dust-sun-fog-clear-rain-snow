@@ -808,7 +808,7 @@ function auto_add_group_rects(){
   var rect_name = null
   var x_value = null, y_value = null
 
-  var opacity_rect_width = 50 + getRandomInt(-20, 20) 
+  var opacity_rect_width = null // 50 + getRandomInt(-20, 20) 
   var opacity_rect_height = 50
   var opacity_value = null
   var x_value_opacity = null
@@ -831,11 +831,13 @@ function auto_add_group_rects(){
     x_value = x * rect_width;
     y_value = y * rect_height;
 
-    x_value_opacity = (x_value + rect_width)/2
+    x_value_opacity = x_value + (rect_width/2) + getRandomInt(-30, 10) 
     y_value_opacity = y_value
+    opacity_rect_width =  50 + getRandomInt(-20, 20) 
 
     opacity_value = 0.5
     opacity_label = opacity_value * 100
+    
 
 
 
@@ -847,6 +849,7 @@ function auto_add_group_rects(){
     // TODO crop and save this image as a jpeg
 
     // TODO define new rect for opacity of plume 
+    
     var rect_plume = new fabric.Rect({left: x_value_opacity,top: y_value, width: opacity_rect_width,height: rect_height,angle: 0, fill: opacity_fill_color, opacity: opacity_value,stroke:'',strokeWidth: ''})
 
     rect_group.addWithUpdate(rectx);
