@@ -808,6 +808,14 @@ function auto_add_group_rects(){
   var rect_name = null
   var x_value = null, y_value = null
 
+  var opacity_rect_width = 50 + getRandomInt(-20, 20) 
+  var opacity_rect_height = 50
+  var opacity_value = null
+  var x_value_opacity = null
+  var y_value_opacity = null
+  var opacity_fill_color ='#232D38'  // Black diesel
+
+
 
   var num_columns = Math.floor(canvas.width/rect_width)
   // var num_rows = Math.floor(final_image_height/rect_height)
@@ -823,11 +831,26 @@ function auto_add_group_rects(){
     x_value = x * rect_width;
     y_value = y * rect_height;
 
+    x_value_opacity = (x_value + rect_width)/2
+    y_value_opacity = y_value
+
+    opacity_value = 0.5
+    opacity_label = opacity_value * 100
+
+
+
+
     rect_name = "rect" + counter
 
     var rectx = new fabric.Rect({left: x_value,top: y_value, width: rect_width,height: rect_height,angle: 0, fill: '', stroke:'#0dd5fc',strokeWidth: 2})
 
+    // TODO crop and save this image as a jpeg
+
+    // TODO define new rect for opacity of plume 
+    var rect_plume = new fabric.Rect({left: x_value_opacity,top: y_value, width: opacity_rect_width,height: rect_height,angle: 0, fill: opacity_fill_color, opacity: opacity_value,stroke:'',strokeWidth: ''})
+
     rect_group.addWithUpdate(rectx);
+    rect_group.addWithUpdate(rect_plume);
 
     // rect_group.push(rect_name) = new fabric.Rect({left: x_value,top: y_value, width: rect_width,height: rect_height,angle: 0});
 
@@ -835,6 +858,8 @@ function auto_add_group_rects(){
 
    }  
 }
+
+// https://buraksenol.medium.com/pass-images-to-html-without-saving-them-as-files-using-python-flask-b055f29908a
 
 
 canvas.add(rect_group);
@@ -1040,6 +1065,13 @@ function enableClickThumbnailImages(){
           alert('thumbnail num ' + i + ' ' + e.target.src);
   })
 }
+}
+
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
 
