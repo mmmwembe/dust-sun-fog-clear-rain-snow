@@ -872,12 +872,25 @@ function auto_add_group_rects(){
 
     var IMAGE_URL = getFilename(canvas.backgroundImage.getSrc())
 
+    // TODO - update the Image URLs to align with the saved image url on the drive
+
     var ai_ready_normalized_data = { 'test_train_validation' : 'TESTING', 'image_url': IMAGE_URL, 'label': opacity_label , 'norm_x_min': norm_x_min, 'norm_y_min': norm_y_min, 'norm_x_tr' : '', 'norm_y_tr' :'', 'norm_x_max' : norm_x_max, 'norm_y_max' : norm_y_max, 'norm_x_bl': '', 'norm_y_bl':'' }
     var ai_ready_raw_data = {'test_train_validation' : 'TESTING', 'image_url': IMAGE_URL, 'label': opacity_label, 'x_min': x_min, 'y_min': y_min, 'x_tr' : '', 'y_tr': '', 'x_max' : x_max, 'y_max' : y_max, 'x_bl': '', 'y_bl':  ''}
 
+    var label_ROI_rect = new fabric.Rect({
+            left: x_min,
+            top: y_min,
+            fill: '',
+            width: x_max - x_min,
+            height: y_max - y_min,
+            stroke: 'red',
+            strokeDashArray: [3, 3]
+        });
+
     rect_group.addWithUpdate(rectx);
     rect_group.addWithUpdate(rect_plume);
-
+    rect_group.addWithUpdate(label_ROI_rect);
+    
     AI_READY_NORMALIZED_ARRAY.push(ai_ready_normalized_data);
     AI_READY_RAW_DATA.push(ai_ready_raw_data);
 
@@ -886,6 +899,8 @@ function auto_add_group_rects(){
     counter +=1
 
    }  
+
+
 }
 
 // https://buraksenol.medium.com/pass-images-to-html-without-saving-them-as-files-using-python-flask-b055f29908a
@@ -894,12 +909,15 @@ function auto_add_group_rects(){
 canvas.add(rect_group);
 canvas.renderAll()
 
+const JSON_STRING_AI_READY_NORMALIZED_ARRAY = JSON.stringify(AI_READY_NORMALIZED_ARRAY);
+alert(JSON_STRING_AI_READY_NORMALIZED_ARRAY)
+
 //canvas.backgroundImage
 var image_name_from_url = getFilename(canvas.backgroundImage.getSrc())
 
 var fname = get_filename_without_ext(image_name_from_url)
 
-alert('filename ' +  fname)
+// alert('filename ' +  fname)
   
 }
 
