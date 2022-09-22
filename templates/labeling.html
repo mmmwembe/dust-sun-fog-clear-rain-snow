@@ -889,7 +889,7 @@ function auto_add_group_rects(){
 
     rect_group.addWithUpdate(rectx);
     rect_group.addWithUpdate(rect_plume);
-    rect_group.addWithUpdate(label_ROI_rect);
+    // rect_group.addWithUpdate(label_ROI_rect);
     
     AI_READY_NORMALIZED_ARRAY.push(ai_ready_normalized_data);
     AI_READY_RAW_DATA.push(ai_ready_raw_data);
@@ -910,7 +910,7 @@ canvas.add(rect_group);
 canvas.renderAll()
 
 const JSON_STRING_AI_READY_NORMALIZED_ARRAY = JSON.stringify(AI_READY_NORMALIZED_ARRAY);
-alert(JSON_STRING_AI_READY_NORMALIZED_ARRAY)
+//alert(JSON_STRING_AI_READY_NORMALIZED_ARRAY)
 
 //canvas.backgroundImage
 var image_name_from_url = getFilename(canvas.backgroundImage.getSrc())
