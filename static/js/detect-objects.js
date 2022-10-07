@@ -85,6 +85,8 @@ async function start() {
 
 
 
+    uploadImage()
+
 
     input.addEventListener("change", preview_image);
 
@@ -201,5 +203,35 @@ function create_json_for_object_detection(preds){
 
     return jsonArr 
 }
+
+
+function uploadImage(){
+
+var x = new XMLHttpRequest();
+x.open('GET', '/static/project-test-images/gallery/img_mountains.jpg');
+x.responseType = 'blob';
+x.onload = function() {
+    var blob = x.response;
+    var fr = new FileReader();
+    fr.onloadend = function() {
+        var dataUrl = fr.result;
+        // Paint image, as a proof of concept
+        // var img = document.createElement('img');
+        img.src = dataUrl;
+        document.body.appendChild(img);
+    };
+    fr.readAsDataURL(blob);
+};
+x.send();
+
+}
+
+
+
+
+
+
+
+
 
 start();
