@@ -51,13 +51,18 @@ async function start() {
         // Remove labels
         var elms1 = document.querySelectorAll("[id='p-label']");
         for(var i = 0; i < elms1.length; i++) 
-
+        // elms[i].style.display='none'; 
+         // elms1[i]?.remove()
          alert('p-label '+ elms1[i].getAttribute('label'))
          // alert('p-label')
 
         // Remove labels
         var elms2 = document.querySelectorAll("[id='bbox-highlighter']");
         for(var i = 0; i < elms2.length; i++) 
+          // elms[i].style.display='none'; 
+          //  elms2[i]?.remove()   
+          // alert('bbox-highlighter')
+          // elms2[i].style["border"] = "10px dashed #C2175B;"
           elms2[i].setAttribute("border","10px dashed #C2175B")
 
           
@@ -129,6 +134,17 @@ async function start() {
         // Remove bounding boxes and labels from previous frame
         remove_bboxes_and_labels()
 
+       // Remove any highlighting we did previous frame.
+       // for (let i = 0; i < children.length; i++) {
+       //     imageView.removeChild(children[i]);
+        //}
+       // children.splice(0);
+        // const predictions = await model.predict(img);
+        // console.log(predictions.classes);
+
+        // Show the results.
+        // resultDiv.textContent = predictions.classes.map((c) => `${c.className}: ${c.score.toFixed(3)}`).join(", ");
+
         // results_JSON = create_json_from_predictions(predictions)
         results_JSON = create_json_for_object_detection(predictions)
 
@@ -186,6 +202,37 @@ function create_json_for_object_detection(preds){
             highlighter.setAttribute('label', label);
             // highlighter.setAttribute('style', 'background-color:darkblue;');
 
+            const myStyles = `
+            background: rgba(0, 255, 0, 0.25);
+            border: 5px dashed #C2175B;
+            z-index: 1;
+            position: absolute;
+          `;
+            // highlighter.style.cssText = myStyles;
+            //highlighter.setAttribute("class", "highlighter");
+            // highlighter.style.setProperty('background-color', 'red', 'important');
+            //highlighter.style.zIndex = "-1";
+            //highlighter.style.position = "absolute";
+            //highlighter.style.backgroundColor =  "#00FF00";
+            //highlighter.style.borderWidth ="2px";
+            //highlighter.style.borderStyle = "dashed";
+            //highlighter.style.borderColor ="#C2175B"
+            // highlighter.style.border = "2px dashed #C2175B";
+
+            // highlighter.style["border"] = "10px dashed #FF984F;"
+            // highlighter.setAttribute('style', 'border: 10px dashed #FF984F');
+            // highlighter.setAttribute("border","10px dashed #FF984F")
+            // highlighter.setAttribute("borderColor","red");
+            // highlighter.setAttribute("borderStyle", "solid");
+            // highlighter.setAttribute("borderWidth","10px");
+            // highlighter.setAttribute("border", "1px dashed #fff;");
+            // highlighter.setAttribute("border-width", "10px");
+            // highlighter.setAttribute("border-style", "solid");
+            //  /* border: 1px dashed #fff; */ 
+            //  border: 1px dashed #fff;
+            //  border: 5px dashed #FF984F;
+            // highlighter.style ="border: 10px dashed #FF984F;"
+
             highlighter.style ="left: " +
               currentObject.boundingBox.originX + "px; top: " +
               currentObject.boundingBox.originY + "px; width: " +
@@ -195,6 +242,8 @@ function create_json_for_object_detection(preds){
             imageView.appendChild(highlighter);
             imageView.appendChild(p);
 
+            //children.push(highlighter);
+            //children.push(p);
 
         }
     }
