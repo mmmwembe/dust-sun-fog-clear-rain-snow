@@ -25,7 +25,7 @@ async function start() {
    // /static/project-test-images/gallery/img_mountains.jpg
    // https://storage.googleapis.com/amina-files/users/45f20651684f40be8916c29d69295998/user-test-images/dog/1-4780522.jpeg
    // fetch('https://upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.jpg')
-    fetch('https://storage.googleapis.com/amina-files/users/45f20651684f40be8916c29d69295998/user-test-images/dog/1-4780522.jpeg')
+  // fetch('/static/project-test-images/gallery/img_mountains.jpg')
     .then(res => res.blob()) // Gets the response and returns it as a blob
     .then(blob => {
       // Here's where you get access to the blob
