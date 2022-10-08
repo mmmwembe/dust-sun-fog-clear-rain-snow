@@ -85,7 +85,7 @@ async function start() {
 
 
 
-    uploadImage()
+    // uploadImage()
 
 
     input.addEventListener("change", preview_image);
@@ -207,24 +207,47 @@ function create_json_for_object_detection(preds){
 
 function uploadImage(){
 
-var x = new XMLHttpRequest();
-x.open('GET', '/static/project-test-images/gallery/img_mountains.jpg');
-x.responseType = 'blob';
-x.onload = function() {
-    var blob = x.response;
-    var fr = new FileReader();
-    fr.onloadend = function() {
-        var dataUrl = fr.result;
-        // Paint image, as a proof of concept
-        // var img = document.createElement('img');
-        img.src = dataUrl;
-        document.body.appendChild(img);
+    var x = new XMLHttpRequest();
+    x.open('GET', '/static/project-test-images/gallery/img_mountains.jpg');
+    x.responseType = 'blob';
+    x.onload = function() {
+        var blob = x.response;
+        var fr = new FileReader();
+        fr.onloadend = function() {
+            var dataUrl = fr.result;
+            // Paint image, as a proof of concept
+            // var img = document.createElement('img');
+            img.src = dataUrl;
+            document.body.appendChild(img);
+        };
+        fr.readAsDataURL(blob);
     };
-    fr.readAsDataURL(blob);
-};
-x.send();
+    x.send();
 
 }
+
+
+
+const url = "https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg"
+const fileName = url.substring(url.lastIndexOf('/')+1)
+
+fetch(url)
+   .then(response => response.blob())
+   .then(blob => new File([blob], `${fileName}`, {
+   		type: blob.type
+	}))
+   .then(file => {
+   		// setFileData(file);
+   		// setPreview(URL.createObjectURL(file));
+           // Show file
+           var reader = new FileReader();
+           reader.onload = function () {
+               img.src = reader.result;
+   
+           };
+           reader.readAsDataURL(file);
+
+	})
 
 
 
