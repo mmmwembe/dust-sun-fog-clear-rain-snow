@@ -231,23 +231,19 @@ function uploadImage(){
 const url = "https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg"
 const fileName = url.substring(url.lastIndexOf('/')+1)
 
-fetch(url)
-   .then(response => response.blob())
-   .then(blob => new File([blob], `${fileName}`, {
-   		type: blob.type
-	}))
-   .then(file => {
-   		// setFileData(file);
-   		// setPreview(URL.createObjectURL(file));
-           // Show file
-           var reader = new FileReader();
-           reader.onload = function () {
-               img.src = reader.result;
-   
-           };
-           reader.readAsDataURL(file);
+fetch('https://upload.wikimedia.org/wikipedia/commons/7/77/Delete_key1.jpg')
+  .then(res => res.blob()) // Gets the response and returns it as a blob
+  .then(blob => {
+    // Here's where you get access to the blob
+    // And you can use it for whatever you want
+    // Like calling ref().put(blob)
 
-	})
+    // Here, I use it to make an image appear on the page
+    let objectURL = URL.createObjectURL(blob);
+    let myImage = new Image();
+    myImage.src = objectURL;
+    document.getElementById('selected-image').appendChild(myImage)
+});
 
 
 
